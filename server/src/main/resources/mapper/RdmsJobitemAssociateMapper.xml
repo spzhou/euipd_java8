@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsJobitemAssociateMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsJobitemAssociate">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="associate_id" jdbcType="CHAR" property="associateId" />
+    <result column="replace_file_Ids_str" jdbcType="VARCHAR" property="replaceFileIdsStr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, jobitem_id, associate_id, replace_file_Ids_str
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsJobitemAssociateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_jobitem_associate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_jobitem_associate
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_jobitem_associate
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsJobitemAssociateExample">
+    delete from rdms_jobitem_associate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsJobitemAssociate">
+    insert into rdms_jobitem_associate (id, jobitem_id, associate_id, 
+      replace_file_Ids_str)
+    values (#{id,jdbcType=CHAR}, #{jobitemId,jdbcType=CHAR}, #{associateId,jdbcType=CHAR}, 
+      #{replaceFileIdsStr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsJobitemAssociate">
+    insert into rdms_jobitem_associate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="associateId != null">
+        associate_id,
+      </if>
+      <if test="replaceFileIdsStr != null">
+        replace_file_Ids_str,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="associateId != null">
+        #{associateId,jdbcType=CHAR},
+      </if>
+      <if test="replaceFileIdsStr != null">
+        #{replaceFileIdsStr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsJobitemAssociateExample" resultType="java.lang.Long">
+    select count(*) from rdms_jobitem_associate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_jobitem_associate
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.associateId != null">
+        associate_id = #{record.associateId,jdbcType=CHAR},
+      </if>
+      <if test="record.replaceFileIdsStr != null">
+        replace_file_Ids_str = #{record.replaceFileIdsStr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_jobitem_associate
+    set id = #{record.id,jdbcType=CHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      associate_id = #{record.associateId,jdbcType=CHAR},
+      replace_file_Ids_str = #{record.replaceFileIdsStr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsJobitemAssociate">
+    update rdms_jobitem_associate
+    <set>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="associateId != null">
+        associate_id = #{associateId,jdbcType=CHAR},
+      </if>
+      <if test="replaceFileIdsStr != null">
+        replace_file_Ids_str = #{replaceFileIdsStr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsJobitemAssociate">
+    update rdms_jobitem_associate
+    set jobitem_id = #{jobitemId,jdbcType=CHAR},
+      associate_id = #{associateId,jdbcType=CHAR},
+      replace_file_Ids_str = #{replaceFileIdsStr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

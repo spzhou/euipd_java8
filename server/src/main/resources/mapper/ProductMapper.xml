@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.Product">
+    <id column="product_id" jdbcType="CHAR" property="productId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_intro" jdbcType="VARCHAR" property="goodsIntro" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
+    <result column="selling_price" jdbcType="INTEGER" property="sellingPrice" />
+    <result column="stock_num" jdbcType="INTEGER" property="stockNum" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="login_name" jdbcType="CHAR" property="loginName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="supplier_id" jdbcType="CHAR" property="supplierId" />
+    <result column="performance_base_price" jdbcType="INTEGER" property="performanceBasePrice" />
+    <result column="platform_purchase_price" jdbcType="INTEGER" property="platformPurchasePrice" />
+    <result column="pricing_type" jdbcType="INTEGER" property="pricingType" />
+    <result column="com_id" jdbcType="CHAR" property="comId" />
+    <result column="com_contact_user_id" jdbcType="CHAR" property="comContactUserId" />
+    <result column="com_contract_id" jdbcType="CHAR" property="comContractId" />
+    <result column="plat_contact_user_id" jdbcType="CHAR" property="platContactUserId" />
+    <result column="plat_contract_id" jdbcType="CHAR" property="platContractId" />
+    <result column="charge" jdbcType="CHAR" property="charge" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="enroll" jdbcType="INTEGER" property="enroll" />
+    <result column="course_id" jdbcType="CHAR" property="courseId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    product_id, goods_id, goods_name, goods_intro, image, original_price, selling_price, 
+    stock_num, tag, `status`, login_name, create_time, update_time, supplier_id, performance_base_price, 
+    platform_purchase_price, pricing_type, com_id, com_contact_user_id, com_contract_id, 
+    plat_contact_user_id, plat_contract_id, charge, sort, enroll, course_id
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where product_id = #{productId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where product_id = #{productId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.Product">
+    insert into product (product_id, goods_id, goods_name, 
+      goods_intro, image, original_price, 
+      selling_price, stock_num, tag, 
+      `status`, login_name, create_time, 
+      update_time, supplier_id, performance_base_price, 
+      platform_purchase_price, pricing_type, com_id, 
+      com_contact_user_id, com_contract_id, plat_contact_user_id, 
+      plat_contract_id, charge, sort, 
+      enroll, course_id)
+    values (#{productId,jdbcType=CHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsIntro,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
+      #{sellingPrice,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{loginName,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{supplierId,jdbcType=CHAR}, #{performanceBasePrice,jdbcType=INTEGER}, 
+      #{platformPurchasePrice,jdbcType=INTEGER}, #{pricingType,jdbcType=INTEGER}, #{comId,jdbcType=CHAR}, 
+      #{comContactUserId,jdbcType=CHAR}, #{comContractId,jdbcType=CHAR}, #{platContactUserId,jdbcType=CHAR}, 
+      #{platContractId,jdbcType=CHAR}, #{charge,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}, 
+      #{enroll,jdbcType=INTEGER}, #{courseId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="sellingPrice != null">
+        selling_price,
+      </if>
+      <if test="stockNum != null">
+        stock_num,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="performanceBasePrice != null">
+        performance_base_price,
+      </if>
+      <if test="platformPurchasePrice != null">
+        platform_purchase_price,
+      </if>
+      <if test="pricingType != null">
+        pricing_type,
+      </if>
+      <if test="comId != null">
+        com_id,
+      </if>
+      <if test="comContactUserId != null">
+        com_contact_user_id,
+      </if>
+      <if test="comContractId != null">
+        com_contract_id,
+      </if>
+      <if test="platContactUserId != null">
+        plat_contact_user_id,
+      </if>
+      <if test="platContractId != null">
+        plat_contract_id,
+      </if>
+      <if test="charge != null">
+        charge,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="enroll != null">
+        enroll,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=CHAR},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sellingPrice != null">
+        #{sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null">
+        #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=CHAR},
+      </if>
+      <if test="performanceBasePrice != null">
+        #{performanceBasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="platformPurchasePrice != null">
+        #{platformPurchasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="pricingType != null">
+        #{pricingType,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null">
+        #{comId,jdbcType=CHAR},
+      </if>
+      <if test="comContactUserId != null">
+        #{comContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="comContractId != null">
+        #{comContractId,jdbcType=CHAR},
+      </if>
+      <if test="platContactUserId != null">
+        #{platContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="platContractId != null">
+        #{platContractId,jdbcType=CHAR},
+      </if>
+      <if test="charge != null">
+        #{charge,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enroll != null">
+        #{enroll,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsName != null">
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsIntro != null">
+        goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null">
+        original_price = #{record.originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellingPrice != null">
+        selling_price = #{record.sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockNum != null">
+        stock_num = #{record.stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.loginName != null">
+        login_name = #{record.loginName,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supplierId != null">
+        supplier_id = #{record.supplierId,jdbcType=CHAR},
+      </if>
+      <if test="record.performanceBasePrice != null">
+        performance_base_price = #{record.performanceBasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.platformPurchasePrice != null">
+        platform_purchase_price = #{record.platformPurchasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.pricingType != null">
+        pricing_type = #{record.pricingType,jdbcType=INTEGER},
+      </if>
+      <if test="record.comId != null">
+        com_id = #{record.comId,jdbcType=CHAR},
+      </if>
+      <if test="record.comContactUserId != null">
+        com_contact_user_id = #{record.comContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="record.comContractId != null">
+        com_contract_id = #{record.comContractId,jdbcType=CHAR},
+      </if>
+      <if test="record.platContactUserId != null">
+        plat_contact_user_id = #{record.platContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="record.platContractId != null">
+        plat_contract_id = #{record.platContractId,jdbcType=CHAR},
+      </if>
+      <if test="record.charge != null">
+        charge = #{record.charge,jdbcType=CHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.enroll != null">
+        enroll = #{record.enroll,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set product_id = #{record.productId,jdbcType=CHAR},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=INTEGER},
+      selling_price = #{record.sellingPrice,jdbcType=INTEGER},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=CHAR},
+      login_name = #{record.loginName,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      supplier_id = #{record.supplierId,jdbcType=CHAR},
+      performance_base_price = #{record.performanceBasePrice,jdbcType=INTEGER},
+      platform_purchase_price = #{record.platformPurchasePrice,jdbcType=INTEGER},
+      pricing_type = #{record.pricingType,jdbcType=INTEGER},
+      com_id = #{record.comId,jdbcType=CHAR},
+      com_contact_user_id = #{record.comContactUserId,jdbcType=CHAR},
+      com_contract_id = #{record.comContractId,jdbcType=CHAR},
+      plat_contact_user_id = #{record.platContactUserId,jdbcType=CHAR},
+      plat_contract_id = #{record.platContractId,jdbcType=CHAR},
+      charge = #{record.charge,jdbcType=CHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      enroll = #{record.enroll,jdbcType=INTEGER},
+      course_id = #{record.courseId,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.Product">
+    update product
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sellingPrice != null">
+        selling_price = #{sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null">
+        stock_num = #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=CHAR},
+      </if>
+      <if test="performanceBasePrice != null">
+        performance_base_price = #{performanceBasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="platformPurchasePrice != null">
+        platform_purchase_price = #{platformPurchasePrice,jdbcType=INTEGER},
+      </if>
+      <if test="pricingType != null">
+        pricing_type = #{pricingType,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null">
+        com_id = #{comId,jdbcType=CHAR},
+      </if>
+      <if test="comContactUserId != null">
+        com_contact_user_id = #{comContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="comContractId != null">
+        com_contract_id = #{comContractId,jdbcType=CHAR},
+      </if>
+      <if test="platContactUserId != null">
+        plat_contact_user_id = #{platContactUserId,jdbcType=CHAR},
+      </if>
+      <if test="platContractId != null">
+        plat_contract_id = #{platContractId,jdbcType=CHAR},
+      </if>
+      <if test="charge != null">
+        charge = #{charge,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enroll != null">
+        enroll = #{enroll,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=CHAR},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.Product">
+    update product
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=INTEGER},
+      selling_price = #{sellingPrice,jdbcType=INTEGER},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      login_name = #{loginName,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      supplier_id = #{supplierId,jdbcType=CHAR},
+      performance_base_price = #{performanceBasePrice,jdbcType=INTEGER},
+      platform_purchase_price = #{platformPurchasePrice,jdbcType=INTEGER},
+      pricing_type = #{pricingType,jdbcType=INTEGER},
+      com_id = #{comId,jdbcType=CHAR},
+      com_contact_user_id = #{comContactUserId,jdbcType=CHAR},
+      com_contract_id = #{comContractId,jdbcType=CHAR},
+      plat_contact_user_id = #{platContactUserId,jdbcType=CHAR},
+      plat_contract_id = #{platContractId,jdbcType=CHAR},
+      charge = #{charge,jdbcType=CHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      enroll = #{enroll,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=CHAR}
+    where product_id = #{productId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,44 @@
+# Author：周朔鹏
+# 编制时间：2025-08-05
+# 电子邮件：391902958@qq.com
+# 项目官网：https://www.euipd.com
+
+server:
+  port: 8009
+  servlet:
+    context-path: /payproject
+spring:
+  application:
+    name: payproject
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: zhousp
+    password: YOUR_DATABASE_PASSWORD
+    url: jdbc:mysql://YOUR_DB_HOST:3306/mycourse?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+  cloud:
+    nacos:
+      discovery:
+        namespace: public
+        username: nacos
+        password: nacos
+        server-addr: 127.0.0.1:8848
+logging:
+  pattern:
+    console: "[%thread] %-5level %logger{36} - %msg%n"
+  file:
+    path: /root/logs/payProject/
+wx:
+  appId: wxa275e9779ec92421
+  mchId: 1612611921
+  mchKey: YOUR_WECHAT_MCH_KEY
+  notifyUrl: https://server.aiisci.com/payproject/pay/notify
+  returnUrl:
+alipay:
+  appId: 2018062960540016
+  privateKey: "YOUR_WECHAT_PRIVATE_KEY
+  publicKey: "YOUR_WECHAT_PUBLIC_KEY
+  notifyUrl: https://server.aiisci.com/payproject/pay/notify
+  returnUrl:
+
+
+

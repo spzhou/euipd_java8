@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsGanttMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsGantt">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="parent" jdbcType="CHAR" property="parent" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="character_id" jdbcType="CHAR" property="characterId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="preproject_id" jdbcType="CHAR" property="preprojectId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="creater_id" jdbcType="CHAR" property="createrId" />
+    <result column="executor_id" jdbcType="CHAR" property="executorId" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="manhour" jdbcType="DOUBLE" property="manhour" />
+    <result column="progress" jdbcType="DOUBLE" property="progress" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="open" jdbcType="INTEGER" property="open" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent, jobitem_id, character_id, subproject_id, project_id, preproject_id, customer_id, 
+    creater_id, executor_id, `text`, start_date, duration, manhour, progress, `status`, 
+    `type`, `open`, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsGanttExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_gantt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_gantt
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_gantt
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsGanttExample">
+    delete from rdms_gantt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsGantt">
+    insert into rdms_gantt (id, parent, jobitem_id, 
+      character_id, subproject_id, project_id, 
+      preproject_id, customer_id, creater_id, 
+      executor_id, `text`, start_date, 
+      duration, manhour, progress, 
+      `status`, `type`, `open`, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{parent,jdbcType=CHAR}, #{jobitemId,jdbcType=CHAR}, 
+      #{characterId,jdbcType=CHAR}, #{subprojectId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, 
+      #{preprojectId,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{createrId,jdbcType=CHAR}, 
+      #{executorId,jdbcType=CHAR}, #{text,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, 
+      #{duration,jdbcType=INTEGER}, #{manhour,jdbcType=DOUBLE}, #{progress,jdbcType=DOUBLE}, 
+      #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{open,jdbcType=INTEGER}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsGantt">
+    insert into rdms_gantt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parent != null">
+        parent,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="characterId != null">
+        character_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="preprojectId != null">
+        preproject_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="executorId != null">
+        executor_id,
+      </if>
+      <if test="text != null">
+        `text`,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="manhour != null">
+        manhour,
+      </if>
+      <if test="progress != null">
+        progress,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="open != null">
+        `open`,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="preprojectId != null">
+        #{preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="manhour != null">
+        #{manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="progress != null">
+        #{progress,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="open != null">
+        #{open,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsGanttExample" resultType="java.lang.Long">
+    select count(*) from rdms_gantt
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_gantt
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.parent != null">
+        parent = #{record.parent,jdbcType=CHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.characterId != null">
+        character_id = #{record.characterId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.preprojectId != null">
+        preproject_id = #{record.preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.createrId != null">
+        creater_id = #{record.createrId,jdbcType=CHAR},
+      </if>
+      <if test="record.executorId != null">
+        executor_id = #{record.executorId,jdbcType=CHAR},
+      </if>
+      <if test="record.text != null">
+        `text` = #{record.text,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=INTEGER},
+      </if>
+      <if test="record.manhour != null">
+        manhour = #{record.manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.progress != null">
+        progress = #{record.progress,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.open != null">
+        `open` = #{record.open,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_gantt
+    set id = #{record.id,jdbcType=CHAR},
+      parent = #{record.parent,jdbcType=CHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      character_id = #{record.characterId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      preproject_id = #{record.preprojectId,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      creater_id = #{record.createrId,jdbcType=CHAR},
+      executor_id = #{record.executorId,jdbcType=CHAR},
+      `text` = #{record.text,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      duration = #{record.duration,jdbcType=INTEGER},
+      manhour = #{record.manhour,jdbcType=DOUBLE},
+      progress = #{record.progress,jdbcType=DOUBLE},
+      `status` = #{record.status,jdbcType=CHAR},
+      `type` = #{record.type,jdbcType=CHAR},
+      `open` = #{record.open,jdbcType=INTEGER},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsGantt">
+    update rdms_gantt
+    <set>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        character_id = #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="preprojectId != null">
+        preproject_id = #{preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        executor_id = #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="text != null">
+        `text` = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="manhour != null">
+        manhour = #{manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="progress != null">
+        progress = #{progress,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="open != null">
+        `open` = #{open,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsGantt">
+    update rdms_gantt
+    set parent = #{parent,jdbcType=CHAR},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      character_id = #{characterId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      preproject_id = #{preprojectId,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      creater_id = #{createrId,jdbcType=CHAR},
+      executor_id = #{executorId,jdbcType=CHAR},
+      `text` = #{text,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      duration = #{duration,jdbcType=INTEGER},
+      manhour = #{manhour,jdbcType=DOUBLE},
+      progress = #{progress,jdbcType=DOUBLE},
+      `status` = #{status,jdbcType=CHAR},
+      `type` = #{type,jdbcType=CHAR},
+      `open` = #{open,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

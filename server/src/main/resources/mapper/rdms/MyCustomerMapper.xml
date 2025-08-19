@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.course.server.mapper.rdms.MyCustomerMapper" >
+    <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCustomer">
+        <id column="id" jdbcType="CHAR" property="id" />
+        <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+        <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+        <result column="reg_address" jdbcType="VARCHAR" property="regAddress" />
+        <result column="office_address" jdbcType="VARCHAR" property="officeAddress" />
+        <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+        <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+        <result column="license_link" jdbcType="VARCHAR" property="licenseLink" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="deleted" jdbcType="VARCHAR" property="deleted" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <select id="findCustomersFromLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from rdms_customer
+        where login_name =  #{keyWord}
+        order by create_time desc
+    </select>
+
+    <select id="findCustomersFromCustomerName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from rdms_customer
+        where customer_name =  #{keyWord}
+        order by create_time desc
+    </select>
+
+    <select id="findCustomersFromAdminPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from rdms_customer
+        where rdms_customer.contact_phone =  #{keyWord}
+        order by create_time desc
+    </select>
+
+    <select id="findCustomers" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from rdms_customer
+        where (rdms_customer.customer_name like concat('%', #{keyWord}, '%')
+        or admin_name like concat('%', #{keyWord}, '%')
+        or login_name like concat('%', #{keyWord}, '%')
+        or office_address like concat('%', #{keyWord}, '%')
+        or credit_code like concat('%', #{keyWord}, '%')
+        or contact_phone like concat('%', #{keyWord}, '%'))
+        and deleted = 0
+        order by create_time desc
+    </select>
+
+</mapper>

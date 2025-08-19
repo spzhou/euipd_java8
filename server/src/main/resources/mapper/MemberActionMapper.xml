@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.MemberActionMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.MemberAction">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="page_category" jdbcType="CHAR" property="pageCategory" />
+    <result column="param_id" jdbcType="CHAR" property="paramId" />
+    <result column="institution_id" jdbcType="CHAR" property="institutionId" />
+    <result column="member_id" jdbcType="CHAR" property="memberId" />
+    <result column="action" jdbcType="CHAR" property="action" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, page_category, param_id, institution_id, member_id, `action`, num, ip, `time`
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.MemberActionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_action
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member_action
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.MemberActionExample">
+    delete from member_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.MemberAction">
+    insert into member_action (id, page_category, param_id, 
+      institution_id, member_id, `action`, 
+      num, ip, `time`)
+    values (#{id,jdbcType=CHAR}, #{pageCategory,jdbcType=CHAR}, #{paramId,jdbcType=CHAR}, 
+      #{institutionId,jdbcType=CHAR}, #{memberId,jdbcType=CHAR}, #{action,jdbcType=CHAR}, 
+      #{num,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.MemberAction">
+    insert into member_action
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pageCategory != null">
+        page_category,
+      </if>
+      <if test="paramId != null">
+        param_id,
+      </if>
+      <if test="institutionId != null">
+        institution_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="action != null">
+        `action`,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="pageCategory != null">
+        #{pageCategory,jdbcType=CHAR},
+      </if>
+      <if test="paramId != null">
+        #{paramId,jdbcType=CHAR},
+      </if>
+      <if test="institutionId != null">
+        #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=CHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.MemberActionExample" resultType="java.lang.Long">
+    select count(*) from member_action
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update member_action
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.pageCategory != null">
+        page_category = #{record.pageCategory,jdbcType=CHAR},
+      </if>
+      <if test="record.paramId != null">
+        param_id = #{record.paramId,jdbcType=CHAR},
+      </if>
+      <if test="record.institutionId != null">
+        institution_id = #{record.institutionId,jdbcType=CHAR},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.action != null">
+        `action` = #{record.action,jdbcType=CHAR},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        `time` = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update member_action
+    set id = #{record.id,jdbcType=CHAR},
+      page_category = #{record.pageCategory,jdbcType=CHAR},
+      param_id = #{record.paramId,jdbcType=CHAR},
+      institution_id = #{record.institutionId,jdbcType=CHAR},
+      member_id = #{record.memberId,jdbcType=CHAR},
+      `action` = #{record.action,jdbcType=CHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      `time` = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.MemberAction">
+    update member_action
+    <set>
+      <if test="pageCategory != null">
+        page_category = #{pageCategory,jdbcType=CHAR},
+      </if>
+      <if test="paramId != null">
+        param_id = #{paramId,jdbcType=CHAR},
+      </if>
+      <if test="institutionId != null">
+        institution_id = #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="action != null">
+        `action` = #{action,jdbcType=CHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.MemberAction">
+    update member_action
+    set page_category = #{pageCategory,jdbcType=CHAR},
+      param_id = #{paramId,jdbcType=CHAR},
+      institution_id = #{institutionId,jdbcType=CHAR},
+      member_id = #{memberId,jdbcType=CHAR},
+      `action` = #{action,jdbcType=CHAR},
+      num = #{num,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

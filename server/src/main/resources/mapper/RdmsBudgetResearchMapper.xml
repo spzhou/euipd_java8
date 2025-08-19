@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsBudgetResearchMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsBudgetResearch">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="parent_id" jdbcType="CHAR" property="parentId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="preproject_id" jdbcType="CHAR" property="preprojectId" />
+    <result column="stage" jdbcType="VARCHAR" property="stage" />
+    <result column="equipment_fee_bt" jdbcType="DECIMAL" property="equipmentFeeBt" />
+    <result column="equipment_fee_zc" jdbcType="DECIMAL" property="equipmentFeeZc" />
+    <result column="equipment_fee_approved_bt" jdbcType="DECIMAL" property="equipmentFeeApprovedBt" />
+    <result column="equipment_fee_approved_zc" jdbcType="DECIMAL" property="equipmentFeeApprovedZc" />
+    <result column="test_fee_bt" jdbcType="DECIMAL" property="testFeeBt" />
+    <result column="test_fee_zc" jdbcType="DECIMAL" property="testFeeZc" />
+    <result column="test_fee_approved_bt" jdbcType="DECIMAL" property="testFeeApprovedBt" />
+    <result column="test_fee_approved_zc" jdbcType="DECIMAL" property="testFeeApprovedZc" />
+    <result column="material_fee_bt" jdbcType="DECIMAL" property="materialFeeBt" />
+    <result column="material_fee_zc" jdbcType="DECIMAL" property="materialFeeZc" />
+    <result column="material_fee_approved_bt" jdbcType="DECIMAL" property="materialFeeApprovedBt" />
+    <result column="material_fee_approved_zc" jdbcType="DECIMAL" property="materialFeeApprovedZc" />
+    <result column="power_fee_bt" jdbcType="DECIMAL" property="powerFeeBt" />
+    <result column="power_fee_zc" jdbcType="DECIMAL" property="powerFeeZc" />
+    <result column="power_fee_approved_bt" jdbcType="DECIMAL" property="powerFeeApprovedBt" />
+    <result column="power_fee_approved_zc" jdbcType="DECIMAL" property="powerFeeApprovedZc" />
+    <result column="conference_fee_bt" jdbcType="DECIMAL" property="conferenceFeeBt" />
+    <result column="conference_fee_zc" jdbcType="DECIMAL" property="conferenceFeeZc" />
+    <result column="conference_fee_approved_bt" jdbcType="DECIMAL" property="conferenceFeeApprovedBt" />
+    <result column="conference_fee_approved_zc" jdbcType="DECIMAL" property="conferenceFeeApprovedZc" />
+    <result column="business_fee_bt" jdbcType="DECIMAL" property="businessFeeBt" />
+    <result column="business_fee_zc" jdbcType="DECIMAL" property="businessFeeZc" />
+    <result column="business_fee_approved_bt" jdbcType="DECIMAL" property="businessFeeApprovedBt" />
+    <result column="business_fee_approved_zc" jdbcType="DECIMAL" property="businessFeeApprovedZc" />
+    <result column="cooperation_fee_bt" jdbcType="DECIMAL" property="cooperationFeeBt" />
+    <result column="cooperation_fee_zc" jdbcType="DECIMAL" property="cooperationFeeZc" />
+    <result column="cooperation_fee_approved_bt" jdbcType="DECIMAL" property="cooperationFeeApprovedBt" />
+    <result column="cooperation_fee_approved_zc" jdbcType="DECIMAL" property="cooperationFeeApprovedZc" />
+    <result column="property_fee_bt" jdbcType="DECIMAL" property="propertyFeeBt" />
+    <result column="property_fee_zc" jdbcType="DECIMAL" property="propertyFeeZc" />
+    <result column="property_fee_approved_bt" jdbcType="DECIMAL" property="propertyFeeApprovedBt" />
+    <result column="property_fee_approved_zc" jdbcType="DECIMAL" property="propertyFeeApprovedZc" />
+    <result column="labor_fee_bt" jdbcType="DECIMAL" property="laborFeeBt" />
+    <result column="labor_fee_zc" jdbcType="DECIMAL" property="laborFeeZc" />
+    <result column="labor_fee_approved_bt" jdbcType="DECIMAL" property="laborFeeApprovedBt" />
+    <result column="labor_fee_approved_zc" jdbcType="DECIMAL" property="laborFeeApprovedZc" />
+    <result column="staff_fee_bt" jdbcType="DECIMAL" property="staffFeeBt" />
+    <result column="staff_fee_zc" jdbcType="DECIMAL" property="staffFeeZc" />
+    <result column="staff_fee_approved_bt" jdbcType="DECIMAL" property="staffFeeApprovedBt" />
+    <result column="staff_fee_approved_zc" jdbcType="DECIMAL" property="staffFeeApprovedZc" />
+    <result column="consulting_fee_bt" jdbcType="DECIMAL" property="consultingFeeBt" />
+    <result column="consulting_fee_zc" jdbcType="DECIMAL" property="consultingFeeZc" />
+    <result column="consulting_fee_approved_bt" jdbcType="DECIMAL" property="consultingFeeApprovedBt" />
+    <result column="consulting_fee_approved_zc" jdbcType="DECIMAL" property="consultingFeeApprovedZc" />
+    <result column="management_fee_bt" jdbcType="DECIMAL" property="managementFeeBt" />
+    <result column="management_fee_zc" jdbcType="DECIMAL" property="managementFeeZc" />
+    <result column="management_fee_approved_bt" jdbcType="DECIMAL" property="managementFeeApprovedBt" />
+    <result column="management_fee_approved_zc" jdbcType="DECIMAL" property="managementFeeApprovedZc" />
+    <result column="other_fee_bt" jdbcType="DECIMAL" property="otherFeeBt" />
+    <result column="other_fee_zc" jdbcType="DECIMAL" property="otherFeeZc" />
+    <result column="other_fee_approved_bt" jdbcType="DECIMAL" property="otherFeeApprovedBt" />
+    <result column="other_fee_approved_zc" jdbcType="DECIMAL" property="otherFeeApprovedZc" />
+    <result column="performance_fee_approved_bt" jdbcType="DECIMAL" property="performanceFeeApprovedBt" />
+    <result column="performance_fee_approved_zc" jdbcType="DECIMAL" property="performanceFeeApprovedZc" />
+    <result column="performance_fee_bt" jdbcType="DECIMAL" property="performanceFeeBt" />
+    <result column="performance_fee_zc" jdbcType="DECIMAL" property="performanceFeeZc" />
+    <result column="infrastructure_fee_approved_bt" jdbcType="DECIMAL" property="infrastructureFeeApprovedBt" />
+    <result column="infrastructure_fee_approved_zc" jdbcType="DECIMAL" property="infrastructureFeeApprovedZc" />
+    <result column="infrastructure_fee_bt" jdbcType="DECIMAL" property="infrastructureFeeBt" />
+    <result column="infrastructure_fee_zc" jdbcType="DECIMAL" property="infrastructureFeeZc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creater_id" jdbcType="CHAR" property="createrId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="modifier_id" jdbcType="CHAR" property="modifierId" />
+    <result column="is_root" jdbcType="INTEGER" property="isRoot" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, project_id, parent_id, subproject_id, preproject_id, stage, equipment_fee_bt, 
+    equipment_fee_zc, equipment_fee_approved_bt, equipment_fee_approved_zc, test_fee_bt, 
+    test_fee_zc, test_fee_approved_bt, test_fee_approved_zc, material_fee_bt, material_fee_zc, 
+    material_fee_approved_bt, material_fee_approved_zc, power_fee_bt, power_fee_zc, power_fee_approved_bt, 
+    power_fee_approved_zc, conference_fee_bt, conference_fee_zc, conference_fee_approved_bt, 
+    conference_fee_approved_zc, business_fee_bt, business_fee_zc, business_fee_approved_bt, 
+    business_fee_approved_zc, cooperation_fee_bt, cooperation_fee_zc, cooperation_fee_approved_bt, 
+    cooperation_fee_approved_zc, property_fee_bt, property_fee_zc, property_fee_approved_bt, 
+    property_fee_approved_zc, labor_fee_bt, labor_fee_zc, labor_fee_approved_bt, labor_fee_approved_zc, 
+    staff_fee_bt, staff_fee_zc, staff_fee_approved_bt, staff_fee_approved_zc, consulting_fee_bt, 
+    consulting_fee_zc, consulting_fee_approved_bt, consulting_fee_approved_zc, management_fee_bt, 
+    management_fee_zc, management_fee_approved_bt, management_fee_approved_zc, other_fee_bt, 
+    other_fee_zc, other_fee_approved_bt, other_fee_approved_zc, performance_fee_approved_bt, 
+    performance_fee_approved_zc, performance_fee_bt, performance_fee_zc, infrastructure_fee_approved_bt, 
+    infrastructure_fee_approved_zc, infrastructure_fee_bt, infrastructure_fee_zc, create_time, 
+    creater_id, update_time, modifier_id, is_root, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsBudgetResearchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_budget_research
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_budget_research
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_budget_research
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsBudgetResearchExample">
+    delete from rdms_budget_research
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsBudgetResearch">
+    insert into rdms_budget_research (id, customer_id, project_id, 
+      parent_id, subproject_id, preproject_id, 
+      stage, equipment_fee_bt, equipment_fee_zc, 
+      equipment_fee_approved_bt, equipment_fee_approved_zc, 
+      test_fee_bt, test_fee_zc, test_fee_approved_bt, 
+      test_fee_approved_zc, material_fee_bt, material_fee_zc, 
+      material_fee_approved_bt, material_fee_approved_zc, 
+      power_fee_bt, power_fee_zc, power_fee_approved_bt, 
+      power_fee_approved_zc, conference_fee_bt, conference_fee_zc, 
+      conference_fee_approved_bt, conference_fee_approved_zc, 
+      business_fee_bt, business_fee_zc, business_fee_approved_bt, 
+      business_fee_approved_zc, cooperation_fee_bt, 
+      cooperation_fee_zc, cooperation_fee_approved_bt, 
+      cooperation_fee_approved_zc, property_fee_bt, 
+      property_fee_zc, property_fee_approved_bt, property_fee_approved_zc, 
+      labor_fee_bt, labor_fee_zc, labor_fee_approved_bt, 
+      labor_fee_approved_zc, staff_fee_bt, staff_fee_zc, 
+      staff_fee_approved_bt, staff_fee_approved_zc, 
+      consulting_fee_bt, consulting_fee_zc, consulting_fee_approved_bt, 
+      consulting_fee_approved_zc, management_fee_bt, 
+      management_fee_zc, management_fee_approved_bt, 
+      management_fee_approved_zc, other_fee_bt, other_fee_zc, 
+      other_fee_approved_bt, other_fee_approved_zc, 
+      performance_fee_approved_bt, performance_fee_approved_zc, 
+      performance_fee_bt, performance_fee_zc, infrastructure_fee_approved_bt, 
+      infrastructure_fee_approved_zc, infrastructure_fee_bt, 
+      infrastructure_fee_zc, create_time, creater_id, 
+      update_time, modifier_id, is_root, 
+      deleted)
+    values (#{id,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, 
+      #{parentId,jdbcType=CHAR}, #{subprojectId,jdbcType=CHAR}, #{preprojectId,jdbcType=CHAR}, 
+      #{stage,jdbcType=VARCHAR}, #{equipmentFeeBt,jdbcType=DECIMAL}, #{equipmentFeeZc,jdbcType=DECIMAL}, 
+      #{equipmentFeeApprovedBt,jdbcType=DECIMAL}, #{equipmentFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{testFeeBt,jdbcType=DECIMAL}, #{testFeeZc,jdbcType=DECIMAL}, #{testFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{testFeeApprovedZc,jdbcType=DECIMAL}, #{materialFeeBt,jdbcType=DECIMAL}, #{materialFeeZc,jdbcType=DECIMAL}, 
+      #{materialFeeApprovedBt,jdbcType=DECIMAL}, #{materialFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{powerFeeBt,jdbcType=DECIMAL}, #{powerFeeZc,jdbcType=DECIMAL}, #{powerFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{powerFeeApprovedZc,jdbcType=DECIMAL}, #{conferenceFeeBt,jdbcType=DECIMAL}, #{conferenceFeeZc,jdbcType=DECIMAL}, 
+      #{conferenceFeeApprovedBt,jdbcType=DECIMAL}, #{conferenceFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{businessFeeBt,jdbcType=DECIMAL}, #{businessFeeZc,jdbcType=DECIMAL}, #{businessFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{businessFeeApprovedZc,jdbcType=DECIMAL}, #{cooperationFeeBt,jdbcType=DECIMAL}, 
+      #{cooperationFeeZc,jdbcType=DECIMAL}, #{cooperationFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{cooperationFeeApprovedZc,jdbcType=DECIMAL}, #{propertyFeeBt,jdbcType=DECIMAL}, 
+      #{propertyFeeZc,jdbcType=DECIMAL}, #{propertyFeeApprovedBt,jdbcType=DECIMAL}, #{propertyFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{laborFeeBt,jdbcType=DECIMAL}, #{laborFeeZc,jdbcType=DECIMAL}, #{laborFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{laborFeeApprovedZc,jdbcType=DECIMAL}, #{staffFeeBt,jdbcType=DECIMAL}, #{staffFeeZc,jdbcType=DECIMAL}, 
+      #{staffFeeApprovedBt,jdbcType=DECIMAL}, #{staffFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{consultingFeeBt,jdbcType=DECIMAL}, #{consultingFeeZc,jdbcType=DECIMAL}, #{consultingFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{consultingFeeApprovedZc,jdbcType=DECIMAL}, #{managementFeeBt,jdbcType=DECIMAL}, 
+      #{managementFeeZc,jdbcType=DECIMAL}, #{managementFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{managementFeeApprovedZc,jdbcType=DECIMAL}, #{otherFeeBt,jdbcType=DECIMAL}, #{otherFeeZc,jdbcType=DECIMAL}, 
+      #{otherFeeApprovedBt,jdbcType=DECIMAL}, #{otherFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{performanceFeeApprovedBt,jdbcType=DECIMAL}, #{performanceFeeApprovedZc,jdbcType=DECIMAL}, 
+      #{performanceFeeBt,jdbcType=DECIMAL}, #{performanceFeeZc,jdbcType=DECIMAL}, #{infrastructureFeeApprovedBt,jdbcType=DECIMAL}, 
+      #{infrastructureFeeApprovedZc,jdbcType=DECIMAL}, #{infrastructureFeeBt,jdbcType=DECIMAL}, 
+      #{infrastructureFeeZc,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=CHAR}, #{isRoot,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsBudgetResearch">
+    insert into rdms_budget_research
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="preprojectId != null">
+        preproject_id,
+      </if>
+      <if test="stage != null">
+        stage,
+      </if>
+      <if test="equipmentFeeBt != null">
+        equipment_fee_bt,
+      </if>
+      <if test="equipmentFeeZc != null">
+        equipment_fee_zc,
+      </if>
+      <if test="equipmentFeeApprovedBt != null">
+        equipment_fee_approved_bt,
+      </if>
+      <if test="equipmentFeeApprovedZc != null">
+        equipment_fee_approved_zc,
+      </if>
+      <if test="testFeeBt != null">
+        test_fee_bt,
+      </if>
+      <if test="testFeeZc != null">
+        test_fee_zc,
+      </if>
+      <if test="testFeeApprovedBt != null">
+        test_fee_approved_bt,
+      </if>
+      <if test="testFeeApprovedZc != null">
+        test_fee_approved_zc,
+      </if>
+      <if test="materialFeeBt != null">
+        material_fee_bt,
+      </if>
+      <if test="materialFeeZc != null">
+        material_fee_zc,
+      </if>
+      <if test="materialFeeApprovedBt != null">
+        material_fee_approved_bt,
+      </if>
+      <if test="materialFeeApprovedZc != null">
+        material_fee_approved_zc,
+      </if>
+      <if test="powerFeeBt != null">
+        power_fee_bt,
+      </if>
+      <if test="powerFeeZc != null">
+        power_fee_zc,
+      </if>
+      <if test="powerFeeApprovedBt != null">
+        power_fee_approved_bt,
+      </if>
+      <if test="powerFeeApprovedZc != null">
+        power_fee_approved_zc,
+      </if>
+      <if test="conferenceFeeBt != null">
+        conference_fee_bt,
+      </if>
+      <if test="conferenceFeeZc != null">
+        conference_fee_zc,
+      </if>
+      <if test="conferenceFeeApprovedBt != null">
+        conference_fee_approved_bt,
+      </if>
+      <if test="conferenceFeeApprovedZc != null">
+        conference_fee_approved_zc,
+      </if>
+      <if test="businessFeeBt != null">
+        business_fee_bt,
+      </if>
+      <if test="businessFeeZc != null">
+        business_fee_zc,
+      </if>
+      <if test="businessFeeApprovedBt != null">
+        business_fee_approved_bt,
+      </if>
+      <if test="businessFeeApprovedZc != null">
+        business_fee_approved_zc,
+      </if>
+      <if test="cooperationFeeBt != null">
+        cooperation_fee_bt,
+      </if>
+      <if test="cooperationFeeZc != null">
+        cooperation_fee_zc,
+      </if>
+      <if test="cooperationFeeApprovedBt != null">
+        cooperation_fee_approved_bt,
+      </if>
+      <if test="cooperationFeeApprovedZc != null">
+        cooperation_fee_approved_zc,
+      </if>
+      <if test="propertyFeeBt != null">
+        property_fee_bt,
+      </if>
+      <if test="propertyFeeZc != null">
+        property_fee_zc,
+      </if>
+      <if test="propertyFeeApprovedBt != null">
+        property_fee_approved_bt,
+      </if>
+      <if test="propertyFeeApprovedZc != null">
+        property_fee_approved_zc,
+      </if>
+      <if test="laborFeeBt != null">
+        labor_fee_bt,
+      </if>
+      <if test="laborFeeZc != null">
+        labor_fee_zc,
+      </if>
+      <if test="laborFeeApprovedBt != null">
+        labor_fee_approved_bt,
+      </if>
+      <if test="laborFeeApprovedZc != null">
+        labor_fee_approved_zc,
+      </if>
+      <if test="staffFeeBt != null">
+        staff_fee_bt,
+      </if>
+      <if test="staffFeeZc != null">
+        staff_fee_zc,
+      </if>
+      <if test="staffFeeApprovedBt != null">
+        staff_fee_approved_bt,
+      </if>
+      <if test="staffFeeApprovedZc != null">
+        staff_fee_approved_zc,
+      </if>
+      <if test="consultingFeeBt != null">
+        consulting_fee_bt,
+      </if>
+      <if test="consultingFeeZc != null">
+        consulting_fee_zc,
+      </if>
+      <if test="consultingFeeApprovedBt != null">
+        consulting_fee_approved_bt,
+      </if>
+      <if test="consultingFeeApprovedZc != null">
+        consulting_fee_approved_zc,
+      </if>
+      <if test="managementFeeBt != null">
+        management_fee_bt,
+      </if>
+      <if test="managementFeeZc != null">
+        management_fee_zc,
+      </if>
+      <if test="managementFeeApprovedBt != null">
+        management_fee_approved_bt,
+      </if>
+      <if test="managementFeeApprovedZc != null">
+        management_fee_approved_zc,
+      </if>
+      <if test="otherFeeBt != null">
+        other_fee_bt,
+      </if>
+      <if test="otherFeeZc != null">
+        other_fee_zc,
+      </if>
+      <if test="otherFeeApprovedBt != null">
+        other_fee_approved_bt,
+      </if>
+      <if test="otherFeeApprovedZc != null">
+        other_fee_approved_zc,
+      </if>
+      <if test="performanceFeeApprovedBt != null">
+        performance_fee_approved_bt,
+      </if>
+      <if test="performanceFeeApprovedZc != null">
+        performance_fee_approved_zc,
+      </if>
+      <if test="performanceFeeBt != null">
+        performance_fee_bt,
+      </if>
+      <if test="performanceFeeZc != null">
+        performance_fee_zc,
+      </if>
+      <if test="infrastructureFeeApprovedBt != null">
+        infrastructure_fee_approved_bt,
+      </if>
+      <if test="infrastructureFeeApprovedZc != null">
+        infrastructure_fee_approved_zc,
+      </if>
+      <if test="infrastructureFeeBt != null">
+        infrastructure_fee_bt,
+      </if>
+      <if test="infrastructureFeeZc != null">
+        infrastructure_fee_zc,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="modifierId != null">
+        modifier_id,
+      </if>
+      <if test="isRoot != null">
+        is_root,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="preprojectId != null">
+        #{preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentFeeBt != null">
+        #{equipmentFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeZc != null">
+        #{equipmentFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeApprovedBt != null">
+        #{equipmentFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeApprovedZc != null">
+        #{equipmentFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeBt != null">
+        #{testFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeZc != null">
+        #{testFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeApprovedBt != null">
+        #{testFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeApprovedZc != null">
+        #{testFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeBt != null">
+        #{materialFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeZc != null">
+        #{materialFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApprovedBt != null">
+        #{materialFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApprovedZc != null">
+        #{materialFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeBt != null">
+        #{powerFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeZc != null">
+        #{powerFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeApprovedBt != null">
+        #{powerFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeApprovedZc != null">
+        #{powerFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeBt != null">
+        #{conferenceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeZc != null">
+        #{conferenceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeApprovedBt != null">
+        #{conferenceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeApprovedZc != null">
+        #{conferenceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeBt != null">
+        #{businessFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeZc != null">
+        #{businessFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeApprovedBt != null">
+        #{businessFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeApprovedZc != null">
+        #{businessFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeBt != null">
+        #{cooperationFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeZc != null">
+        #{cooperationFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeApprovedBt != null">
+        #{cooperationFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeApprovedZc != null">
+        #{cooperationFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeBt != null">
+        #{propertyFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeZc != null">
+        #{propertyFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeApprovedBt != null">
+        #{propertyFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeApprovedZc != null">
+        #{propertyFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeBt != null">
+        #{laborFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeZc != null">
+        #{laborFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeApprovedBt != null">
+        #{laborFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeApprovedZc != null">
+        #{laborFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeBt != null">
+        #{staffFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeZc != null">
+        #{staffFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeApprovedBt != null">
+        #{staffFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeApprovedZc != null">
+        #{staffFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeBt != null">
+        #{consultingFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeZc != null">
+        #{consultingFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeApprovedBt != null">
+        #{consultingFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeApprovedZc != null">
+        #{consultingFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeBt != null">
+        #{managementFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeZc != null">
+        #{managementFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeApprovedBt != null">
+        #{managementFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeApprovedZc != null">
+        #{managementFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeBt != null">
+        #{otherFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeZc != null">
+        #{otherFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApprovedBt != null">
+        #{otherFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApprovedZc != null">
+        #{otherFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeApprovedBt != null">
+        #{performanceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeApprovedZc != null">
+        #{performanceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeBt != null">
+        #{performanceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeZc != null">
+        #{performanceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeApprovedBt != null">
+        #{infrastructureFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeApprovedZc != null">
+        #{infrastructureFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeBt != null">
+        #{infrastructureFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeZc != null">
+        #{infrastructureFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null">
+        #{modifierId,jdbcType=CHAR},
+      </if>
+      <if test="isRoot != null">
+        #{isRoot,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsBudgetResearchExample" resultType="java.lang.Long">
+    select count(*) from rdms_budget_research
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_budget_research
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.preprojectId != null">
+        preproject_id = #{record.preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.stage != null">
+        stage = #{record.stage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipmentFeeBt != null">
+        equipment_fee_bt = #{record.equipmentFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.equipmentFeeZc != null">
+        equipment_fee_zc = #{record.equipmentFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.equipmentFeeApprovedBt != null">
+        equipment_fee_approved_bt = #{record.equipmentFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.equipmentFeeApprovedZc != null">
+        equipment_fee_approved_zc = #{record.equipmentFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testFeeBt != null">
+        test_fee_bt = #{record.testFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testFeeZc != null">
+        test_fee_zc = #{record.testFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testFeeApprovedBt != null">
+        test_fee_approved_bt = #{record.testFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testFeeApprovedZc != null">
+        test_fee_approved_zc = #{record.testFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialFeeBt != null">
+        material_fee_bt = #{record.materialFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialFeeZc != null">
+        material_fee_zc = #{record.materialFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialFeeApprovedBt != null">
+        material_fee_approved_bt = #{record.materialFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialFeeApprovedZc != null">
+        material_fee_approved_zc = #{record.materialFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.powerFeeBt != null">
+        power_fee_bt = #{record.powerFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.powerFeeZc != null">
+        power_fee_zc = #{record.powerFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.powerFeeApprovedBt != null">
+        power_fee_approved_bt = #{record.powerFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.powerFeeApprovedZc != null">
+        power_fee_approved_zc = #{record.powerFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conferenceFeeBt != null">
+        conference_fee_bt = #{record.conferenceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conferenceFeeZc != null">
+        conference_fee_zc = #{record.conferenceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conferenceFeeApprovedBt != null">
+        conference_fee_approved_bt = #{record.conferenceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conferenceFeeApprovedZc != null">
+        conference_fee_approved_zc = #{record.conferenceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.businessFeeBt != null">
+        business_fee_bt = #{record.businessFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.businessFeeZc != null">
+        business_fee_zc = #{record.businessFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.businessFeeApprovedBt != null">
+        business_fee_approved_bt = #{record.businessFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.businessFeeApprovedZc != null">
+        business_fee_approved_zc = #{record.businessFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cooperationFeeBt != null">
+        cooperation_fee_bt = #{record.cooperationFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cooperationFeeZc != null">
+        cooperation_fee_zc = #{record.cooperationFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cooperationFeeApprovedBt != null">
+        cooperation_fee_approved_bt = #{record.cooperationFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cooperationFeeApprovedZc != null">
+        cooperation_fee_approved_zc = #{record.cooperationFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propertyFeeBt != null">
+        property_fee_bt = #{record.propertyFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propertyFeeZc != null">
+        property_fee_zc = #{record.propertyFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propertyFeeApprovedBt != null">
+        property_fee_approved_bt = #{record.propertyFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propertyFeeApprovedZc != null">
+        property_fee_approved_zc = #{record.propertyFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.laborFeeBt != null">
+        labor_fee_bt = #{record.laborFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.laborFeeZc != null">
+        labor_fee_zc = #{record.laborFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.laborFeeApprovedBt != null">
+        labor_fee_approved_bt = #{record.laborFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.laborFeeApprovedZc != null">
+        labor_fee_approved_zc = #{record.laborFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffFeeBt != null">
+        staff_fee_bt = #{record.staffFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffFeeZc != null">
+        staff_fee_zc = #{record.staffFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffFeeApprovedBt != null">
+        staff_fee_approved_bt = #{record.staffFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.staffFeeApprovedZc != null">
+        staff_fee_approved_zc = #{record.staffFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consultingFeeBt != null">
+        consulting_fee_bt = #{record.consultingFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consultingFeeZc != null">
+        consulting_fee_zc = #{record.consultingFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consultingFeeApprovedBt != null">
+        consulting_fee_approved_bt = #{record.consultingFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consultingFeeApprovedZc != null">
+        consulting_fee_approved_zc = #{record.consultingFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managementFeeBt != null">
+        management_fee_bt = #{record.managementFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managementFeeZc != null">
+        management_fee_zc = #{record.managementFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managementFeeApprovedBt != null">
+        management_fee_approved_bt = #{record.managementFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managementFeeApprovedZc != null">
+        management_fee_approved_zc = #{record.managementFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeBt != null">
+        other_fee_bt = #{record.otherFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeZc != null">
+        other_fee_zc = #{record.otherFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeApprovedBt != null">
+        other_fee_approved_bt = #{record.otherFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeApprovedZc != null">
+        other_fee_approved_zc = #{record.otherFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceFeeApprovedBt != null">
+        performance_fee_approved_bt = #{record.performanceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceFeeApprovedZc != null">
+        performance_fee_approved_zc = #{record.performanceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceFeeBt != null">
+        performance_fee_bt = #{record.performanceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceFeeZc != null">
+        performance_fee_zc = #{record.performanceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.infrastructureFeeApprovedBt != null">
+        infrastructure_fee_approved_bt = #{record.infrastructureFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.infrastructureFeeApprovedZc != null">
+        infrastructure_fee_approved_zc = #{record.infrastructureFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.infrastructureFeeBt != null">
+        infrastructure_fee_bt = #{record.infrastructureFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.infrastructureFeeZc != null">
+        infrastructure_fee_zc = #{record.infrastructureFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createrId != null">
+        creater_id = #{record.createrId,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifierId != null">
+        modifier_id = #{record.modifierId,jdbcType=CHAR},
+      </if>
+      <if test="record.isRoot != null">
+        is_root = #{record.isRoot,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_budget_research
+    set id = #{record.id,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      parent_id = #{record.parentId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      preproject_id = #{record.preprojectId,jdbcType=CHAR},
+      stage = #{record.stage,jdbcType=VARCHAR},
+      equipment_fee_bt = #{record.equipmentFeeBt,jdbcType=DECIMAL},
+      equipment_fee_zc = #{record.equipmentFeeZc,jdbcType=DECIMAL},
+      equipment_fee_approved_bt = #{record.equipmentFeeApprovedBt,jdbcType=DECIMAL},
+      equipment_fee_approved_zc = #{record.equipmentFeeApprovedZc,jdbcType=DECIMAL},
+      test_fee_bt = #{record.testFeeBt,jdbcType=DECIMAL},
+      test_fee_zc = #{record.testFeeZc,jdbcType=DECIMAL},
+      test_fee_approved_bt = #{record.testFeeApprovedBt,jdbcType=DECIMAL},
+      test_fee_approved_zc = #{record.testFeeApprovedZc,jdbcType=DECIMAL},
+      material_fee_bt = #{record.materialFeeBt,jdbcType=DECIMAL},
+      material_fee_zc = #{record.materialFeeZc,jdbcType=DECIMAL},
+      material_fee_approved_bt = #{record.materialFeeApprovedBt,jdbcType=DECIMAL},
+      material_fee_approved_zc = #{record.materialFeeApprovedZc,jdbcType=DECIMAL},
+      power_fee_bt = #{record.powerFeeBt,jdbcType=DECIMAL},
+      power_fee_zc = #{record.powerFeeZc,jdbcType=DECIMAL},
+      power_fee_approved_bt = #{record.powerFeeApprovedBt,jdbcType=DECIMAL},
+      power_fee_approved_zc = #{record.powerFeeApprovedZc,jdbcType=DECIMAL},
+      conference_fee_bt = #{record.conferenceFeeBt,jdbcType=DECIMAL},
+      conference_fee_zc = #{record.conferenceFeeZc,jdbcType=DECIMAL},
+      conference_fee_approved_bt = #{record.conferenceFeeApprovedBt,jdbcType=DECIMAL},
+      conference_fee_approved_zc = #{record.conferenceFeeApprovedZc,jdbcType=DECIMAL},
+      business_fee_bt = #{record.businessFeeBt,jdbcType=DECIMAL},
+      business_fee_zc = #{record.businessFeeZc,jdbcType=DECIMAL},
+      business_fee_approved_bt = #{record.businessFeeApprovedBt,jdbcType=DECIMAL},
+      business_fee_approved_zc = #{record.businessFeeApprovedZc,jdbcType=DECIMAL},
+      cooperation_fee_bt = #{record.cooperationFeeBt,jdbcType=DECIMAL},
+      cooperation_fee_zc = #{record.cooperationFeeZc,jdbcType=DECIMAL},
+      cooperation_fee_approved_bt = #{record.cooperationFeeApprovedBt,jdbcType=DECIMAL},
+      cooperation_fee_approved_zc = #{record.cooperationFeeApprovedZc,jdbcType=DECIMAL},
+      property_fee_bt = #{record.propertyFeeBt,jdbcType=DECIMAL},
+      property_fee_zc = #{record.propertyFeeZc,jdbcType=DECIMAL},
+      property_fee_approved_bt = #{record.propertyFeeApprovedBt,jdbcType=DECIMAL},
+      property_fee_approved_zc = #{record.propertyFeeApprovedZc,jdbcType=DECIMAL},
+      labor_fee_bt = #{record.laborFeeBt,jdbcType=DECIMAL},
+      labor_fee_zc = #{record.laborFeeZc,jdbcType=DECIMAL},
+      labor_fee_approved_bt = #{record.laborFeeApprovedBt,jdbcType=DECIMAL},
+      labor_fee_approved_zc = #{record.laborFeeApprovedZc,jdbcType=DECIMAL},
+      staff_fee_bt = #{record.staffFeeBt,jdbcType=DECIMAL},
+      staff_fee_zc = #{record.staffFeeZc,jdbcType=DECIMAL},
+      staff_fee_approved_bt = #{record.staffFeeApprovedBt,jdbcType=DECIMAL},
+      staff_fee_approved_zc = #{record.staffFeeApprovedZc,jdbcType=DECIMAL},
+      consulting_fee_bt = #{record.consultingFeeBt,jdbcType=DECIMAL},
+      consulting_fee_zc = #{record.consultingFeeZc,jdbcType=DECIMAL},
+      consulting_fee_approved_bt = #{record.consultingFeeApprovedBt,jdbcType=DECIMAL},
+      consulting_fee_approved_zc = #{record.consultingFeeApprovedZc,jdbcType=DECIMAL},
+      management_fee_bt = #{record.managementFeeBt,jdbcType=DECIMAL},
+      management_fee_zc = #{record.managementFeeZc,jdbcType=DECIMAL},
+      management_fee_approved_bt = #{record.managementFeeApprovedBt,jdbcType=DECIMAL},
+      management_fee_approved_zc = #{record.managementFeeApprovedZc,jdbcType=DECIMAL},
+      other_fee_bt = #{record.otherFeeBt,jdbcType=DECIMAL},
+      other_fee_zc = #{record.otherFeeZc,jdbcType=DECIMAL},
+      other_fee_approved_bt = #{record.otherFeeApprovedBt,jdbcType=DECIMAL},
+      other_fee_approved_zc = #{record.otherFeeApprovedZc,jdbcType=DECIMAL},
+      performance_fee_approved_bt = #{record.performanceFeeApprovedBt,jdbcType=DECIMAL},
+      performance_fee_approved_zc = #{record.performanceFeeApprovedZc,jdbcType=DECIMAL},
+      performance_fee_bt = #{record.performanceFeeBt,jdbcType=DECIMAL},
+      performance_fee_zc = #{record.performanceFeeZc,jdbcType=DECIMAL},
+      infrastructure_fee_approved_bt = #{record.infrastructureFeeApprovedBt,jdbcType=DECIMAL},
+      infrastructure_fee_approved_zc = #{record.infrastructureFeeApprovedZc,jdbcType=DECIMAL},
+      infrastructure_fee_bt = #{record.infrastructureFeeBt,jdbcType=DECIMAL},
+      infrastructure_fee_zc = #{record.infrastructureFeeZc,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      creater_id = #{record.createrId,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      modifier_id = #{record.modifierId,jdbcType=CHAR},
+      is_root = #{record.isRoot,jdbcType=INTEGER},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsBudgetResearch">
+    update rdms_budget_research
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="preprojectId != null">
+        preproject_id = #{preprojectId,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        stage = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentFeeBt != null">
+        equipment_fee_bt = #{equipmentFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeZc != null">
+        equipment_fee_zc = #{equipmentFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeApprovedBt != null">
+        equipment_fee_approved_bt = #{equipmentFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="equipmentFeeApprovedZc != null">
+        equipment_fee_approved_zc = #{equipmentFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeBt != null">
+        test_fee_bt = #{testFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeZc != null">
+        test_fee_zc = #{testFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeApprovedBt != null">
+        test_fee_approved_bt = #{testFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="testFeeApprovedZc != null">
+        test_fee_approved_zc = #{testFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeBt != null">
+        material_fee_bt = #{materialFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeZc != null">
+        material_fee_zc = #{materialFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApprovedBt != null">
+        material_fee_approved_bt = #{materialFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApprovedZc != null">
+        material_fee_approved_zc = #{materialFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeBt != null">
+        power_fee_bt = #{powerFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeZc != null">
+        power_fee_zc = #{powerFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeApprovedBt != null">
+        power_fee_approved_bt = #{powerFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFeeApprovedZc != null">
+        power_fee_approved_zc = #{powerFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeBt != null">
+        conference_fee_bt = #{conferenceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeZc != null">
+        conference_fee_zc = #{conferenceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeApprovedBt != null">
+        conference_fee_approved_bt = #{conferenceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFeeApprovedZc != null">
+        conference_fee_approved_zc = #{conferenceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeBt != null">
+        business_fee_bt = #{businessFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeZc != null">
+        business_fee_zc = #{businessFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeApprovedBt != null">
+        business_fee_approved_bt = #{businessFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFeeApprovedZc != null">
+        business_fee_approved_zc = #{businessFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeBt != null">
+        cooperation_fee_bt = #{cooperationFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeZc != null">
+        cooperation_fee_zc = #{cooperationFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeApprovedBt != null">
+        cooperation_fee_approved_bt = #{cooperationFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFeeApprovedZc != null">
+        cooperation_fee_approved_zc = #{cooperationFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeBt != null">
+        property_fee_bt = #{propertyFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeZc != null">
+        property_fee_zc = #{propertyFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeApprovedBt != null">
+        property_fee_approved_bt = #{propertyFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFeeApprovedZc != null">
+        property_fee_approved_zc = #{propertyFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeBt != null">
+        labor_fee_bt = #{laborFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeZc != null">
+        labor_fee_zc = #{laborFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeApprovedBt != null">
+        labor_fee_approved_bt = #{laborFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFeeApprovedZc != null">
+        labor_fee_approved_zc = #{laborFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeBt != null">
+        staff_fee_bt = #{staffFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeZc != null">
+        staff_fee_zc = #{staffFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeApprovedBt != null">
+        staff_fee_approved_bt = #{staffFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="staffFeeApprovedZc != null">
+        staff_fee_approved_zc = #{staffFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeBt != null">
+        consulting_fee_bt = #{consultingFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeZc != null">
+        consulting_fee_zc = #{consultingFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeApprovedBt != null">
+        consulting_fee_approved_bt = #{consultingFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFeeApprovedZc != null">
+        consulting_fee_approved_zc = #{consultingFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeBt != null">
+        management_fee_bt = #{managementFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeZc != null">
+        management_fee_zc = #{managementFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeApprovedBt != null">
+        management_fee_approved_bt = #{managementFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFeeApprovedZc != null">
+        management_fee_approved_zc = #{managementFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeBt != null">
+        other_fee_bt = #{otherFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeZc != null">
+        other_fee_zc = #{otherFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApprovedBt != null">
+        other_fee_approved_bt = #{otherFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApprovedZc != null">
+        other_fee_approved_zc = #{otherFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeApprovedBt != null">
+        performance_fee_approved_bt = #{performanceFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeApprovedZc != null">
+        performance_fee_approved_zc = #{performanceFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeBt != null">
+        performance_fee_bt = #{performanceFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceFeeZc != null">
+        performance_fee_zc = #{performanceFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeApprovedBt != null">
+        infrastructure_fee_approved_bt = #{infrastructureFeeApprovedBt,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeApprovedZc != null">
+        infrastructure_fee_approved_zc = #{infrastructureFeeApprovedZc,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeBt != null">
+        infrastructure_fee_bt = #{infrastructureFeeBt,jdbcType=DECIMAL},
+      </if>
+      <if test="infrastructureFeeZc != null">
+        infrastructure_fee_zc = #{infrastructureFeeZc,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null">
+        modifier_id = #{modifierId,jdbcType=CHAR},
+      </if>
+      <if test="isRoot != null">
+        is_root = #{isRoot,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsBudgetResearch">
+    update rdms_budget_research
+    set customer_id = #{customerId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      preproject_id = #{preprojectId,jdbcType=CHAR},
+      stage = #{stage,jdbcType=VARCHAR},
+      equipment_fee_bt = #{equipmentFeeBt,jdbcType=DECIMAL},
+      equipment_fee_zc = #{equipmentFeeZc,jdbcType=DECIMAL},
+      equipment_fee_approved_bt = #{equipmentFeeApprovedBt,jdbcType=DECIMAL},
+      equipment_fee_approved_zc = #{equipmentFeeApprovedZc,jdbcType=DECIMAL},
+      test_fee_bt = #{testFeeBt,jdbcType=DECIMAL},
+      test_fee_zc = #{testFeeZc,jdbcType=DECIMAL},
+      test_fee_approved_bt = #{testFeeApprovedBt,jdbcType=DECIMAL},
+      test_fee_approved_zc = #{testFeeApprovedZc,jdbcType=DECIMAL},
+      material_fee_bt = #{materialFeeBt,jdbcType=DECIMAL},
+      material_fee_zc = #{materialFeeZc,jdbcType=DECIMAL},
+      material_fee_approved_bt = #{materialFeeApprovedBt,jdbcType=DECIMAL},
+      material_fee_approved_zc = #{materialFeeApprovedZc,jdbcType=DECIMAL},
+      power_fee_bt = #{powerFeeBt,jdbcType=DECIMAL},
+      power_fee_zc = #{powerFeeZc,jdbcType=DECIMAL},
+      power_fee_approved_bt = #{powerFeeApprovedBt,jdbcType=DECIMAL},
+      power_fee_approved_zc = #{powerFeeApprovedZc,jdbcType=DECIMAL},
+      conference_fee_bt = #{conferenceFeeBt,jdbcType=DECIMAL},
+      conference_fee_zc = #{conferenceFeeZc,jdbcType=DECIMAL},
+      conference_fee_approved_bt = #{conferenceFeeApprovedBt,jdbcType=DECIMAL},
+      conference_fee_approved_zc = #{conferenceFeeApprovedZc,jdbcType=DECIMAL},
+      business_fee_bt = #{businessFeeBt,jdbcType=DECIMAL},
+      business_fee_zc = #{businessFeeZc,jdbcType=DECIMAL},
+      business_fee_approved_bt = #{businessFeeApprovedBt,jdbcType=DECIMAL},
+      business_fee_approved_zc = #{businessFeeApprovedZc,jdbcType=DECIMAL},
+      cooperation_fee_bt = #{cooperationFeeBt,jdbcType=DECIMAL},
+      cooperation_fee_zc = #{cooperationFeeZc,jdbcType=DECIMAL},
+      cooperation_fee_approved_bt = #{cooperationFeeApprovedBt,jdbcType=DECIMAL},
+      cooperation_fee_approved_zc = #{cooperationFeeApprovedZc,jdbcType=DECIMAL},
+      property_fee_bt = #{propertyFeeBt,jdbcType=DECIMAL},
+      property_fee_zc = #{propertyFeeZc,jdbcType=DECIMAL},
+      property_fee_approved_bt = #{propertyFeeApprovedBt,jdbcType=DECIMAL},
+      property_fee_approved_zc = #{propertyFeeApprovedZc,jdbcType=DECIMAL},
+      labor_fee_bt = #{laborFeeBt,jdbcType=DECIMAL},
+      labor_fee_zc = #{laborFeeZc,jdbcType=DECIMAL},
+      labor_fee_approved_bt = #{laborFeeApprovedBt,jdbcType=DECIMAL},
+      labor_fee_approved_zc = #{laborFeeApprovedZc,jdbcType=DECIMAL},
+      staff_fee_bt = #{staffFeeBt,jdbcType=DECIMAL},
+      staff_fee_zc = #{staffFeeZc,jdbcType=DECIMAL},
+      staff_fee_approved_bt = #{staffFeeApprovedBt,jdbcType=DECIMAL},
+      staff_fee_approved_zc = #{staffFeeApprovedZc,jdbcType=DECIMAL},
+      consulting_fee_bt = #{consultingFeeBt,jdbcType=DECIMAL},
+      consulting_fee_zc = #{consultingFeeZc,jdbcType=DECIMAL},
+      consulting_fee_approved_bt = #{consultingFeeApprovedBt,jdbcType=DECIMAL},
+      consulting_fee_approved_zc = #{consultingFeeApprovedZc,jdbcType=DECIMAL},
+      management_fee_bt = #{managementFeeBt,jdbcType=DECIMAL},
+      management_fee_zc = #{managementFeeZc,jdbcType=DECIMAL},
+      management_fee_approved_bt = #{managementFeeApprovedBt,jdbcType=DECIMAL},
+      management_fee_approved_zc = #{managementFeeApprovedZc,jdbcType=DECIMAL},
+      other_fee_bt = #{otherFeeBt,jdbcType=DECIMAL},
+      other_fee_zc = #{otherFeeZc,jdbcType=DECIMAL},
+      other_fee_approved_bt = #{otherFeeApprovedBt,jdbcType=DECIMAL},
+      other_fee_approved_zc = #{otherFeeApprovedZc,jdbcType=DECIMAL},
+      performance_fee_approved_bt = #{performanceFeeApprovedBt,jdbcType=DECIMAL},
+      performance_fee_approved_zc = #{performanceFeeApprovedZc,jdbcType=DECIMAL},
+      performance_fee_bt = #{performanceFeeBt,jdbcType=DECIMAL},
+      performance_fee_zc = #{performanceFeeZc,jdbcType=DECIMAL},
+      infrastructure_fee_approved_bt = #{infrastructureFeeApprovedBt,jdbcType=DECIMAL},
+      infrastructure_fee_approved_zc = #{infrastructureFeeApprovedZc,jdbcType=DECIMAL},
+      infrastructure_fee_bt = #{infrastructureFeeBt,jdbcType=DECIMAL},
+      infrastructure_fee_zc = #{infrastructureFeeZc,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=CHAR},
+      is_root = #{isRoot,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

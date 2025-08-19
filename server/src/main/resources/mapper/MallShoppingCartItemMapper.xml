@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.MallShoppingCartItemMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.MallShoppingCartItem">
+    <id column="cart_item_id" jdbcType="CHAR" property="cartItemId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="institution_id" jdbcType="CHAR" property="institutionId" />
+    <result column="buyFrom" jdbcType="INTEGER" property="buyfrom" />
+    <result column="selected" jdbcType="BIT" property="selected" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cart_item_id, customer_id, goods_id, goods_count, is_deleted, create_time, update_time, 
+    institution_id, buyFrom, selected
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.MallShoppingCartItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mall_shopping_cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_shopping_cart_item
+    where cart_item_id = #{cartItemId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mall_shopping_cart_item
+    where cart_item_id = #{cartItemId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.MallShoppingCartItemExample">
+    delete from mall_shopping_cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.MallShoppingCartItem">
+    insert into mall_shopping_cart_item (cart_item_id, customer_id, goods_id, 
+      goods_count, is_deleted, create_time, 
+      update_time, institution_id, buyFrom, 
+      selected)
+    values (#{cartItemId,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{goodsId,jdbcType=BIGINT}, 
+      #{goodsCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{institutionId,jdbcType=CHAR}, #{buyfrom,jdbcType=INTEGER}, 
+      #{selected,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.MallShoppingCartItem">
+    insert into mall_shopping_cart_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cartItemId != null">
+        cart_item_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="goodsCount != null">
+        goods_count,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="institutionId != null">
+        institution_id,
+      </if>
+      <if test="buyfrom != null">
+        buyFrom,
+      </if>
+      <if test="selected != null">
+        selected,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cartItemId != null">
+        #{cartItemId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCount != null">
+        #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="institutionId != null">
+        #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="buyfrom != null">
+        #{buyfrom,jdbcType=INTEGER},
+      </if>
+      <if test="selected != null">
+        #{selected,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.MallShoppingCartItemExample" resultType="java.lang.Long">
+    select count(*) from mall_shopping_cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mall_shopping_cart_item
+    <set>
+      <if test="record.cartItemId != null">
+        cart_item_id = #{record.cartItemId,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsCount != null">
+        goods_count = #{record.goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.institutionId != null">
+        institution_id = #{record.institutionId,jdbcType=CHAR},
+      </if>
+      <if test="record.buyfrom != null">
+        buyFrom = #{record.buyfrom,jdbcType=INTEGER},
+      </if>
+      <if test="record.selected != null">
+        selected = #{record.selected,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mall_shopping_cart_item
+    set cart_item_id = #{record.cartItemId,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_count = #{record.goodsCount,jdbcType=INTEGER},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      institution_id = #{record.institutionId,jdbcType=CHAR},
+      buyFrom = #{record.buyfrom,jdbcType=INTEGER},
+      selected = #{record.selected,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.MallShoppingCartItem">
+    update mall_shopping_cart_item
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCount != null">
+        goods_count = #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="institutionId != null">
+        institution_id = #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="buyfrom != null">
+        buyFrom = #{buyfrom,jdbcType=INTEGER},
+      </if>
+      <if test="selected != null">
+        selected = #{selected,jdbcType=BIT},
+      </if>
+    </set>
+    where cart_item_id = #{cartItemId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.MallShoppingCartItem">
+    update mall_shopping_cart_item
+    set customer_id = #{customerId,jdbcType=CHAR},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      institution_id = #{institutionId,jdbcType=CHAR},
+      buyFrom = #{buyfrom,jdbcType=INTEGER},
+      selected = #{selected,jdbcType=BIT}
+    where cart_item_id = #{cartItemId,jdbcType=CHAR}
+  </update>
+</mapper>

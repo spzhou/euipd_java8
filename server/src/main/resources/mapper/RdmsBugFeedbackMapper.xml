@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsBugFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsBugFeedback">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="bug_serial" jdbcType="CHAR" property="bugSerial" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="test_manager_id" jdbcType="CHAR" property="testManagerId" />
+    <result column="associate_project_str" jdbcType="VARCHAR" property="associateProjectStr" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="consumer" jdbcType="VARCHAR" property="consumer" />
+    <result column="writer_id" jdbcType="CHAR" property="writerId" />
+    <result column="confirm_tel" jdbcType="VARCHAR" property="confirmTel" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="character_id" jdbcType="CHAR" property="characterId" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="executor_id" jdbcType="CHAR" property="executorId" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="bug_description" jdbcType="VARCHAR" property="bugDescription" />
+    <result column="trigger_condition" jdbcType="VARCHAR" property="triggerCondition" />
+    <result column="analysis_name" jdbcType="VARCHAR" property="analysisName" />
+    <result column="essential_analysis" jdbcType="VARCHAR" property="essentialAnalysis" />
+    <result column="solution" jdbcType="VARCHAR" property="solution" />
+    <result column="output_indicator" jdbcType="VARCHAR" property="outputIndicator" />
+    <result column="test_method" jdbcType="VARCHAR" property="testMethod" />
+    <result column="plan_submission_time" jdbcType="TIMESTAMP" property="planSubmissionTime" />
+    <result column="feedback_description" jdbcType="VARCHAR" property="feedbackDescription" />
+    <result column="feedback_file_id_list_str" jdbcType="VARCHAR" property="feedbackFileIdListStr" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bug_serial, `name`, customer_id, project_id, subproject_id, product_manager_id, 
+    project_manager_id, test_manager_id, associate_project_str, file_list_str, consumer, 
+    writer_id, confirm_tel, `status`, character_id, jobitem_id, executor_id, `type`, 
+    bug_description, trigger_condition, analysis_name, essential_analysis, solution, 
+    output_indicator, test_method, plan_submission_time, feedback_description, feedback_file_id_list_str, 
+    create_time, update_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsBugFeedbackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_bug_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_bug_feedback
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_bug_feedback
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsBugFeedbackExample">
+    delete from rdms_bug_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsBugFeedback">
+    insert into rdms_bug_feedback (id, bug_serial, `name`, 
+      customer_id, project_id, subproject_id, 
+      product_manager_id, project_manager_id, test_manager_id, 
+      associate_project_str, file_list_str, consumer, 
+      writer_id, confirm_tel, `status`, 
+      character_id, jobitem_id, executor_id, 
+      `type`, bug_description, trigger_condition, 
+      analysis_name, essential_analysis, solution, 
+      output_indicator, test_method, plan_submission_time, 
+      feedback_description, feedback_file_id_list_str, 
+      create_time, update_time, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{bugSerial,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{subprojectId,jdbcType=CHAR}, 
+      #{productManagerId,jdbcType=CHAR}, #{projectManagerId,jdbcType=CHAR}, #{testManagerId,jdbcType=CHAR}, 
+      #{associateProjectStr,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, #{consumer,jdbcType=VARCHAR}, 
+      #{writerId,jdbcType=CHAR}, #{confirmTel,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{characterId,jdbcType=CHAR}, #{jobitemId,jdbcType=CHAR}, #{executorId,jdbcType=CHAR}, 
+      #{type,jdbcType=CHAR}, #{bugDescription,jdbcType=VARCHAR}, #{triggerCondition,jdbcType=VARCHAR}, 
+      #{analysisName,jdbcType=VARCHAR}, #{essentialAnalysis,jdbcType=VARCHAR}, #{solution,jdbcType=VARCHAR}, 
+      #{outputIndicator,jdbcType=VARCHAR}, #{testMethod,jdbcType=VARCHAR}, #{planSubmissionTime,jdbcType=TIMESTAMP}, 
+      #{feedbackDescription,jdbcType=VARCHAR}, #{feedbackFileIdListStr,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsBugFeedback">
+    insert into rdms_bug_feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bugSerial != null">
+        bug_serial,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id,
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id,
+      </if>
+      <if test="associateProjectStr != null">
+        associate_project_str,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="consumer != null">
+        consumer,
+      </if>
+      <if test="writerId != null">
+        writer_id,
+      </if>
+      <if test="confirmTel != null">
+        confirm_tel,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="characterId != null">
+        character_id,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="executorId != null">
+        executor_id,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="bugDescription != null">
+        bug_description,
+      </if>
+      <if test="triggerCondition != null">
+        trigger_condition,
+      </if>
+      <if test="analysisName != null">
+        analysis_name,
+      </if>
+      <if test="essentialAnalysis != null">
+        essential_analysis,
+      </if>
+      <if test="solution != null">
+        solution,
+      </if>
+      <if test="outputIndicator != null">
+        output_indicator,
+      </if>
+      <if test="testMethod != null">
+        test_method,
+      </if>
+      <if test="planSubmissionTime != null">
+        plan_submission_time,
+      </if>
+      <if test="feedbackDescription != null">
+        feedback_description,
+      </if>
+      <if test="feedbackFileIdListStr != null">
+        feedback_file_id_list_str,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="bugSerial != null">
+        #{bugSerial,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="associateProjectStr != null">
+        #{associateProjectStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="consumer != null">
+        #{consumer,jdbcType=VARCHAR},
+      </if>
+      <if test="writerId != null">
+        #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="confirmTel != null">
+        #{confirmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="characterId != null">
+        #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="bugDescription != null">
+        #{bugDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerCondition != null">
+        #{triggerCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisName != null">
+        #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="essentialAnalysis != null">
+        #{essentialAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="solution != null">
+        #{solution,jdbcType=VARCHAR},
+      </if>
+      <if test="outputIndicator != null">
+        #{outputIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="planSubmissionTime != null">
+        #{planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackDescription != null">
+        #{feedbackDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackFileIdListStr != null">
+        #{feedbackFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsBugFeedbackExample" resultType="java.lang.Long">
+    select count(*) from rdms_bug_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_bug_feedback
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.bugSerial != null">
+        bug_serial = #{record.bugSerial,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectManagerId != null">
+        project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.testManagerId != null">
+        test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.associateProjectStr != null">
+        associate_project_str = #{record.associateProjectStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumer != null">
+        consumer = #{record.consumer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writerId != null">
+        writer_id = #{record.writerId,jdbcType=CHAR},
+      </if>
+      <if test="record.confirmTel != null">
+        confirm_tel = #{record.confirmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.characterId != null">
+        character_id = #{record.characterId,jdbcType=CHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.executorId != null">
+        executor_id = #{record.executorId,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.bugDescription != null">
+        bug_description = #{record.bugDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.triggerCondition != null">
+        trigger_condition = #{record.triggerCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysisName != null">
+        analysis_name = #{record.analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.essentialAnalysis != null">
+        essential_analysis = #{record.essentialAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solution != null">
+        solution = #{record.solution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outputIndicator != null">
+        output_indicator = #{record.outputIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testMethod != null">
+        test_method = #{record.testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planSubmissionTime != null">
+        plan_submission_time = #{record.planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.feedbackDescription != null">
+        feedback_description = #{record.feedbackDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackFileIdListStr != null">
+        feedback_file_id_list_str = #{record.feedbackFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_bug_feedback
+    set id = #{record.id,jdbcType=CHAR},
+      bug_serial = #{record.bugSerial,jdbcType=CHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      associate_project_str = #{record.associateProjectStr,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      consumer = #{record.consumer,jdbcType=VARCHAR},
+      writer_id = #{record.writerId,jdbcType=CHAR},
+      confirm_tel = #{record.confirmTel,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      character_id = #{record.characterId,jdbcType=CHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      executor_id = #{record.executorId,jdbcType=CHAR},
+      `type` = #{record.type,jdbcType=CHAR},
+      bug_description = #{record.bugDescription,jdbcType=VARCHAR},
+      trigger_condition = #{record.triggerCondition,jdbcType=VARCHAR},
+      analysis_name = #{record.analysisName,jdbcType=VARCHAR},
+      essential_analysis = #{record.essentialAnalysis,jdbcType=VARCHAR},
+      solution = #{record.solution,jdbcType=VARCHAR},
+      output_indicator = #{record.outputIndicator,jdbcType=VARCHAR},
+      test_method = #{record.testMethod,jdbcType=VARCHAR},
+      plan_submission_time = #{record.planSubmissionTime,jdbcType=TIMESTAMP},
+      feedback_description = #{record.feedbackDescription,jdbcType=VARCHAR},
+      feedback_file_id_list_str = #{record.feedbackFileIdListStr,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsBugFeedback">
+    update rdms_bug_feedback
+    <set>
+      <if test="bugSerial != null">
+        bug_serial = #{bugSerial,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id = #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="associateProjectStr != null">
+        associate_project_str = #{associateProjectStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="consumer != null">
+        consumer = #{consumer,jdbcType=VARCHAR},
+      </if>
+      <if test="writerId != null">
+        writer_id = #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="confirmTel != null">
+        confirm_tel = #{confirmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="characterId != null">
+        character_id = #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        executor_id = #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="bugDescription != null">
+        bug_description = #{bugDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerCondition != null">
+        trigger_condition = #{triggerCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisName != null">
+        analysis_name = #{analysisName,jdbcType=VARCHAR},
+      </if>
+      <if test="essentialAnalysis != null">
+        essential_analysis = #{essentialAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="solution != null">
+        solution = #{solution,jdbcType=VARCHAR},
+      </if>
+      <if test="outputIndicator != null">
+        output_indicator = #{outputIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        test_method = #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="planSubmissionTime != null">
+        plan_submission_time = #{planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedbackDescription != null">
+        feedback_description = #{feedbackDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackFileIdListStr != null">
+        feedback_file_id_list_str = #{feedbackFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsBugFeedback">
+    update rdms_bug_feedback
+    set bug_serial = #{bugSerial,jdbcType=CHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{testManagerId,jdbcType=CHAR},
+      associate_project_str = #{associateProjectStr,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      consumer = #{consumer,jdbcType=VARCHAR},
+      writer_id = #{writerId,jdbcType=CHAR},
+      confirm_tel = #{confirmTel,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      character_id = #{characterId,jdbcType=CHAR},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      executor_id = #{executorId,jdbcType=CHAR},
+      `type` = #{type,jdbcType=CHAR},
+      bug_description = #{bugDescription,jdbcType=VARCHAR},
+      trigger_condition = #{triggerCondition,jdbcType=VARCHAR},
+      analysis_name = #{analysisName,jdbcType=VARCHAR},
+      essential_analysis = #{essentialAnalysis,jdbcType=VARCHAR},
+      solution = #{solution,jdbcType=VARCHAR},
+      output_indicator = #{outputIndicator,jdbcType=VARCHAR},
+      test_method = #{testMethod,jdbcType=VARCHAR},
+      plan_submission_time = #{planSubmissionTime,jdbcType=TIMESTAMP},
+      feedback_description = #{feedbackDescription,jdbcType=VARCHAR},
+      feedback_file_id_list_str = #{feedbackFileIdListStr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsFileApplyMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsFileApply">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="file_id" jdbcType="CHAR" property="fileId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="proposer_id" jdbcType="CHAR" property="proposerId" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="application_status" jdbcType="VARCHAR" property="applicationStatus" />
+    <result column="approver_id" jdbcType="CHAR" property="approverId" />
+    <result column="approval_time" jdbcType="TIMESTAMP" property="approvalTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, file_id, customer_id, proposer_id, reason, `type`, application_status, approver_id, 
+    approval_time, create_time, update_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsFileApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_file_apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_file_apply
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_file_apply
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsFileApplyExample">
+    delete from rdms_file_apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsFileApply">
+    insert into rdms_file_apply (id, file_id, customer_id, 
+      proposer_id, reason, `type`, 
+      application_status, approver_id, approval_time, 
+      create_time, update_time, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{fileId,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, 
+      #{proposerId,jdbcType=CHAR}, #{reason,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{applicationStatus,jdbcType=VARCHAR}, #{approverId,jdbcType=CHAR}, #{approvalTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsFileApply">
+    insert into rdms_file_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="proposerId != null">
+        proposer_id,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="applicationStatus != null">
+        application_status,
+      </if>
+      <if test="approverId != null">
+        approver_id,
+      </if>
+      <if test="approvalTime != null">
+        approval_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="proposerId != null">
+        #{proposerId,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationStatus != null">
+        #{applicationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approverId != null">
+        #{approverId,jdbcType=CHAR},
+      </if>
+      <if test="approvalTime != null">
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsFileApplyExample" resultType="java.lang.Long">
+    select count(*) from rdms_file_apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_file_apply
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.fileId != null">
+        file_id = #{record.fileId,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.proposerId != null">
+        proposer_id = #{record.proposerId,jdbcType=CHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationStatus != null">
+        application_status = #{record.applicationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approverId != null">
+        approver_id = #{record.approverId,jdbcType=CHAR},
+      </if>
+      <if test="record.approvalTime != null">
+        approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_file_apply
+    set id = #{record.id,jdbcType=CHAR},
+      file_id = #{record.fileId,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      proposer_id = #{record.proposerId,jdbcType=CHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      application_status = #{record.applicationStatus,jdbcType=VARCHAR},
+      approver_id = #{record.approverId,jdbcType=CHAR},
+      approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsFileApply">
+    update rdms_file_apply
+    <set>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="proposerId != null">
+        proposer_id = #{proposerId,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationStatus != null">
+        application_status = #{applicationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approverId != null">
+        approver_id = #{approverId,jdbcType=CHAR},
+      </if>
+      <if test="approvalTime != null">
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsFileApply">
+    update rdms_file_apply
+    set file_id = #{fileId,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      proposer_id = #{proposerId,jdbcType=CHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      application_status = #{applicationStatus,jdbcType=VARCHAR},
+      approver_id = #{approverId,jdbcType=CHAR},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

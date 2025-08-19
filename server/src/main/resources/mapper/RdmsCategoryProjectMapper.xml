@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCategoryProjectMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCategoryProject">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="parent" jdbcType="CHAR" property="parent" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="is_open" jdbcType="INTEGER" property="isOpen" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="auth_user_id_str" jdbcType="VARCHAR" property="authUserIdStr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent, `name`, sort, customer_id, project_id, is_open, is_delete, auth_user_id_str
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCategoryProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_category_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_category_project
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_category_project
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCategoryProjectExample">
+    delete from rdms_category_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCategoryProject">
+    insert into rdms_category_project (id, parent, `name`, sort, 
+      customer_id, project_id, is_open, 
+      is_delete, auth_user_id_str)
+    values (#{id,jdbcType=CHAR}, #{parent,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{isOpen,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=INTEGER}, #{authUserIdStr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCategoryProject">
+    insert into rdms_category_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parent != null">
+        parent,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="authUserIdStr != null">
+        auth_user_id_str,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="authUserIdStr != null">
+        #{authUserIdStr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCategoryProjectExample" resultType="java.lang.Long">
+    select count(*) from rdms_category_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_category_project
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.parent != null">
+        parent = #{record.parent,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.isOpen != null">
+        is_open = #{record.isOpen,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.authUserIdStr != null">
+        auth_user_id_str = #{record.authUserIdStr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_category_project
+    set id = #{record.id,jdbcType=CHAR},
+      parent = #{record.parent,jdbcType=CHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      is_open = #{record.isOpen,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      auth_user_id_str = #{record.authUserIdStr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCategoryProject">
+    update rdms_category_project
+    <set>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="authUserIdStr != null">
+        auth_user_id_str = #{authUserIdStr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCategoryProject">
+    update rdms_category_project
+    set parent = #{parent,jdbcType=CHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      is_open = #{isOpen,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      auth_user_id_str = #{authUserIdStr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

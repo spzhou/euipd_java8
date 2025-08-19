@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsJobItemPropertyMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsJobItemProperty">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="job_item_id" jdbcType="CHAR" property="jobItemId" />
+    <result column="job_description" jdbcType="VARCHAR" property="jobDescription" />
+    <result column="test_key_points" jdbcType="VARCHAR" property="testKeyPoints" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="reference_file_list_str" jdbcType="VARCHAR" property="referenceFileListStr" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, job_item_id, job_description, test_key_points, file_list_str, reference_file_list_str, 
+    create_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsJobItemPropertyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_job_item_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_job_item_property
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_job_item_property
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsJobItemPropertyExample">
+    delete from rdms_job_item_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsJobItemProperty">
+    insert into rdms_job_item_property (id, job_item_id, job_description, 
+      test_key_points, file_list_str, reference_file_list_str, 
+      create_time, deleted)
+    values (#{id,jdbcType=CHAR}, #{jobItemId,jdbcType=CHAR}, #{jobDescription,jdbcType=VARCHAR}, 
+      #{testKeyPoints,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, #{referenceFileListStr,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsJobItemProperty">
+    insert into rdms_job_item_property
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobItemId != null">
+        job_item_id,
+      </if>
+      <if test="jobDescription != null">
+        job_description,
+      </if>
+      <if test="testKeyPoints != null">
+        test_key_points,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="referenceFileListStr != null">
+        reference_file_list_str,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="jobItemId != null">
+        #{jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="jobDescription != null">
+        #{jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="testKeyPoints != null">
+        #{testKeyPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceFileListStr != null">
+        #{referenceFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsJobItemPropertyExample" resultType="java.lang.Long">
+    select count(*) from rdms_job_item_property
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_job_item_property
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.jobItemId != null">
+        job_item_id = #{record.jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="record.jobDescription != null">
+        job_description = #{record.jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testKeyPoints != null">
+        test_key_points = #{record.testKeyPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referenceFileListStr != null">
+        reference_file_list_str = #{record.referenceFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_job_item_property
+    set id = #{record.id,jdbcType=CHAR},
+      job_item_id = #{record.jobItemId,jdbcType=CHAR},
+      job_description = #{record.jobDescription,jdbcType=VARCHAR},
+      test_key_points = #{record.testKeyPoints,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      reference_file_list_str = #{record.referenceFileListStr,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsJobItemProperty">
+    update rdms_job_item_property
+    <set>
+      <if test="jobItemId != null">
+        job_item_id = #{jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="jobDescription != null">
+        job_description = #{jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="testKeyPoints != null">
+        test_key_points = #{testKeyPoints,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceFileListStr != null">
+        reference_file_list_str = #{referenceFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsJobItemProperty">
+    update rdms_job_item_property
+    set job_item_id = #{jobItemId,jdbcType=CHAR},
+      job_description = #{jobDescription,jdbcType=VARCHAR},
+      test_key_points = #{testKeyPoints,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      reference_file_list_str = #{referenceFileListStr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

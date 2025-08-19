@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsJobItem2Mapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsJobItem2">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="job_serial" jdbcType="CHAR" property="jobSerial" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="creater_id" jdbcType="CHAR" property="createrId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="character_id" jdbcType="CHAR" property="characterId" />
+    <result column="quality_id" jdbcType="CHAR" property="qualityId" />
+    <result column="tested_jobitem_id" jdbcType="CHAR" property="testedJobitemId" />
+    <result column="parent_jobitem_id" jdbcType="CHAR" property="parentJobitemId" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="test_manager_id" jdbcType="CHAR" property="testManagerId" />
+    <result column="executor_id" jdbcType="CHAR" property="executorId" />
+    <result column="next_node" jdbcType="CHAR" property="nextNode" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="aux_type" jdbcType="VARCHAR" property="auxType" />
+    <result column="project_type" jdbcType="CHAR" property="projectType" />
+    <result column="demand_id_str" jdbcType="VARCHAR" property="demandIdStr" />
+    <result column="merge_character_id_str" jdbcType="VARCHAR" property="mergeCharacterIdStr" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="manhour" jdbcType="DOUBLE" property="manhour" />
+    <result column="stand_manhour_fee" jdbcType="DECIMAL" property="standManhourFee" />
+    <result column="performance_manhour" jdbcType="DOUBLE" property="performanceManhour" />
+    <result column="task_description" jdbcType="VARCHAR" property="taskDescription" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="plan_submission_time" jdbcType="TIMESTAMP" property="planSubmissionTime" />
+    <result column="actual_submission_time" jdbcType="TIMESTAMP" property="actualSubmissionTime" />
+    <result column="property_id" jdbcType="CHAR" property="propertyId" />
+    <result column="review_worker_id_str" jdbcType="VARCHAR" property="reviewWorkerIdStr" />
+    <result column="review_result" jdbcType="CHAR" property="reviewResult" />
+    <result column="evaluate_desc" jdbcType="VARCHAR" property="evaluateDesc" />
+    <result column="evaluate_score" jdbcType="INTEGER" property="evaluateScore" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="complete_time" jdbcType="TIMESTAMP" property="completeTime" />
+    <result column="settle_accounts" jdbcType="INTEGER" property="settleAccounts" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, job_serial, job_name, customer_id, creater_id, pre_project_id, project_id, subproject_id, 
+    character_id, quality_id, tested_jobitem_id, parent_jobitem_id, project_manager_id, 
+    product_manager_id, test_manager_id, executor_id, next_node, `status`, `type`, aux_type, 
+    project_type, demand_id_str, merge_character_id_str, file_list_str, manhour, stand_manhour_fee, 
+    performance_manhour, task_description, create_time, plan_submission_time, actual_submission_time, 
+    property_id, review_worker_id_str, review_result, evaluate_desc, evaluate_score, 
+    update_time, complete_time, settle_accounts, deleted, note
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsJobItem2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_job_item2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_job_item2
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_job_item2
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsJobItem2Example">
+    delete from rdms_job_item2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsJobItem2">
+    insert into rdms_job_item2 (id, job_serial, job_name, 
+      customer_id, creater_id, pre_project_id, 
+      project_id, subproject_id, character_id, 
+      quality_id, tested_jobitem_id, parent_jobitem_id, 
+      project_manager_id, product_manager_id, test_manager_id, 
+      executor_id, next_node, `status`, 
+      `type`, aux_type, project_type, 
+      demand_id_str, merge_character_id_str, file_list_str, 
+      manhour, stand_manhour_fee, performance_manhour, 
+      task_description, create_time, plan_submission_time, 
+      actual_submission_time, property_id, review_worker_id_str, 
+      review_result, evaluate_desc, evaluate_score, 
+      update_time, complete_time, settle_accounts, 
+      deleted, note)
+    values (#{id,jdbcType=CHAR}, #{jobSerial,jdbcType=CHAR}, #{jobName,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=CHAR}, #{createrId,jdbcType=CHAR}, #{preProjectId,jdbcType=CHAR}, 
+      #{projectId,jdbcType=CHAR}, #{subprojectId,jdbcType=CHAR}, #{characterId,jdbcType=CHAR}, 
+      #{qualityId,jdbcType=CHAR}, #{testedJobitemId,jdbcType=CHAR}, #{parentJobitemId,jdbcType=CHAR}, 
+      #{projectManagerId,jdbcType=CHAR}, #{productManagerId,jdbcType=CHAR}, #{testManagerId,jdbcType=CHAR}, 
+      #{executorId,jdbcType=CHAR}, #{nextNode,jdbcType=CHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{auxType,jdbcType=VARCHAR}, #{projectType,jdbcType=CHAR}, 
+      #{demandIdStr,jdbcType=VARCHAR}, #{mergeCharacterIdStr,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, 
+      #{manhour,jdbcType=DOUBLE}, #{standManhourFee,jdbcType=DECIMAL}, #{performanceManhour,jdbcType=DOUBLE}, 
+      #{taskDescription,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{planSubmissionTime,jdbcType=TIMESTAMP}, 
+      #{actualSubmissionTime,jdbcType=TIMESTAMP}, #{propertyId,jdbcType=CHAR}, #{reviewWorkerIdStr,jdbcType=VARCHAR}, 
+      #{reviewResult,jdbcType=CHAR}, #{evaluateDesc,jdbcType=VARCHAR}, #{evaluateScore,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{completeTime,jdbcType=TIMESTAMP}, #{settleAccounts,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsJobItem2">
+    insert into rdms_job_item2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobSerial != null">
+        job_serial,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="characterId != null">
+        character_id,
+      </if>
+      <if test="qualityId != null">
+        quality_id,
+      </if>
+      <if test="testedJobitemId != null">
+        tested_jobitem_id,
+      </if>
+      <if test="parentJobitemId != null">
+        parent_jobitem_id,
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id,
+      </if>
+      <if test="executorId != null">
+        executor_id,
+      </if>
+      <if test="nextNode != null">
+        next_node,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="auxType != null">
+        aux_type,
+      </if>
+      <if test="projectType != null">
+        project_type,
+      </if>
+      <if test="demandIdStr != null">
+        demand_id_str,
+      </if>
+      <if test="mergeCharacterIdStr != null">
+        merge_character_id_str,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="manhour != null">
+        manhour,
+      </if>
+      <if test="standManhourFee != null">
+        stand_manhour_fee,
+      </if>
+      <if test="performanceManhour != null">
+        performance_manhour,
+      </if>
+      <if test="taskDescription != null">
+        task_description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="planSubmissionTime != null">
+        plan_submission_time,
+      </if>
+      <if test="actualSubmissionTime != null">
+        actual_submission_time,
+      </if>
+      <if test="propertyId != null">
+        property_id,
+      </if>
+      <if test="reviewWorkerIdStr != null">
+        review_worker_id_str,
+      </if>
+      <if test="reviewResult != null">
+        review_result,
+      </if>
+      <if test="evaluateDesc != null">
+        evaluate_desc,
+      </if>
+      <if test="evaluateScore != null">
+        evaluate_score,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="completeTime != null">
+        complete_time,
+      </if>
+      <if test="settleAccounts != null">
+        settle_accounts,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="jobSerial != null">
+        #{jobSerial,jdbcType=CHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="qualityId != null">
+        #{qualityId,jdbcType=CHAR},
+      </if>
+      <if test="testedJobitemId != null">
+        #{testedJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="parentJobitemId != null">
+        #{parentJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="auxType != null">
+        #{auxType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null">
+        #{projectType,jdbcType=CHAR},
+      </if>
+      <if test="demandIdStr != null">
+        #{demandIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeCharacterIdStr != null">
+        #{mergeCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="manhour != null">
+        #{manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="standManhourFee != null">
+        #{standManhourFee,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceManhour != null">
+        #{performanceManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="taskDescription != null">
+        #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planSubmissionTime != null">
+        #{planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualSubmissionTime != null">
+        #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="propertyId != null">
+        #{propertyId,jdbcType=CHAR},
+      </if>
+      <if test="reviewWorkerIdStr != null">
+        #{reviewWorkerIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewResult != null">
+        #{reviewResult,jdbcType=CHAR},
+      </if>
+      <if test="evaluateDesc != null">
+        #{evaluateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateScore != null">
+        #{evaluateScore,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeTime != null">
+        #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleAccounts != null">
+        #{settleAccounts,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsJobItem2Example" resultType="java.lang.Long">
+    select count(*) from rdms_job_item2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_job_item2
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.jobSerial != null">
+        job_serial = #{record.jobSerial,jdbcType=CHAR},
+      </if>
+      <if test="record.jobName != null">
+        job_name = #{record.jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.createrId != null">
+        creater_id = #{record.createrId,jdbcType=CHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.characterId != null">
+        character_id = #{record.characterId,jdbcType=CHAR},
+      </if>
+      <if test="record.qualityId != null">
+        quality_id = #{record.qualityId,jdbcType=CHAR},
+      </if>
+      <if test="record.testedJobitemId != null">
+        tested_jobitem_id = #{record.testedJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.parentJobitemId != null">
+        parent_jobitem_id = #{record.parentJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectManagerId != null">
+        project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.testManagerId != null">
+        test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.executorId != null">
+        executor_id = #{record.executorId,jdbcType=CHAR},
+      </if>
+      <if test="record.nextNode != null">
+        next_node = #{record.nextNode,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.auxType != null">
+        aux_type = #{record.auxType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType != null">
+        project_type = #{record.projectType,jdbcType=CHAR},
+      </if>
+      <if test="record.demandIdStr != null">
+        demand_id_str = #{record.demandIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mergeCharacterIdStr != null">
+        merge_character_id_str = #{record.mergeCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manhour != null">
+        manhour = #{record.manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.standManhourFee != null">
+        stand_manhour_fee = #{record.standManhourFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceManhour != null">
+        performance_manhour = #{record.performanceManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.taskDescription != null">
+        task_description = #{record.taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planSubmissionTime != null">
+        plan_submission_time = #{record.planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualSubmissionTime != null">
+        actual_submission_time = #{record.actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.propertyId != null">
+        property_id = #{record.propertyId,jdbcType=CHAR},
+      </if>
+      <if test="record.reviewWorkerIdStr != null">
+        review_worker_id_str = #{record.reviewWorkerIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewResult != null">
+        review_result = #{record.reviewResult,jdbcType=CHAR},
+      </if>
+      <if test="record.evaluateDesc != null">
+        evaluate_desc = #{record.evaluateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateScore != null">
+        evaluate_score = #{record.evaluateScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.completeTime != null">
+        complete_time = #{record.completeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.settleAccounts != null">
+        settle_accounts = #{record.settleAccounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_job_item2
+    set id = #{record.id,jdbcType=CHAR},
+      job_serial = #{record.jobSerial,jdbcType=CHAR},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      creater_id = #{record.createrId,jdbcType=CHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      character_id = #{record.characterId,jdbcType=CHAR},
+      quality_id = #{record.qualityId,jdbcType=CHAR},
+      tested_jobitem_id = #{record.testedJobitemId,jdbcType=CHAR},
+      parent_jobitem_id = #{record.parentJobitemId,jdbcType=CHAR},
+      project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      executor_id = #{record.executorId,jdbcType=CHAR},
+      next_node = #{record.nextNode,jdbcType=CHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=CHAR},
+      aux_type = #{record.auxType,jdbcType=VARCHAR},
+      project_type = #{record.projectType,jdbcType=CHAR},
+      demand_id_str = #{record.demandIdStr,jdbcType=VARCHAR},
+      merge_character_id_str = #{record.mergeCharacterIdStr,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      manhour = #{record.manhour,jdbcType=DOUBLE},
+      stand_manhour_fee = #{record.standManhourFee,jdbcType=DECIMAL},
+      performance_manhour = #{record.performanceManhour,jdbcType=DOUBLE},
+      task_description = #{record.taskDescription,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      plan_submission_time = #{record.planSubmissionTime,jdbcType=TIMESTAMP},
+      actual_submission_time = #{record.actualSubmissionTime,jdbcType=TIMESTAMP},
+      property_id = #{record.propertyId,jdbcType=CHAR},
+      review_worker_id_str = #{record.reviewWorkerIdStr,jdbcType=VARCHAR},
+      review_result = #{record.reviewResult,jdbcType=CHAR},
+      evaluate_desc = #{record.evaluateDesc,jdbcType=VARCHAR},
+      evaluate_score = #{record.evaluateScore,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      complete_time = #{record.completeTime,jdbcType=TIMESTAMP},
+      settle_accounts = #{record.settleAccounts,jdbcType=INTEGER},
+      deleted = #{record.deleted,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsJobItem2">
+    update rdms_job_item2
+    <set>
+      <if test="jobSerial != null">
+        job_serial = #{jobSerial,jdbcType=CHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        character_id = #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="qualityId != null">
+        quality_id = #{qualityId,jdbcType=CHAR},
+      </if>
+      <if test="testedJobitemId != null">
+        tested_jobitem_id = #{testedJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="parentJobitemId != null">
+        parent_jobitem_id = #{parentJobitemId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id = #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        executor_id = #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        next_node = #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=CHAR},
+      </if>
+      <if test="auxType != null">
+        aux_type = #{auxType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null">
+        project_type = #{projectType,jdbcType=CHAR},
+      </if>
+      <if test="demandIdStr != null">
+        demand_id_str = #{demandIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="mergeCharacterIdStr != null">
+        merge_character_id_str = #{mergeCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="manhour != null">
+        manhour = #{manhour,jdbcType=DOUBLE},
+      </if>
+      <if test="standManhourFee != null">
+        stand_manhour_fee = #{standManhourFee,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceManhour != null">
+        performance_manhour = #{performanceManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="taskDescription != null">
+        task_description = #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planSubmissionTime != null">
+        plan_submission_time = #{planSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualSubmissionTime != null">
+        actual_submission_time = #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="propertyId != null">
+        property_id = #{propertyId,jdbcType=CHAR},
+      </if>
+      <if test="reviewWorkerIdStr != null">
+        review_worker_id_str = #{reviewWorkerIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewResult != null">
+        review_result = #{reviewResult,jdbcType=CHAR},
+      </if>
+      <if test="evaluateDesc != null">
+        evaluate_desc = #{evaluateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateScore != null">
+        evaluate_score = #{evaluateScore,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeTime != null">
+        complete_time = #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleAccounts != null">
+        settle_accounts = #{settleAccounts,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsJobItem2">
+    update rdms_job_item2
+    set job_serial = #{jobSerial,jdbcType=CHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      creater_id = #{createrId,jdbcType=CHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      character_id = #{characterId,jdbcType=CHAR},
+      quality_id = #{qualityId,jdbcType=CHAR},
+      tested_jobitem_id = #{testedJobitemId,jdbcType=CHAR},
+      parent_jobitem_id = #{parentJobitemId,jdbcType=CHAR},
+      project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      test_manager_id = #{testManagerId,jdbcType=CHAR},
+      executor_id = #{executorId,jdbcType=CHAR},
+      next_node = #{nextNode,jdbcType=CHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=CHAR},
+      aux_type = #{auxType,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=CHAR},
+      demand_id_str = #{demandIdStr,jdbcType=VARCHAR},
+      merge_character_id_str = #{mergeCharacterIdStr,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      manhour = #{manhour,jdbcType=DOUBLE},
+      stand_manhour_fee = #{standManhourFee,jdbcType=DECIMAL},
+      performance_manhour = #{performanceManhour,jdbcType=DOUBLE},
+      task_description = #{taskDescription,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      plan_submission_time = #{planSubmissionTime,jdbcType=TIMESTAMP},
+      actual_submission_time = #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      property_id = #{propertyId,jdbcType=CHAR},
+      review_worker_id_str = #{reviewWorkerIdStr,jdbcType=VARCHAR},
+      review_result = #{reviewResult,jdbcType=CHAR},
+      evaluate_desc = #{evaluateDesc,jdbcType=VARCHAR},
+      evaluate_score = #{evaluateScore,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      complete_time = #{completeTime,jdbcType=TIMESTAMP},
+      settle_accounts = #{settleAccounts,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

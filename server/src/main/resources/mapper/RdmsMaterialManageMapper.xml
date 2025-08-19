@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsMaterialManageMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsMaterialManage">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="character_id" jdbcType="CHAR" property="characterId" />
+    <result column="quality_id" jdbcType="CHAR" property="qualityId" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="usage_mode" jdbcType="VARCHAR" property="usageMode" />
+    <result column="account_cost" jdbcType="DECIMAL" property="accountCost" />
+    <result column="adjust_cost" jdbcType="DECIMAL" property="adjustCost" />
+    <result column="writer_id" jdbcType="VARCHAR" property="writerId" />
+    <result column="approver_id" jdbcType="CHAR" property="approverId" />
+    <result column="next_node" jdbcType="CHAR" property="nextNode" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="approve_description" jdbcType="VARCHAR" property="approveDescription" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="aux_status" jdbcType="VARCHAR" property="auxStatus" />
+    <result column="job_type" jdbcType="VARCHAR" property="jobType" />
+    <result column="approve_file_list_str" jdbcType="VARCHAR" property="approveFileListStr" />
+    <result column="deal_with_file_list_str" jdbcType="VARCHAR" property="dealWithFileListStr" />
+    <result column="submit_description" jdbcType="VARCHAR" property="submitDescription" />
+    <result column="submit_approve_description" jdbcType="VARCHAR" property="submitApproveDescription" />
+    <result column="complete_file_list_str" jdbcType="VARCHAR" property="completeFileListStr" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="approve_time" jdbcType="TIMESTAMP" property="approveTime" />
+    <result column="final_cost" jdbcType="DECIMAL" property="finalCost" />
+    <result column="capital_source" jdbcType="VARCHAR" property="capitalSource" />
+    <result column="ope_status" jdbcType="VARCHAR" property="opeStatus" />
+    <result column="request_id" jdbcType="VARCHAR" property="requestId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, code, `name`, character_id, quality_id, jobitem_id, customer_id, project_id,
+    pre_project_id, subproject_id, usage_mode, account_cost, adjust_cost, writer_id,
+    approver_id, next_node, reason, approve_description, `status`, aux_status, job_type,
+    approve_file_list_str, deal_with_file_list_str, submit_description, submit_approve_description,
+    complete_file_list_str, warehouse_code, approve_time, final_cost, capital_source,
+    ope_status, request_id, update_time, create_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsMaterialManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_material_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rdms_material_manage
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_material_manage
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsMaterialManageExample">
+    delete from rdms_material_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsMaterialManage">
+    insert into rdms_material_manage (id, code, `name`,
+      character_id, quality_id, jobitem_id,
+      customer_id, project_id, pre_project_id,
+      subproject_id, usage_mode, account_cost,
+      adjust_cost, writer_id, approver_id,
+      next_node, reason, approve_description,
+      `status`, aux_status, job_type,
+      approve_file_list_str, deal_with_file_list_str,
+      submit_description, submit_approve_description,
+      complete_file_list_str, warehouse_code, approve_time,
+      final_cost, capital_source, ope_status,
+      request_id, update_time, create_time,
+      deleted)
+    values (#{id,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{characterId,jdbcType=CHAR}, #{qualityId,jdbcType=CHAR}, #{jobitemId,jdbcType=CHAR},
+      #{customerId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{preProjectId,jdbcType=CHAR},
+      #{subprojectId,jdbcType=CHAR}, #{usageMode,jdbcType=VARCHAR}, #{accountCost,jdbcType=DECIMAL},
+      #{adjustCost,jdbcType=DECIMAL}, #{writerId,jdbcType=VARCHAR}, #{approverId,jdbcType=CHAR},
+      #{nextNode,jdbcType=CHAR}, #{reason,jdbcType=VARCHAR}, #{approveDescription,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{auxStatus,jdbcType=VARCHAR}, #{jobType,jdbcType=VARCHAR},
+      #{approveFileListStr,jdbcType=VARCHAR}, #{dealWithFileListStr,jdbcType=VARCHAR},
+      #{submitDescription,jdbcType=VARCHAR}, #{submitApproveDescription,jdbcType=VARCHAR},
+      #{completeFileListStr,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{approveTime,jdbcType=TIMESTAMP},
+      #{finalCost,jdbcType=DECIMAL}, #{capitalSource,jdbcType=VARCHAR}, #{opeStatus,jdbcType=VARCHAR},
+      #{requestId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
+      #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsMaterialManage">
+    insert into rdms_material_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="characterId != null">
+        character_id,
+      </if>
+      <if test="qualityId != null">
+        quality_id,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="usageMode != null">
+        usage_mode,
+      </if>
+      <if test="accountCost != null">
+        account_cost,
+      </if>
+      <if test="adjustCost != null">
+        adjust_cost,
+      </if>
+      <if test="writerId != null">
+        writer_id,
+      </if>
+      <if test="approverId != null">
+        approver_id,
+      </if>
+      <if test="nextNode != null">
+        next_node,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="approveDescription != null">
+        approve_description,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="auxStatus != null">
+        aux_status,
+      </if>
+      <if test="jobType != null">
+        job_type,
+      </if>
+      <if test="approveFileListStr != null">
+        approve_file_list_str,
+      </if>
+      <if test="dealWithFileListStr != null">
+        deal_with_file_list_str,
+      </if>
+      <if test="submitDescription != null">
+        submit_description,
+      </if>
+      <if test="submitApproveDescription != null">
+        submit_approve_description,
+      </if>
+      <if test="completeFileListStr != null">
+        complete_file_list_str,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="approveTime != null">
+        approve_time,
+      </if>
+      <if test="finalCost != null">
+        final_cost,
+      </if>
+      <if test="capitalSource != null">
+        capital_source,
+      </if>
+      <if test="opeStatus != null">
+        ope_status,
+      </if>
+      <if test="requestId != null">
+        request_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="characterId != null">
+        #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="qualityId != null">
+        #{qualityId,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="usageMode != null">
+        #{usageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCost != null">
+        #{accountCost,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustCost != null">
+        #{adjustCost,jdbcType=DECIMAL},
+      </if>
+      <if test="writerId != null">
+        #{writerId,jdbcType=VARCHAR},
+      </if>
+      <if test="approverId != null">
+        #{approverId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDescription != null">
+        #{approveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auxStatus != null">
+        #{auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="approveFileListStr != null">
+        #{approveFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="dealWithFileListStr != null">
+        #{dealWithFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="submitDescription != null">
+        #{submitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="submitApproveDescription != null">
+        #{submitApproveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="completeFileListStr != null">
+        #{completeFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null">
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalCost != null">
+        #{finalCost,jdbcType=DECIMAL},
+      </if>
+      <if test="capitalSource != null">
+        #{capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="opeStatus != null">
+        #{opeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="requestId != null">
+        #{requestId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsMaterialManageExample" resultType="java.lang.Long">
+    select count(*) from rdms_material_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_material_manage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.characterId != null">
+        character_id = #{record.characterId,jdbcType=CHAR},
+      </if>
+      <if test="record.qualityId != null">
+        quality_id = #{record.qualityId,jdbcType=CHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.usageMode != null">
+        usage_mode = #{record.usageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountCost != null">
+        account_cost = #{record.accountCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.adjustCost != null">
+        adjust_cost = #{record.adjustCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.writerId != null">
+        writer_id = #{record.writerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approverId != null">
+        approver_id = #{record.approverId,jdbcType=CHAR},
+      </if>
+      <if test="record.nextNode != null">
+        next_node = #{record.nextNode,jdbcType=CHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveDescription != null">
+        approve_description = #{record.approveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auxStatus != null">
+        aux_status = #{record.auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobType != null">
+        job_type = #{record.jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveFileListStr != null">
+        approve_file_list_str = #{record.approveFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealWithFileListStr != null">
+        deal_with_file_list_str = #{record.dealWithFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitDescription != null">
+        submit_description = #{record.submitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitApproveDescription != null">
+        submit_approve_description = #{record.submitApproveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.completeFileListStr != null">
+        complete_file_list_str = #{record.completeFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warehouseCode != null">
+        warehouse_code = #{record.warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveTime != null">
+        approve_time = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finalCost != null">
+        final_cost = #{record.finalCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.capitalSource != null">
+        capital_source = #{record.capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opeStatus != null">
+        ope_status = #{record.opeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestId != null">
+        request_id = #{record.requestId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_material_manage
+    set id = #{record.id,jdbcType=CHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      character_id = #{record.characterId,jdbcType=CHAR},
+      quality_id = #{record.qualityId,jdbcType=CHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      usage_mode = #{record.usageMode,jdbcType=VARCHAR},
+      account_cost = #{record.accountCost,jdbcType=DECIMAL},
+      adjust_cost = #{record.adjustCost,jdbcType=DECIMAL},
+      writer_id = #{record.writerId,jdbcType=VARCHAR},
+      approver_id = #{record.approverId,jdbcType=CHAR},
+      next_node = #{record.nextNode,jdbcType=CHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      approve_description = #{record.approveDescription,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      aux_status = #{record.auxStatus,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
+      approve_file_list_str = #{record.approveFileListStr,jdbcType=VARCHAR},
+      deal_with_file_list_str = #{record.dealWithFileListStr,jdbcType=VARCHAR},
+      submit_description = #{record.submitDescription,jdbcType=VARCHAR},
+      submit_approve_description = #{record.submitApproveDescription,jdbcType=VARCHAR},
+      complete_file_list_str = #{record.completeFileListStr,jdbcType=VARCHAR},
+      warehouse_code = #{record.warehouseCode,jdbcType=VARCHAR},
+      approve_time = #{record.approveTime,jdbcType=TIMESTAMP},
+      final_cost = #{record.finalCost,jdbcType=DECIMAL},
+      capital_source = #{record.capitalSource,jdbcType=VARCHAR},
+      ope_status = #{record.opeStatus,jdbcType=VARCHAR},
+      request_id = #{record.requestId,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsMaterialManage">
+    update rdms_material_manage
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="characterId != null">
+        character_id = #{characterId,jdbcType=CHAR},
+      </if>
+      <if test="qualityId != null">
+        quality_id = #{qualityId,jdbcType=CHAR},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="usageMode != null">
+        usage_mode = #{usageMode,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCost != null">
+        account_cost = #{accountCost,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustCost != null">
+        adjust_cost = #{adjustCost,jdbcType=DECIMAL},
+      </if>
+      <if test="writerId != null">
+        writer_id = #{writerId,jdbcType=VARCHAR},
+      </if>
+      <if test="approverId != null">
+        approver_id = #{approverId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        next_node = #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approveDescription != null">
+        approve_description = #{approveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auxStatus != null">
+        aux_status = #{auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        job_type = #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="approveFileListStr != null">
+        approve_file_list_str = #{approveFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="dealWithFileListStr != null">
+        deal_with_file_list_str = #{dealWithFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="submitDescription != null">
+        submit_description = #{submitDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="submitApproveDescription != null">
+        submit_approve_description = #{submitApproveDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="completeFileListStr != null">
+        complete_file_list_str = #{completeFileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null">
+        approve_time = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalCost != null">
+        final_cost = #{finalCost,jdbcType=DECIMAL},
+      </if>
+      <if test="capitalSource != null">
+        capital_source = #{capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="opeStatus != null">
+        ope_status = #{opeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="requestId != null">
+        request_id = #{requestId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsMaterialManage">
+    update rdms_material_manage
+    set code = #{code,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      character_id = #{characterId,jdbcType=CHAR},
+      quality_id = #{qualityId,jdbcType=CHAR},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      usage_mode = #{usageMode,jdbcType=VARCHAR},
+      account_cost = #{accountCost,jdbcType=DECIMAL},
+      adjust_cost = #{adjustCost,jdbcType=DECIMAL},
+      writer_id = #{writerId,jdbcType=VARCHAR},
+      approver_id = #{approverId,jdbcType=CHAR},
+      next_node = #{nextNode,jdbcType=CHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      approve_description = #{approveDescription,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      aux_status = #{auxStatus,jdbcType=VARCHAR},
+      job_type = #{jobType,jdbcType=VARCHAR},
+      approve_file_list_str = #{approveFileListStr,jdbcType=VARCHAR},
+      deal_with_file_list_str = #{dealWithFileListStr,jdbcType=VARCHAR},
+      submit_description = #{submitDescription,jdbcType=VARCHAR},
+      submit_approve_description = #{submitApproveDescription,jdbcType=VARCHAR},
+      complete_file_list_str = #{completeFileListStr,jdbcType=VARCHAR},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      approve_time = #{approveTime,jdbcType=TIMESTAMP},
+      final_cost = #{finalCost,jdbcType=DECIMAL},
+      capital_source = #{capitalSource,jdbcType=VARCHAR},
+      ope_status = #{opeStatus,jdbcType=VARCHAR},
+      request_id = #{requestId,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

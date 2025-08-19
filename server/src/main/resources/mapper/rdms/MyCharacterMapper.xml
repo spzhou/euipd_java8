@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.rdms.MyCharacterMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.rdms.MyCharacter">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="character_name" jdbcType="VARCHAR" property="characterName" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+
+    <result column="job_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="job_serial" jdbcType="CHAR" property="jobSerial" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="executor_id" jdbcType="CHAR" property="executorId" />
+    <result column="job_status" jdbcType="VARCHAR" property="jobStatus" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, character_name, customer_id, project_id, subproject_id, `status`, product_manager_id,
+    job_id, job_serial, job_name, project_manager_id, executor_id, job_status, type
+  </sql>
+
+  <select id="getCharacterUnionJobitemList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select c.id, c.character_name, c.customer_id, c.project_id, c.subproject_id, c.`status`, c.product_manager_id,
+           j.id job_id, j.job_serial, j.job_name, j.project_manager_id, j.executor_id, j.`status` job_status, j.`type`
+    from `rdms_character` c, `rdms_job_item` j
+    where c.id = j.character_id
+    <if test="subprojectId != null and subprojectId != ''">
+          and c.subproject_id = #{subprojectId}
+    </if>
+    <if test="characterStatus != null and characterStatus != ''">
+          and c.`status` = #{characterStatus}
+    </if>
+    <if test="jobitemStatus != null and jobitemStatus != ''">
+          and j.`status` = #{jobitemStatus}
+    </if>
+    <if test="jobitemStatus != null and jobitemStatus != ''">
+          and j.`type` = #{jobitemType}
+    </if>
+
+  </select>
+  <select id="getCharacterUnionJobitemListByTypeList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select c.id, c.character_name, c.customer_id, c.project_id, c.subproject_id, c.`status`, c.product_manager_id,
+           j.id job_id, j.job_serial, j.job_name, j.project_manager_id, j.executor_id, j.`status` job_status, j.`type`
+    from `rdms_character` c, `rdms_job_item` j
+    where c.id = j.character_id
+    <if test="subprojectId != null and subprojectId != ''">
+          and c.subproject_id = #{subprojectId}
+    </if>
+    <if test="characterStatusList != null and characterStatusList != ''">
+          and c.`status` in
+      <foreach collection="characterStatusList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+    <if test="jobitemStatus != null and jobitemStatus != ''">
+          and j.`status` = #{jobitemStatus}
+    </if>
+    <if test="jobitemTypeList != null and jobitemTypeList !=''">
+      and j.`type` in
+      <foreach collection="jobitemTypeList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </select>
+
+<select id="getCharacterListByIdList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, character_name, subproject_id, product_manager_id
+    from rdms_character
+    where
+    <if test="customerId != null and customerId != ''">
+          customer_id = #{customerId}
+    </if>
+    <if test="characterIdList != null and characterIdList !=''">
+      and id in
+      <foreach collection="characterIdList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </select>
+
+
+</mapper>

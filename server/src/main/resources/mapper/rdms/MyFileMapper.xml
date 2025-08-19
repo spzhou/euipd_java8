@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.rdms.MyFileMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsFile">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="use" jdbcType="CHAR" property="use" />
+    <result column="item_id" jdbcType="CHAR" property="itemId" />
+    <result column="operator_id" jdbcType="CHAR" property="operatorId" />
+    <result column="key" jdbcType="CHAR" property="key" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="size" jdbcType="INTEGER" property="size" />
+    <result column="suffix" jdbcType="CHAR" property="suffix" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, customer_id, project_id, pre_project_id, subproject_id, `use`, item_id, operator_id,
+    `key`, `path`, `name`, `size`, suffix, create_time, update_time, deleted
+  </sql>
+
+  <select id="getFileListByIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from rdms_file
+    <where> 1=1 and deleted=0
+      <if test="idList != null and idList != '' and idList != '[]'">
+        and id in
+        <foreach collection="idList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+    </where>
+    order by create_time desc
+  </select>
+
+</mapper>

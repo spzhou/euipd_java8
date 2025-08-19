@@ -1,0 +1,314 @@
+[
+    {
+    "id": "00", "name": "欢迎", "page": "welcome"
+},
+    {
+    "id": "51", "name": "平台超级用户",
+    "children": [{
+        "id": "5101", "name": "客户管理", "page": "system/customer",
+        "children": [
+            {"id": "510101", "name": "创建/编辑客户", "request": ["/system/rdms/customer/save"]},
+            {"id": "510102", "name": "列表客户", "request": ["/system/rdms/customer/list"]},
+            {"id": "510103", "name": "删除客户", "request": ["/system/rdms/customer/del"]},
+            {"id": "510104", "name": "查询客户", "request": ["/system/rdms/customer/login-search", "/system/rdms/customer/inst-search", "/system/rdms/customer/contact-search", "/system/rdms/customer/search"]}
+        ]
+    }, {
+        "id": "5102", "name": "资源管理", "page": "system/customer-resource",
+        "children": [
+            {"id": "510201", "name": "保存/显示", "request": ["/system/rdms/resource/customer"]}
+        ]
+    }, {
+        "id": "5103", "name": "角色管理", "page": "system/customer-role",
+        "children": [
+            {"id": "510301", "name": "角色/权限管理", "request": ["/system/rdms/role/customer", "/system/rdms/user/searchUserByLoginName"]}
+        ]
+    }
+    ]
+},{
+    "id": "52", "name": "公司管理",
+    "children": [{
+        "id": "5201", "name": "员工管理", "page": "customer/staff",
+        "children": [
+            {"id": "520101", "name": "创建/编辑员工", "request": ["/customer/worker/save", "/customer/department/get-departments", "/customer/worker/login-search"]},
+            {"id": "520102", "name": "员工列表", "request": ["/customer/worker/list", "/customer/department/get-departments", "/system/rdms/user/save-password"]},
+            {"id": "520103", "name": "删除员工", "request": ["/customer/worker/del"]}
+        ]
+    }, {
+        "id": "5202", "name": "工时管理", "page": "customer/manhour",
+        "children": [
+            {"id": "520201", "name": "保存/显示", "request": ["/customer/manhour/customer"]}
+        ]
+    }, {
+        "id": "5203", "name": "培训管理", "page": "customer/training",
+        "children": [
+            {"id": "520301", "name": "角色/权限管理", "request": ["/customer/training/customer"]}
+        ]
+    }, {
+        "id": "5204", "name": "权限管理", "page": "customer/authority",
+        "children": [
+            {"id": "520401", "name": "角色/权限管理", "request": ["/customer/authority/customer"]}
+        ]
+    }, {
+        "id": "5205", "name": "预算管理", "page": "customer/budgetall",
+        "children": [
+            {"id": "520501", "name": "角色/权限管理", "request": ["/customer/budgetall/customer"]}
+        ]
+    }, {
+        "id": "5206", "name": "部门管理", "page": "customer/department",
+        "children": [
+            {"id": "520601", "name": "列表查询", "request": ["/customer/department/list", "/customer/department/listDepartment", "/customer/department/listWorker"]},
+            {"id": "520602", "name": "创建/修改部门", "request": ["/customer/department/save"]},
+            {"id": "520603", "name": "删除部门", "request": ["/customer/department/del"]},
+            {"id": "520604", "name": "列表所有员工", "request": ["/customer/worker/listAllUsers"]}
+        ]
+    }, {
+        "id": "5208", "name": "需求管理", "page": "customer/demand",
+        "children": [
+            {"id": "520801", "name": "创建/编辑员工", "request": ["/customer/worker/save", "/customer/department/get-departments", "/customer/worker/login-search"]},
+            {"id": "520802", "name": "员工列表", "request": ["/customer/worker/list", "/customer/department/get-departments", "/system/rdms/user/save-password"]},
+            {"id": "520803", "name": "删除员工", "request": ["/customer/worker/del"]}
+        ]
+    },{
+        "id": "5209", "name": "立项管理", "page": "customer/project",
+        "children": [
+            {"id": "520901", "name": "创建/编辑员工", "request": ["/customer/worker/save", "/customer/department/get-departments", "/customer/worker/login-search"]},
+            {"id": "520902", "name": "员工列表", "request": ["/customer/worker/list", "/customer/department/get-departments", "/system/rdms/user/save-password"]},
+            {"id": "520903", "name": "删除员工", "request": ["/customer/worker/del"]}
+        ]
+    },{
+        "id": "5210", "name": "开发管理", "page": "customer/develop",
+        "children": [
+            {"id": "521001", "name": "创建/编辑员工", "request": ["/customer/worker/save", "/customer/department/get-departments", "/customer/worker/login-search"]},
+            {"id": "521002", "name": "员工列表", "request": ["/customer/worker/list", "/customer/department/get-departments", "/system/rdms/user/save-password"]},
+            {"id": "521003", "name": "删除员工", "request": ["/customer/worker/del"]}
+        ]
+    },{
+        "id": "5211", "name": "职级管理", "page": "customer/grade",
+        "children": [
+            {"id": "521101", "name": "创建/编辑员工", "request": ["/customer/worker/save", "/customer/department/get-departments", "/customer/worker/login-search"]},
+            {"id": "521102", "name": "员工列表", "request": ["/customer/worker/list", "/customer/department/get-departments", "/system/rdms/user/save-password"]},
+            {"id": "521103", "name": "删除员工", "request": ["/customer/worker/del"]}
+        ]
+    }
+    ]
+},
+    {
+    "id": "02", "name": "业务管理",
+    "children": [
+    {
+        "id": "0201", "name": "分类管理", "page": "business/category",
+        "children": [
+            {"id": "020101", "name": "增删改查", "request": ["/business/admin/category"]}
+        ]
+    }, {
+        "id": "0202", "name": "课程管理", "page": "business/course",
+        "children": [
+            {"id": "020201", "name": "增删改查", "request": ["/business/admin/course", "/business/admin/category/all", "/file", "/business/admin/product", "/system/admin/live"]}
+        ]
+    }, {
+        "id": "0203", "name": "讲师管理", "page": "business/teacher",
+        "children": [
+            {"id": "020301", "name": "增删改查", "request": ["/business/admin/teacher", "/file"]}
+        ]
+    }, {
+        "id": "0204", "name": "会员管理", "page": "business/member",
+        "children": [
+            {"id": "020401", "name": "增删改查", "request": ["/business/admin/member"]}
+        ]
+    }, {
+        "id": "0205", "name": "短信管理", "page": "business/sms",
+        "children": [
+            {"id": "020501", "name": "增删改查", "request": ["/business/admin/sms"]}
+        ]
+    }, {
+        "id": "0206", "name": "篇章管理", "page": "business/chapter",
+        "children": [
+            {"id": "020601", "name": "增删改查", "request": ["/business/admin/chapter"]}
+        ]
+    }, {
+        "id": "0207", "name": "小节管理", "page": "business/section",
+        "children": [
+            {"id": "020701", "name": "增删改查", "request": ["/business/admin/section", "/file"]}
+        ]
+    }, {
+        "id": "0208", "name": "内容管理", "page": "business/content",
+        "children": [
+            {"id": "020801", "name": "增删改查", "request": ["/business/admin/course", "/business/admin/course-content-file", "/file"]}
+        ]
+    }, {
+        "id": "0209", "name": "用户课程管理", "page": "business/user-course",
+        "children": [
+            {"id": "020901", "name": "增删改查", "request": ["/business/admin/user-course", "/business/admin/category/all", "/business/admin/teacher", "/system/admin/user/logout", "/file", "/business/admin/product", "/system/admin/live"]},
+            {"id": "020902", "name": "直播管理", "request": ["/system/admin/live/channel-sso"]}
+        ]
+    }, {
+        "id": "0210", "name": "用户讲师管理", "page": "business/user-teacher",
+        "children": [
+            {"id": "021001", "name": "增删改查", "request": ["/business/admin/user-teacher", "/file"]}
+        ]
+    }, {
+            "id": "0211", "name": "店铺管理", "page": "business/institution",
+            "children": [
+                {"id": "021101", "name": "查看店铺", "request": ["/business/admin/institution/list"]},
+                {"id": "021102", "name": "创建店铺", "request": ["/business/admin/institution/save"]},
+                {"id": "021103", "name": "编辑店铺", "request": ["/business/admin/institution/edit"]},
+                {"id": "021104", "name": "删除店铺", "request": ["/business/admin/institution/delete"]}
+            ]
+    }, {
+        "id": "0212", "name": "直播回放管理", "page": "business/live-repeat",
+        "children": [
+            {"id": "021201", "name": "列表查看", "request": ["/business/admin/live-repeat/list"]},
+            {"id": "021202", "name": "编辑视频", "request": ["/business/admin/live-repeat/edit"]},
+            {"id": "021203", "name": "下载视频", "request": ["/business/admin/live-repeat/download"]},
+            {"id": "021204", "name": "删除直播", "request": ["/business/admin/live-repeat/delete"]}
+        ]
+    }, {
+        "id": "0213", "name": "直播管理", "page": "business/live",
+        "children": [
+            {"id": "021301", "name": "增删改查", "request": ["/business/admin/live", "/business/admin/category/all", "/file", "/system/admin/live"]}
+        ]
+    }, {
+        "id": "0214", "name": "店铺装修", "page": "business/inst-content",
+        "children": [
+            {"id": "021401", "name": "增删改查", "request": ["/business/admin/institution", "/business/admin/institution-content-file", "/file"]}
+        ]
+    }, {
+        "id": "0215", "name": "产品管理", "page": "business/product",
+        "children": [
+            {"id": "021501", "name": "增删改查", "request": ["/business/admin/course", "/business/admin/category/all", "/file", "/business/admin/product", "/system/admin/live"]}
+        ]
+    }, {
+        "id": "0216", "name": "产品页面装修管理", "page": "business/product-content",
+        "children": [
+            {"id": "021601", "name": "增删改查", "request": ["/business/admin/product", "/business/admin/product-content-file", "/file"]}
+        ]
+    }, {
+        "id": "0217", "name": "加盟管理", "page": "business/institution-member",
+        "children": [
+            {"id": "021701", "name": "查看成员", "request": ["/business/admin/institution-member/list"]},
+            {"id": "021702", "name": "添加成员", "request": ["/business/admin/institution-member/add"]},
+            {"id": "021703", "name": "编辑成员", "request": ["/business/admin/institution-member/edit"]},
+            {"id": "021704", "name": "删除成员", "request": ["/business/admin/institution-member/delete"]}
+        ]
+    }, {
+        "id": "0218", "name": "授权运营", "page": "business/institution-authority",
+        "children": [
+            {"id": "021801", "name": "查看所有机构", "request": ["/business/admin/institution-authority/list"]},
+            {"id": "021802", "name": "向机构授权", "request": ["/business/admin/institution-authority/add"]},
+            {"id": "021803", "name": "取消授权", "request": ["/business/admin/institution-authority/cancel"]},
+            {"id": "021804", "name": "接受授权", "request": ["/business/admin/institution-authority/accept"]}
+        ]
+    }, {
+        "id": "0219", "name": "产品授权", "page": "business/institution-product-auth",
+        "children": [
+            {"id": "021901", "name": "查看所有机构", "request": ["/business/admin/institution-product-auth/to-list"]},
+            {"id": "021902", "name": "向机构授权", "request": ["/business/admin/institution-product-auth/add"]},
+            {"id": "021903", "name": "取消授权", "request": ["/business/admin/institution-product-auth/cancel"]},
+            {"id": "021904", "name": "查看授权产品", "request": ["/business/admin/institution-product-auth/form-list"]},
+            {"id": "021905", "name": "接受授权", "request": ["/business/admin/institution-product-auth/accept"]},
+            {"id": "021906", "name": "拒绝授权", "request": ["/business/admin/institution-product-auth/refuse"]}
+        ]
+    }, {
+        "id": "0220", "name": "课程授权", "page": "business/institution-course-auth",
+        "children": [
+            {"id": "022001", "name": "查看所有机构", "request": ["/business/admin/institution-course-auth/to-list"]},
+            {"id": "022002", "name": "向机构授权", "request": ["/business/admin/institution-course-auth/add"]},
+            {"id": "022003", "name": "取消授权", "request": ["/business/admin/institution-course-auth/cancel"]},
+            {"id": "022004", "name": "查看授权课程", "request": ["/business/admin/institution-course-auth/form-list"]},
+            {"id": "022005", "name": "接受授权", "request": ["/business/admin/institution-course-auth/accept"]},
+            {"id": "022006", "name": "拒绝授权", "request": ["/business/admin/institution-course-auth/refuse"]}
+        ]
+    }, {
+        "id": "0221", "name": "科技分享", "page": "business/share",
+        "children": [
+            {"id": "022101", "name": "增删改查", "request": ["/business/admin/share", "/business/admin/category/all", "/file", "/system/admin/live"]}
+        ]
+    }, {
+        "id": "0222", "name": "首页管理", "page": "business/index-management",
+        "children": [
+            {"id": "022201", "name": "增删改查", "request": ["business/admin/ad-carousel-file/list", "/business/admin/ad-carousel-file/save", "/business/admin/ad-carousel-file/delete/"]}
+        ]
+    }, {
+        "id": "0223", "name": "经营管理", "page": "business/business-management",
+        "children": [
+            {"id": "022301", "name": "列表", "request": ["/business/admin/business/list"]},
+            {"id": "022302", "name": "保存", "request": ["/business/admin/business/save"]},
+            {"id": "022303", "name": "编辑", "request": ["/business/admin/business/edit"]},
+            {"id": "022304", "name": "删除", "request": ["/business/admin/business/delete"]}
+        ]
+    }, {
+        "id": "0224", "name": "广告管理", "page": "business/index-management/carousel",
+        "children": [
+            {"id": "022401", "name": "列表", "request": ["/business/admin/ad-carousel-file/list"]},
+            {"id": "022402", "name": "保存", "request": ["/business/admin/ad-carousel-file/save"]},
+            {"id": "022403", "name": "删除", "request": ["/business/admin/ad-carousel-file/delete"]}
+        ]
+    }, {
+        "id": "0225", "name": "品牌专区", "page": "business/org-brand",
+        "children": [
+            {"id": "022501", "name": "查看卡片", "request": ["/business/admin/org-brand/list", "/business/admin/institution/synch-brand-info", "/business/admin/institution/list-brand"]},
+            {"id": "022502", "name": "创建卡片", "request": ["/business/admin/org-brand/save"]},
+            {"id": "022503", "name": "编辑卡片", "request": ["/business/admin/org-brand/edit"]},
+            {"id": "022504", "name": "删除卡片", "request": ["/business/admin/org-brand/delete"]}
+        ]
+    }, {
+        "id": "0230", "name": "研发管理", "page": "customer/rdm",
+        "children": [
+            {"id": "023001", "name": "基本操作", "request": ["/customer/rdm/list"]}
+        ]
+    }, {
+        "id": "0231", "name": "部门管理", "page": "customer/department",
+        "children": [
+            {"id": "023101", "name": "基本操作", "request": ["/customer/department/list"]}
+        ]
+    }, {
+        "id": "0232", "name": "员工管理", "page": "customer/worker",
+        "children": [
+            {"id": "023201", "name": "基本操作", "request": ["/customer/worker/list"]}
+        ]
+    }, {
+        "id": "0233", "name": "预算管理", "page": "customer/budget",
+        "children": [
+            {"id": "023301", "name": "基本操作", "request": ["/customer/budget/list"]}
+        ]
+    }, {
+        "id": "0234", "name": "审批管理", "page": "customer/approve",
+        "children": [
+            {"id": "023401", "name": "基本操作", "request": ["/customer/approve/list"]}
+        ]
+    }, {
+        "id": "0235", "name": "绩效管理", "page": "customer/performance",
+        "children": [
+            {"id": "023501", "name": "基本操作", "request": ["/customer/performance/list"]}
+        ]
+    }, {
+        "id": "0236", "name": "档案管理", "page": "customer/file",
+        "children": [
+            {"id": "023601", "name": "基本操作", "request": ["/customer/file/list"]}
+        ]
+    }, {
+        "id": "0237", "name": "物料管理", "page": "customer/material",
+        "children": [
+            {"id": "023701", "name": "基本操作", "request": ["/customer/material/list"]}
+        ]
+    }, {
+        "id": "0238", "name": "物料管理", "page": "customer/purchase",
+        "children": [
+            {"id": "023801", "name": "基本操作", "request": ["/customer/purchase/list"]}
+        ]
+    }, {
+        "id": "0239", "name": "资金管理", "page": "customer/capital",
+        "children": [
+            {"id": "023901", "name": "基本操作", "request": ["/customer/capital/list"]}
+        ]
+    }
+    ]
+}, {
+    "id": "03", "name": "文件管理",
+    "children": [{
+        "id": "0301", "name": "文件管理", "page": "file/file",
+        "children": [
+            {"id": "030101", "name": "文件管理", "request": ["/file/admin/file"]}
+        ]
+    }]
+}]

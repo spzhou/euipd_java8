@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCharacterDataMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCharacterData">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="function_description" jdbcType="VARCHAR" property="functionDescription" />
+    <result column="work_condition" jdbcType="VARCHAR" property="workCondition" />
+    <result column="input_logical_desc" jdbcType="VARCHAR" property="inputLogicalDesc" />
+    <result column="function_logical_desc" jdbcType="VARCHAR" property="functionLogicalDesc" />
+    <result column="output_logical_desc" jdbcType="VARCHAR" property="outputLogicalDesc" />
+    <result column="test_method" jdbcType="VARCHAR" property="testMethod" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, function_description, work_condition, input_logical_desc, function_logical_desc, 
+    output_logical_desc, test_method, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCharacterDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_character_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_character_data
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_character_data
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCharacterDataExample">
+    delete from rdms_character_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCharacterData">
+    insert into rdms_character_data (id, function_description, work_condition, 
+      input_logical_desc, function_logical_desc, 
+      output_logical_desc, test_method, create_time, 
+      update_time)
+    values (#{id,jdbcType=CHAR}, #{functionDescription,jdbcType=VARCHAR}, #{workCondition,jdbcType=VARCHAR}, 
+      #{inputLogicalDesc,jdbcType=VARCHAR}, #{functionLogicalDesc,jdbcType=VARCHAR}, 
+      #{outputLogicalDesc,jdbcType=VARCHAR}, #{testMethod,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCharacterData">
+    insert into rdms_character_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="functionDescription != null">
+        function_description,
+      </if>
+      <if test="workCondition != null">
+        work_condition,
+      </if>
+      <if test="inputLogicalDesc != null">
+        input_logical_desc,
+      </if>
+      <if test="functionLogicalDesc != null">
+        function_logical_desc,
+      </if>
+      <if test="outputLogicalDesc != null">
+        output_logical_desc,
+      </if>
+      <if test="testMethod != null">
+        test_method,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="functionDescription != null">
+        #{functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="workCondition != null">
+        #{workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="inputLogicalDesc != null">
+        #{inputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="functionLogicalDesc != null">
+        #{functionLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outputLogicalDesc != null">
+        #{outputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCharacterDataExample" resultType="java.lang.Long">
+    select count(*) from rdms_character_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_character_data
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.functionDescription != null">
+        function_description = #{record.functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCondition != null">
+        work_condition = #{record.workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputLogicalDesc != null">
+        input_logical_desc = #{record.inputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionLogicalDesc != null">
+        function_logical_desc = #{record.functionLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outputLogicalDesc != null">
+        output_logical_desc = #{record.outputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testMethod != null">
+        test_method = #{record.testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_character_data
+    set id = #{record.id,jdbcType=CHAR},
+      function_description = #{record.functionDescription,jdbcType=VARCHAR},
+      work_condition = #{record.workCondition,jdbcType=VARCHAR},
+      input_logical_desc = #{record.inputLogicalDesc,jdbcType=VARCHAR},
+      function_logical_desc = #{record.functionLogicalDesc,jdbcType=VARCHAR},
+      output_logical_desc = #{record.outputLogicalDesc,jdbcType=VARCHAR},
+      test_method = #{record.testMethod,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCharacterData">
+    update rdms_character_data
+    <set>
+      <if test="functionDescription != null">
+        function_description = #{functionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="workCondition != null">
+        work_condition = #{workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="inputLogicalDesc != null">
+        input_logical_desc = #{inputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="functionLogicalDesc != null">
+        function_logical_desc = #{functionLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outputLogicalDesc != null">
+        output_logical_desc = #{outputLogicalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        test_method = #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCharacterData">
+    update rdms_character_data
+    set function_description = #{functionDescription,jdbcType=VARCHAR},
+      work_condition = #{workCondition,jdbcType=VARCHAR},
+      input_logical_desc = #{inputLogicalDesc,jdbcType=VARCHAR},
+      function_logical_desc = #{functionLogicalDesc,jdbcType=VARCHAR},
+      output_logical_desc = #{outputLogicalDesc,jdbcType=VARCHAR},
+      test_method = #{testMethod,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.FileSortMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.FileSort">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="video_class" jdbcType="CHAR" property="videoClass" />
+    <result column="param_id" jdbcType="CHAR" property="paramId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="vod" jdbcType="VARCHAR" property="vod" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="video_cover" jdbcType="VARCHAR" property="videoCover" />
+    <result column="institution" jdbcType="VARCHAR" property="institution" />
+    <result column="logo_url" jdbcType="VARCHAR" property="logoUrl" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="rand" jdbcType="INTEGER" property="rand" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, video_class, param_id, title, vod, content, video_cover, institution, logo_url, 
+    sort, rand, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.FileSortExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from file_sort
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file_sort
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from file_sort
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.FileSortExample">
+    delete from file_sort
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.FileSort">
+    insert into file_sort (id, video_class, param_id, 
+      title, vod, content, 
+      video_cover, institution, logo_url, 
+      sort, rand, create_time
+      )
+    values (#{id,jdbcType=CHAR}, #{videoClass,jdbcType=CHAR}, #{paramId,jdbcType=CHAR}, 
+      #{title,jdbcType=VARCHAR}, #{vod,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{videoCover,jdbcType=VARCHAR}, #{institution,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{rand,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.FileSort">
+    insert into file_sort
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="videoClass != null">
+        video_class,
+      </if>
+      <if test="paramId != null">
+        param_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="vod != null">
+        vod,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="videoCover != null">
+        video_cover,
+      </if>
+      <if test="institution != null">
+        institution,
+      </if>
+      <if test="logoUrl != null">
+        logo_url,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="rand != null">
+        rand,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="videoClass != null">
+        #{videoClass,jdbcType=CHAR},
+      </if>
+      <if test="paramId != null">
+        #{paramId,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="vod != null">
+        #{vod,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCover != null">
+        #{videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null">
+        #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="rand != null">
+        #{rand,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.FileSortExample" resultType="java.lang.Long">
+    select count(*) from file_sort
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update file_sort
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.videoClass != null">
+        video_class = #{record.videoClass,jdbcType=CHAR},
+      </if>
+      <if test="record.paramId != null">
+        param_id = #{record.paramId,jdbcType=CHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vod != null">
+        vod = #{record.vod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoCover != null">
+        video_cover = #{record.videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.institution != null">
+        institution = #{record.institution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoUrl != null">
+        logo_url = #{record.logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.rand != null">
+        rand = #{record.rand,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update file_sort
+    set id = #{record.id,jdbcType=CHAR},
+      video_class = #{record.videoClass,jdbcType=CHAR},
+      param_id = #{record.paramId,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      vod = #{record.vod,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      video_cover = #{record.videoCover,jdbcType=VARCHAR},
+      institution = #{record.institution,jdbcType=VARCHAR},
+      logo_url = #{record.logoUrl,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      rand = #{record.rand,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.FileSort">
+    update file_sort
+    <set>
+      <if test="videoClass != null">
+        video_class = #{videoClass,jdbcType=CHAR},
+      </if>
+      <if test="paramId != null">
+        param_id = #{paramId,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="vod != null">
+        vod = #{vod,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCover != null">
+        video_cover = #{videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="institution != null">
+        institution = #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="rand != null">
+        rand = #{rand,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.FileSort">
+    update file_sort
+    set video_class = #{videoClass,jdbcType=CHAR},
+      param_id = #{paramId,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      vod = #{vod,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      video_cover = #{videoCover,jdbcType=VARCHAR},
+      institution = #{institution,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      rand = #{rand,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,124 @@
+# Build outputs
+target/
+build/
+out/
+bin/
+# IDE files
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.eclipse/
+.project
+.classpath
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+
+# OS files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Logs
+logs/
+*.log
+/logging.file.path_IS_UNDEFINED/
+/log.path_IS_UNDEFINED/
+/system/log.path_IS_UNDEFINED/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+gradlew
+gradlew.bat
+gradle/
+
+# Spring Boot
+spring.log
+
+# Configuration files with sensitive data
+**/application-prod.properties
+**/application-dev.properties
+**/bootstrap-prod.properties
+**/bootstrap-dev.properties
+config/application-prod.properties
+config/application-dev.properties
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash logs
+hs_err_pid*
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# IntelliJ IDEA
+*.iws
+*.iml
+*.ipr
+/out/
+
+# Local user paths
+/Users/
+
+# Documentation build
+/doc/build/
+*.pdf
+
+# Sensitive documentation
+KEYS_MIGRATION_MEMO.md
+

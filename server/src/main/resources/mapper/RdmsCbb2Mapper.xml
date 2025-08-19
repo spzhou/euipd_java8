@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCbb2Mapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCbb2">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="cbb_serial" jdbcType="CHAR" property="cbbSerial" />
+    <result column="character_Id" jdbcType="VARCHAR" property="characterId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="cbb_name" jdbcType="VARCHAR" property="cbbName" />
+    <result column="cbb_introduce" jdbcType="VARCHAR" property="cbbIntroduce" />
+    <result column="supervise" jdbcType="CHAR" property="supervise" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="test_manager_id" jdbcType="CHAR" property="testManagerId" />
+    <result column="system_manager_id" jdbcType="CHAR" property="systemManagerId" />
+    <result column="creater_id" jdbcType="CHAR" property="createrId" />
+    <result column="key_member_list_str" jdbcType="VARCHAR" property="keyMemberListStr" />
+    <result column="file_id_list_str" jdbcType="VARCHAR" property="fileIdListStr" />
+    <result column="module_id_list_str" jdbcType="VARCHAR" property="moduleIdListStr" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="dev_version" jdbcType="VARCHAR" property="devVersion" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="jobitem_type" jdbcType="VARCHAR" property="jobitemType" />
+    <result column="related_id" jdbcType="CHAR" property="relatedId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cbb_serial, character_Id, customer_id, cbb_name, cbb_introduce, supervise, product_manager_id, 
+    project_manager_id, test_manager_id, system_manager_id, creater_id, key_member_list_str, 
+    file_id_list_str, module_id_list_str, `status`, dev_version, `type`, jobitem_type, 
+    related_id, create_time, release_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCbb2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_cbb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_cbb2
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_cbb2
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCbb2Example">
+    delete from rdms_cbb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCbb2">
+    insert into rdms_cbb2 (id, cbb_serial, character_Id, 
+      customer_id, cbb_name, cbb_introduce, 
+      supervise, product_manager_id, project_manager_id, 
+      test_manager_id, system_manager_id, creater_id, 
+      key_member_list_str, file_id_list_str, module_id_list_str, 
+      `status`, dev_version, `type`, 
+      jobitem_type, related_id, create_time, 
+      release_time, deleted)
+    values (#{id,jdbcType=CHAR}, #{cbbSerial,jdbcType=CHAR}, #{characterId,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=CHAR}, #{cbbName,jdbcType=VARCHAR}, #{cbbIntroduce,jdbcType=VARCHAR}, 
+      #{supervise,jdbcType=CHAR}, #{productManagerId,jdbcType=CHAR}, #{projectManagerId,jdbcType=CHAR}, 
+      #{testManagerId,jdbcType=CHAR}, #{systemManagerId,jdbcType=CHAR}, #{createrId,jdbcType=CHAR}, 
+      #{keyMemberListStr,jdbcType=VARCHAR}, #{fileIdListStr,jdbcType=VARCHAR}, #{moduleIdListStr,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{devVersion,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{jobitemType,jdbcType=VARCHAR}, #{relatedId,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{releaseTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCbb2">
+    insert into rdms_cbb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cbbSerial != null">
+        cbb_serial,
+      </if>
+      <if test="characterId != null">
+        character_Id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="cbbName != null">
+        cbb_name,
+      </if>
+      <if test="cbbIntroduce != null">
+        cbb_introduce,
+      </if>
+      <if test="supervise != null">
+        supervise,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id,
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id,
+      </if>
+      <if test="systemManagerId != null">
+        system_manager_id,
+      </if>
+      <if test="createrId != null">
+        creater_id,
+      </if>
+      <if test="keyMemberListStr != null">
+        key_member_list_str,
+      </if>
+      <if test="fileIdListStr != null">
+        file_id_list_str,
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="devVersion != null">
+        dev_version,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type,
+      </if>
+      <if test="relatedId != null">
+        related_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="cbbSerial != null">
+        #{cbbSerial,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        #{characterId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="cbbName != null">
+        #{cbbName,jdbcType=VARCHAR},
+      </if>
+      <if test="cbbIntroduce != null">
+        #{cbbIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="supervise != null">
+        #{supervise,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="systemManagerId != null">
+        #{systemManagerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="keyMemberListStr != null">
+        #{keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileIdListStr != null">
+        #{fileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="devVersion != null">
+        #{devVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedId != null">
+        #{relatedId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCbb2Example" resultType="java.lang.Long">
+    select count(*) from rdms_cbb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_cbb2
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.cbbSerial != null">
+        cbb_serial = #{record.cbbSerial,jdbcType=CHAR},
+      </if>
+      <if test="record.characterId != null">
+        character_Id = #{record.characterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.cbbName != null">
+        cbb_name = #{record.cbbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbbIntroduce != null">
+        cbb_introduce = #{record.cbbIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supervise != null">
+        supervise = #{record.supervise,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectManagerId != null">
+        project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.testManagerId != null">
+        test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.systemManagerId != null">
+        system_manager_id = #{record.systemManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.createrId != null">
+        creater_id = #{record.createrId,jdbcType=CHAR},
+      </if>
+      <if test="record.keyMemberListStr != null">
+        key_member_list_str = #{record.keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileIdListStr != null">
+        file_id_list_str = #{record.fileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIdListStr != null">
+        module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devVersion != null">
+        dev_version = #{record.devVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobitemType != null">
+        jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatedId != null">
+        related_id = #{record.relatedId,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releaseTime != null">
+        release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_cbb2
+    set id = #{record.id,jdbcType=CHAR},
+      cbb_serial = #{record.cbbSerial,jdbcType=CHAR},
+      character_Id = #{record.characterId,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      cbb_name = #{record.cbbName,jdbcType=VARCHAR},
+      cbb_introduce = #{record.cbbIntroduce,jdbcType=VARCHAR},
+      supervise = #{record.supervise,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      system_manager_id = #{record.systemManagerId,jdbcType=CHAR},
+      creater_id = #{record.createrId,jdbcType=CHAR},
+      key_member_list_str = #{record.keyMemberListStr,jdbcType=VARCHAR},
+      file_id_list_str = #{record.fileIdListStr,jdbcType=VARCHAR},
+      module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      dev_version = #{record.devVersion,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      related_id = #{record.relatedId,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCbb2">
+    update rdms_cbb2
+    <set>
+      <if test="cbbSerial != null">
+        cbb_serial = #{cbbSerial,jdbcType=CHAR},
+      </if>
+      <if test="characterId != null">
+        character_Id = #{characterId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="cbbName != null">
+        cbb_name = #{cbbName,jdbcType=VARCHAR},
+      </if>
+      <if test="cbbIntroduce != null">
+        cbb_introduce = #{cbbIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="supervise != null">
+        supervise = #{supervise,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id = #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="systemManagerId != null">
+        system_manager_id = #{systemManagerId,jdbcType=CHAR},
+      </if>
+      <if test="createrId != null">
+        creater_id = #{createrId,jdbcType=CHAR},
+      </if>
+      <if test="keyMemberListStr != null">
+        key_member_list_str = #{keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileIdListStr != null">
+        file_id_list_str = #{fileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="devVersion != null">
+        dev_version = #{devVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedId != null">
+        related_id = #{relatedId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCbb2">
+    update rdms_cbb2
+    set cbb_serial = #{cbbSerial,jdbcType=CHAR},
+      character_Id = #{characterId,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      cbb_name = #{cbbName,jdbcType=VARCHAR},
+      cbb_introduce = #{cbbIntroduce,jdbcType=VARCHAR},
+      supervise = #{supervise,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{testManagerId,jdbcType=CHAR},
+      system_manager_id = #{systemManagerId,jdbcType=CHAR},
+      creater_id = #{createrId,jdbcType=CHAR},
+      key_member_list_str = #{keyMemberListStr,jdbcType=VARCHAR},
+      file_id_list_str = #{fileIdListStr,jdbcType=VARCHAR},
+      module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      dev_version = #{devVersion,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      related_id = #{relatedId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

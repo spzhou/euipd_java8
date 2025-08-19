@@ -1,0 +1,60 @@
+# Author：周朔鹏
+# 编制时间：2025-08-05
+# 电子邮件：391902958@qq.com
+# 项目官网：https://www.euipd.com
+
+spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+spring.application.name=file
+
+spring.cloud.nacos.username=nacos
+spring.cloud.nacos.namespace=public
+spring.cloud.nacos.password=YOUR_NACOS_PASSWORD
+#spring.cloud.nacos.password=aobo@001xmyhX
+
+## euipd-oss(自己公司的) 只要修改下列配置参数, 即可修改OSS 此处配置指向RAM用户
+oss.accessKeyId=YOUR_ALIYUN_OSS_ACCESS_KEY_ID
+oss.accessKeySecret=YOUR_ALIYUN_OSS_ACCESS_KEY_SECRET
+oss.role_arn=acs:ram::1949128748029685:role/euipd-oss-arn
+oss.endpoint=http://oss-cn-shanghai.aliyuncs.com
+oss.domain=https://euipd-doc.oss-cn-shanghai.aliyuncs.com/
+oss.domain_web=https://euipd-web.oss-cn-shanghai.aliyuncs.com/
+oss.bucket=euipd-doc
+oss.bucket_web=euipd-web
+oss.endpoint_sts=sts.cn-shanghai.aliyuncs.com
+
+## Aobo OSS parameter
+#oss.accessKeyId=YOUR_ALIYUN_ACCESS_KEY_ID
+#oss.accessKeySecret=YOUR_ALIYUN_ACCESS_KEY_SECRET
+#oss.role_arn=acs:ram::1551716862073470:role/ramstsuser
+#oss.endpoint=http://oss-cn-beijing.aliyuncs.com
+#oss.domain=https://aobo-doc.oss-cn-beijing.aliyuncs.com/
+#oss.domain_web=https://euipd-web.oss-cn-shanghai.aliyuncs.com/
+#oss.bucket=aobo-doc
+#oss.bucket_web=euipd-web
+#oss.endpoint_sts=sts.cn-beijing.aliyuncs.com
+
+### Raykeen OSS parameter
+#oss.accessKeyId=YOUR_RAYKEEN_ACCESS_KEY_ID
+#oss.accessKeySecret=YOUR_RAYKEEN_ACCESS_KEY_SECRET
+#oss.role_arn=acs:ram::1321728351468595:role/ramossuser
+#oss.endpoint=http://oss-cn-shanghai.aliyuncs.com
+#oss.domain=https://raykeen-euipd-doc.oss-cn-shanghai.aliyuncs.com/
+#oss.domain_web=https://euipd-web.oss-cn-shanghai.aliyuncs.com/
+#oss.bucket=raykeen-euipd-doc
+#oss.bucket_web=euipd-web
+#oss.endpoint_sts=sts.cn-shanghai.aliyuncs.com
+
+
+# vod oss
+oss.domain.vod=https://euipd-course-vod.oss-cn-shanghai.aliyuncs.com/
+## vod参数
+#必须使用RAM用户登录,登录名称 euipd_course_vod@1949128748029685.onaliyun.com
+#文档:https://help.aliyun.com/zh/vod/developer-reference/using-the-openapi-example?spm=a2c4g.11186623.0.i1
+#备忘:AccessKey ID YOUR_ALIYUN_VOD_ACCESS_KEY_ID
+#备忘:AccessKey Secret YOUR_ALIYUN_VOD_ACCESS_KEY_SECRET
+vod.accessKeyId=YOUR_ALIYUN_VOD_ACCESS_KEY_ID
+vod.accessKeySecret=YOUR_ALIYUN_VOD_ACCESS_KEY_SECRET
+vod.regionId=cn-shanghai
+vod.categoryId=1000657271
+vod.workflowId=cfccd07fda23366c109f7618ecc09414
+vod.storageLocation=euipd-course-vod.oss-cn-shanghai.aliyuncs.com

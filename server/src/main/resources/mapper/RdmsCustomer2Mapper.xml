@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCustomer2Mapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCustomer2">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+    <result column="reg_address" jdbcType="VARCHAR" property="regAddress" />
+    <result column="office_address" jdbcType="VARCHAR" property="officeAddress" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="license_link" jdbcType="VARCHAR" property="licenseLink" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="login_token" jdbcType="VARCHAR" property="loginToken" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_num_limit" jdbcType="INTEGER" property="userNumLimit" />
+    <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime" />
+    <result column="budget_mode" jdbcType="VARCHAR" property="budgetMode" />
+    <result column="storage_space" jdbcType="INTEGER" property="storageSpace" />
+    <result column="en_auth_edit" jdbcType="INTEGER" property="enAuthEdit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, login_name, `password`, customer_name, credit_code, reg_address, office_address, 
+    admin_name, contact_phone, license_link, `status`, login_token, login_ip, deleted, 
+    create_time, user_num_limit, expiration_time, budget_mode, storage_space, en_auth_edit
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCustomer2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_customer2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_customer2
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_customer2
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCustomer2Example">
+    delete from rdms_customer2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCustomer2">
+    insert into rdms_customer2 (id, login_name, `password`, 
+      customer_name, credit_code, reg_address, 
+      office_address, admin_name, contact_phone, 
+      license_link, `status`, login_token, 
+      login_ip, deleted, create_time, 
+      user_num_limit, expiration_time, budget_mode, 
+      storage_space, en_auth_edit)
+    values (#{id,jdbcType=CHAR}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, #{regAddress,jdbcType=VARCHAR}, 
+      #{officeAddress,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{licenseLink,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{loginToken,jdbcType=VARCHAR}, 
+      #{loginIp,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userNumLimit,jdbcType=INTEGER}, #{expirationTime,jdbcType=TIMESTAMP}, #{budgetMode,jdbcType=VARCHAR}, 
+      #{storageSpace,jdbcType=INTEGER}, #{enAuthEdit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCustomer2">
+    insert into rdms_customer2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="creditCode != null">
+        credit_code,
+      </if>
+      <if test="regAddress != null">
+        reg_address,
+      </if>
+      <if test="officeAddress != null">
+        office_address,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="contactPhone != null">
+        contact_phone,
+      </if>
+      <if test="licenseLink != null">
+        license_link,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="loginToken != null">
+        login_token,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userNumLimit != null">
+        user_num_limit,
+      </if>
+      <if test="expirationTime != null">
+        expiration_time,
+      </if>
+      <if test="budgetMode != null">
+        budget_mode,
+      </if>
+      <if test="storageSpace != null">
+        storage_space,
+      </if>
+      <if test="enAuthEdit != null">
+        en_auth_edit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddress != null">
+        #{regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null">
+        #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseLink != null">
+        #{licenseLink,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumLimit != null">
+        #{userNumLimit,jdbcType=INTEGER},
+      </if>
+      <if test="expirationTime != null">
+        #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budgetMode != null">
+        #{budgetMode,jdbcType=VARCHAR},
+      </if>
+      <if test="storageSpace != null">
+        #{storageSpace,jdbcType=INTEGER},
+      </if>
+      <if test="enAuthEdit != null">
+        #{enAuthEdit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCustomer2Example" resultType="java.lang.Long">
+    select count(*) from rdms_customer2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_customer2
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.loginName != null">
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditCode != null">
+        credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regAddress != null">
+        reg_address = #{record.regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeAddress != null">
+        office_address = #{record.officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminName != null">
+        admin_name = #{record.adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPhone != null">
+        contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseLink != null">
+        license_link = #{record.licenseLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginToken != null">
+        login_token = #{record.loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginIp != null">
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNumLimit != null">
+        user_num_limit = #{record.userNumLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.expirationTime != null">
+        expiration_time = #{record.expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.budgetMode != null">
+        budget_mode = #{record.budgetMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storageSpace != null">
+        storage_space = #{record.storageSpace,jdbcType=INTEGER},
+      </if>
+      <if test="record.enAuthEdit != null">
+        en_auth_edit = #{record.enAuthEdit,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_customer2
+    set id = #{record.id,jdbcType=CHAR},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      reg_address = #{record.regAddress,jdbcType=VARCHAR},
+      office_address = #{record.officeAddress,jdbcType=VARCHAR},
+      admin_name = #{record.adminName,jdbcType=VARCHAR},
+      contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+      license_link = #{record.licenseLink,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      login_token = #{record.loginToken,jdbcType=VARCHAR},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      user_num_limit = #{record.userNumLimit,jdbcType=INTEGER},
+      expiration_time = #{record.expirationTime,jdbcType=TIMESTAMP},
+      budget_mode = #{record.budgetMode,jdbcType=VARCHAR},
+      storage_space = #{record.storageSpace,jdbcType=INTEGER},
+      en_auth_edit = #{record.enAuthEdit,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCustomer2">
+    update rdms_customer2
+    <set>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddress != null">
+        reg_address = #{regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null">
+        office_address = #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseLink != null">
+        license_link = #{licenseLink,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        login_token = #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNumLimit != null">
+        user_num_limit = #{userNumLimit,jdbcType=INTEGER},
+      </if>
+      <if test="expirationTime != null">
+        expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budgetMode != null">
+        budget_mode = #{budgetMode,jdbcType=VARCHAR},
+      </if>
+      <if test="storageSpace != null">
+        storage_space = #{storageSpace,jdbcType=INTEGER},
+      </if>
+      <if test="enAuthEdit != null">
+        en_auth_edit = #{enAuthEdit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCustomer2">
+    update rdms_customer2
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      reg_address = #{regAddress,jdbcType=VARCHAR},
+      office_address = #{officeAddress,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      license_link = #{licenseLink,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      login_token = #{loginToken,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_num_limit = #{userNumLimit,jdbcType=INTEGER},
+      expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      budget_mode = #{budgetMode,jdbcType=VARCHAR},
+      storage_space = #{storageSpace,jdbcType=INTEGER},
+      en_auth_edit = #{enAuthEdit,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

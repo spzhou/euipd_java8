@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCharacter3Mapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCharacter3">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="character_serial" jdbcType="CHAR" property="characterSerial" />
+    <result column="parent" jdbcType="CHAR" property="parent" />
+    <result column="deep" jdbcType="INTEGER" property="deep" />
+    <result column="character_name" jdbcType="VARCHAR" property="characterName" />
+    <result column="iteration_version" jdbcType="INTEGER" property="iterationVersion" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="milestone_id" jdbcType="VARCHAR" property="milestoneId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="writer_id" jdbcType="CHAR" property="writerId" />
+    <result column="next_node" jdbcType="CHAR" property="nextNode" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="aux_status" jdbcType="VARCHAR" property="auxStatus" />
+    <result column="jobitem_type" jdbcType="VARCHAR" property="jobitemType" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="project_type" jdbcType="CHAR" property="projectType" />
+    <result column="stage" jdbcType="CHAR" property="stage" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="demand_list_str" jdbcType="VARCHAR" property="demandListStr" />
+    <result column="merged_character_id_str" jdbcType="VARCHAR" property="mergedCharacterIdStr" />
+    <result column="module_id_list_str" jdbcType="VARCHAR" property="moduleIdListStr" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="setuped_time" jdbcType="TIMESTAMP" property="setupedTime" />
+    <result column="plan_complete_time" jdbcType="TIMESTAMP" property="planCompleteTime" />
+    <result column="dev_manhour" jdbcType="DOUBLE" property="devManhour" />
+    <result column="dev_manhour_approved" jdbcType="DOUBLE" property="devManhourApproved" />
+    <result column="test_manhour" jdbcType="DOUBLE" property="testManhour" />
+    <result column="test_manhour_approved" jdbcType="DOUBLE" property="testManhourApproved" />
+    <result column="material_fee" jdbcType="DECIMAL" property="materialFee" />
+    <result column="material_fee_approved" jdbcType="DECIMAL" property="materialFeeApproved" />
+    <result column="test_fee" jdbcType="DECIMAL" property="testFee" />
+    <result column="power_fee" jdbcType="DECIMAL" property="powerFee" />
+    <result column="conference_fee" jdbcType="DECIMAL" property="conferenceFee" />
+    <result column="business_fee" jdbcType="DECIMAL" property="businessFee" />
+    <result column="cooperation_fee" jdbcType="DECIMAL" property="cooperationFee" />
+    <result column="property_fee" jdbcType="DECIMAL" property="propertyFee" />
+    <result column="labor_fee" jdbcType="DECIMAL" property="laborFee" />
+    <result column="consulting_fee" jdbcType="DECIMAL" property="consultingFee" />
+    <result column="management_fee" jdbcType="DECIMAL" property="managementFee" />
+    <result column="sum_other_fee" jdbcType="DECIMAL" property="sumOtherFee" />
+    <result column="budget" jdbcType="DECIMAL" property="budget" />
+    <result column="version_update" jdbcType="VARCHAR" property="versionUpdate" />
+    <result column="mm_status" jdbcType="VARCHAR" property="mmStatus" />
+    <result column="bom_status" jdbcType="VARCHAR" property="bomStatus" />
+    <result column="bom_version" jdbcType="INTEGER" property="bomVersion" />
+    <result column="out_character_id" jdbcType="CHAR" property="outCharacterId" />
+    <result column="cbb_project_id" jdbcType="CHAR" property="cbbProjectId" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, character_serial, parent, deep, character_name, iteration_version, customer_id, 
+    pre_project_id, project_id, subproject_id, milestone_id, product_manager_id, writer_id, 
+    next_node, `status`, aux_status, jobitem_type, jobitem_id, project_type, stage, update_time, 
+    file_list_str, demand_list_str, merged_character_id_str, module_id_list_str, create_time, 
+    submit_time, setuped_time, plan_complete_time, dev_manhour, dev_manhour_approved, 
+    test_manhour, test_manhour_approved, material_fee, material_fee_approved, test_fee, 
+    power_fee, conference_fee, business_fee, cooperation_fee, property_fee, labor_fee, 
+    consulting_fee, management_fee, sum_other_fee, budget, version_update, mm_status, 
+    bom_status, bom_version, out_character_id, cbb_project_id, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCharacter3Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_character3
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_character3
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_character3
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCharacter3Example">
+    delete from rdms_character3
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCharacter3">
+    insert into rdms_character3 (id, character_serial, parent, 
+      deep, character_name, iteration_version, 
+      customer_id, pre_project_id, project_id, 
+      subproject_id, milestone_id, product_manager_id, 
+      writer_id, next_node, `status`, 
+      aux_status, jobitem_type, jobitem_id, 
+      project_type, stage, update_time, 
+      file_list_str, demand_list_str, merged_character_id_str, 
+      module_id_list_str, create_time, submit_time, 
+      setuped_time, plan_complete_time, dev_manhour, 
+      dev_manhour_approved, test_manhour, test_manhour_approved, 
+      material_fee, material_fee_approved, test_fee, 
+      power_fee, conference_fee, business_fee, 
+      cooperation_fee, property_fee, labor_fee, 
+      consulting_fee, management_fee, sum_other_fee, 
+      budget, version_update, mm_status, 
+      bom_status, bom_version, out_character_id, 
+      cbb_project_id, deleted)
+    values (#{id,jdbcType=CHAR}, #{characterSerial,jdbcType=CHAR}, #{parent,jdbcType=CHAR}, 
+      #{deep,jdbcType=INTEGER}, #{characterName,jdbcType=VARCHAR}, #{iterationVersion,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=CHAR}, #{preProjectId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, 
+      #{subprojectId,jdbcType=CHAR}, #{milestoneId,jdbcType=VARCHAR}, #{productManagerId,jdbcType=CHAR}, 
+      #{writerId,jdbcType=CHAR}, #{nextNode,jdbcType=CHAR}, #{status,jdbcType=VARCHAR}, 
+      #{auxStatus,jdbcType=VARCHAR}, #{jobitemType,jdbcType=VARCHAR}, #{jobitemId,jdbcType=CHAR}, 
+      #{projectType,jdbcType=CHAR}, #{stage,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{fileListStr,jdbcType=VARCHAR}, #{demandListStr,jdbcType=VARCHAR}, #{mergedCharacterIdStr,jdbcType=VARCHAR}, 
+      #{moduleIdListStr,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{setupedTime,jdbcType=TIMESTAMP}, #{planCompleteTime,jdbcType=TIMESTAMP}, #{devManhour,jdbcType=DOUBLE}, 
+      #{devManhourApproved,jdbcType=DOUBLE}, #{testManhour,jdbcType=DOUBLE}, #{testManhourApproved,jdbcType=DOUBLE}, 
+      #{materialFee,jdbcType=DECIMAL}, #{materialFeeApproved,jdbcType=DECIMAL}, #{testFee,jdbcType=DECIMAL}, 
+      #{powerFee,jdbcType=DECIMAL}, #{conferenceFee,jdbcType=DECIMAL}, #{businessFee,jdbcType=DECIMAL}, 
+      #{cooperationFee,jdbcType=DECIMAL}, #{propertyFee,jdbcType=DECIMAL}, #{laborFee,jdbcType=DECIMAL}, 
+      #{consultingFee,jdbcType=DECIMAL}, #{managementFee,jdbcType=DECIMAL}, #{sumOtherFee,jdbcType=DECIMAL}, 
+      #{budget,jdbcType=DECIMAL}, #{versionUpdate,jdbcType=VARCHAR}, #{mmStatus,jdbcType=VARCHAR}, 
+      #{bomStatus,jdbcType=VARCHAR}, #{bomVersion,jdbcType=INTEGER}, #{outCharacterId,jdbcType=CHAR}, 
+      #{cbbProjectId,jdbcType=CHAR}, #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCharacter3">
+    insert into rdms_character3
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="characterSerial != null">
+        character_serial,
+      </if>
+      <if test="parent != null">
+        parent,
+      </if>
+      <if test="deep != null">
+        deep,
+      </if>
+      <if test="characterName != null">
+        character_name,
+      </if>
+      <if test="iterationVersion != null">
+        iteration_version,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="milestoneId != null">
+        milestone_id,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="writerId != null">
+        writer_id,
+      </if>
+      <if test="nextNode != null">
+        next_node,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="auxStatus != null">
+        aux_status,
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="projectType != null">
+        project_type,
+      </if>
+      <if test="stage != null">
+        stage,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="demandListStr != null">
+        demand_list_str,
+      </if>
+      <if test="mergedCharacterIdStr != null">
+        merged_character_id_str,
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="setupedTime != null">
+        setuped_time,
+      </if>
+      <if test="planCompleteTime != null">
+        plan_complete_time,
+      </if>
+      <if test="devManhour != null">
+        dev_manhour,
+      </if>
+      <if test="devManhourApproved != null">
+        dev_manhour_approved,
+      </if>
+      <if test="testManhour != null">
+        test_manhour,
+      </if>
+      <if test="testManhourApproved != null">
+        test_manhour_approved,
+      </if>
+      <if test="materialFee != null">
+        material_fee,
+      </if>
+      <if test="materialFeeApproved != null">
+        material_fee_approved,
+      </if>
+      <if test="testFee != null">
+        test_fee,
+      </if>
+      <if test="powerFee != null">
+        power_fee,
+      </if>
+      <if test="conferenceFee != null">
+        conference_fee,
+      </if>
+      <if test="businessFee != null">
+        business_fee,
+      </if>
+      <if test="cooperationFee != null">
+        cooperation_fee,
+      </if>
+      <if test="propertyFee != null">
+        property_fee,
+      </if>
+      <if test="laborFee != null">
+        labor_fee,
+      </if>
+      <if test="consultingFee != null">
+        consulting_fee,
+      </if>
+      <if test="managementFee != null">
+        management_fee,
+      </if>
+      <if test="sumOtherFee != null">
+        sum_other_fee,
+      </if>
+      <if test="budget != null">
+        budget,
+      </if>
+      <if test="versionUpdate != null">
+        version_update,
+      </if>
+      <if test="mmStatus != null">
+        mm_status,
+      </if>
+      <if test="bomStatus != null">
+        bom_status,
+      </if>
+      <if test="bomVersion != null">
+        bom_version,
+      </if>
+      <if test="outCharacterId != null">
+        out_character_id,
+      </if>
+      <if test="cbbProjectId != null">
+        cbb_project_id,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="characterSerial != null">
+        #{characterSerial,jdbcType=CHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="characterName != null">
+        #{characterName,jdbcType=VARCHAR},
+      </if>
+      <if test="iterationVersion != null">
+        #{iterationVersion,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="milestoneId != null">
+        #{milestoneId,jdbcType=VARCHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="writerId != null">
+        #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auxStatus != null">
+        #{auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="projectType != null">
+        #{projectType,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="demandListStr != null">
+        #{demandListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="mergedCharacterIdStr != null">
+        #{mergedCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="setupedTime != null">
+        #{setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCompleteTime != null">
+        #{planCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devManhour != null">
+        #{devManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="devManhourApproved != null">
+        #{devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhour != null">
+        #{testManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourApproved != null">
+        #{testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFee != null">
+        #{materialFee,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApproved != null">
+        #{materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="testFee != null">
+        #{testFee,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFee != null">
+        #{powerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFee != null">
+        #{conferenceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFee != null">
+        #{businessFee,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFee != null">
+        #{cooperationFee,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFee != null">
+        #{propertyFee,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFee != null">
+        #{laborFee,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFee != null">
+        #{consultingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFee != null">
+        #{managementFee,jdbcType=DECIMAL},
+      </if>
+      <if test="sumOtherFee != null">
+        #{sumOtherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="budget != null">
+        #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="versionUpdate != null">
+        #{versionUpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="mmStatus != null">
+        #{mmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomStatus != null">
+        #{bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomVersion != null">
+        #{bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="outCharacterId != null">
+        #{outCharacterId,jdbcType=CHAR},
+      </if>
+      <if test="cbbProjectId != null">
+        #{cbbProjectId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCharacter3Example" resultType="java.lang.Long">
+    select count(*) from rdms_character3
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_character3
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.characterSerial != null">
+        character_serial = #{record.characterSerial,jdbcType=CHAR},
+      </if>
+      <if test="record.parent != null">
+        parent = #{record.parent,jdbcType=CHAR},
+      </if>
+      <if test="record.deep != null">
+        deep = #{record.deep,jdbcType=INTEGER},
+      </if>
+      <if test="record.characterName != null">
+        character_name = #{record.characterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iterationVersion != null">
+        iteration_version = #{record.iterationVersion,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.milestoneId != null">
+        milestone_id = #{record.milestoneId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.writerId != null">
+        writer_id = #{record.writerId,jdbcType=CHAR},
+      </if>
+      <if test="record.nextNode != null">
+        next_node = #{record.nextNode,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auxStatus != null">
+        aux_status = #{record.auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobitemType != null">
+        jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectType != null">
+        project_type = #{record.projectType,jdbcType=CHAR},
+      </if>
+      <if test="record.stage != null">
+        stage = #{record.stage,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandListStr != null">
+        demand_list_str = #{record.demandListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mergedCharacterIdStr != null">
+        merged_character_id_str = #{record.mergedCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIdListStr != null">
+        module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.setupedTime != null">
+        setuped_time = #{record.setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planCompleteTime != null">
+        plan_complete_time = #{record.planCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devManhour != null">
+        dev_manhour = #{record.devManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.devManhourApproved != null">
+        dev_manhour_approved = #{record.devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testManhour != null">
+        test_manhour = #{record.testManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testManhourApproved != null">
+        test_manhour_approved = #{record.testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialFee != null">
+        material_fee = #{record.materialFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialFeeApproved != null">
+        material_fee_approved = #{record.materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="record.testFee != null">
+        test_fee = #{record.testFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.powerFee != null">
+        power_fee = #{record.powerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conferenceFee != null">
+        conference_fee = #{record.conferenceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.businessFee != null">
+        business_fee = #{record.businessFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cooperationFee != null">
+        cooperation_fee = #{record.cooperationFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propertyFee != null">
+        property_fee = #{record.propertyFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.laborFee != null">
+        labor_fee = #{record.laborFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consultingFee != null">
+        consulting_fee = #{record.consultingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managementFee != null">
+        management_fee = #{record.managementFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumOtherFee != null">
+        sum_other_fee = #{record.sumOtherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.budget != null">
+        budget = #{record.budget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.versionUpdate != null">
+        version_update = #{record.versionUpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mmStatus != null">
+        mm_status = #{record.mmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bomStatus != null">
+        bom_status = #{record.bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bomVersion != null">
+        bom_version = #{record.bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="record.outCharacterId != null">
+        out_character_id = #{record.outCharacterId,jdbcType=CHAR},
+      </if>
+      <if test="record.cbbProjectId != null">
+        cbb_project_id = #{record.cbbProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_character3
+    set id = #{record.id,jdbcType=CHAR},
+      character_serial = #{record.characterSerial,jdbcType=CHAR},
+      parent = #{record.parent,jdbcType=CHAR},
+      deep = #{record.deep,jdbcType=INTEGER},
+      character_name = #{record.characterName,jdbcType=VARCHAR},
+      iteration_version = #{record.iterationVersion,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      milestone_id = #{record.milestoneId,jdbcType=VARCHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      writer_id = #{record.writerId,jdbcType=CHAR},
+      next_node = #{record.nextNode,jdbcType=CHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      aux_status = #{record.auxStatus,jdbcType=VARCHAR},
+      jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      project_type = #{record.projectType,jdbcType=CHAR},
+      stage = #{record.stage,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      demand_list_str = #{record.demandListStr,jdbcType=VARCHAR},
+      merged_character_id_str = #{record.mergedCharacterIdStr,jdbcType=VARCHAR},
+      module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      setuped_time = #{record.setupedTime,jdbcType=TIMESTAMP},
+      plan_complete_time = #{record.planCompleteTime,jdbcType=TIMESTAMP},
+      dev_manhour = #{record.devManhour,jdbcType=DOUBLE},
+      dev_manhour_approved = #{record.devManhourApproved,jdbcType=DOUBLE},
+      test_manhour = #{record.testManhour,jdbcType=DOUBLE},
+      test_manhour_approved = #{record.testManhourApproved,jdbcType=DOUBLE},
+      material_fee = #{record.materialFee,jdbcType=DECIMAL},
+      material_fee_approved = #{record.materialFeeApproved,jdbcType=DECIMAL},
+      test_fee = #{record.testFee,jdbcType=DECIMAL},
+      power_fee = #{record.powerFee,jdbcType=DECIMAL},
+      conference_fee = #{record.conferenceFee,jdbcType=DECIMAL},
+      business_fee = #{record.businessFee,jdbcType=DECIMAL},
+      cooperation_fee = #{record.cooperationFee,jdbcType=DECIMAL},
+      property_fee = #{record.propertyFee,jdbcType=DECIMAL},
+      labor_fee = #{record.laborFee,jdbcType=DECIMAL},
+      consulting_fee = #{record.consultingFee,jdbcType=DECIMAL},
+      management_fee = #{record.managementFee,jdbcType=DECIMAL},
+      sum_other_fee = #{record.sumOtherFee,jdbcType=DECIMAL},
+      budget = #{record.budget,jdbcType=DECIMAL},
+      version_update = #{record.versionUpdate,jdbcType=VARCHAR},
+      mm_status = #{record.mmStatus,jdbcType=VARCHAR},
+      bom_status = #{record.bomStatus,jdbcType=VARCHAR},
+      bom_version = #{record.bomVersion,jdbcType=INTEGER},
+      out_character_id = #{record.outCharacterId,jdbcType=CHAR},
+      cbb_project_id = #{record.cbbProjectId,jdbcType=CHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCharacter3">
+    update rdms_character3
+    <set>
+      <if test="characterSerial != null">
+        character_serial = #{characterSerial,jdbcType=CHAR},
+      </if>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        deep = #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="characterName != null">
+        character_name = #{characterName,jdbcType=VARCHAR},
+      </if>
+      <if test="iterationVersion != null">
+        iteration_version = #{iterationVersion,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="milestoneId != null">
+        milestone_id = #{milestoneId,jdbcType=VARCHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="writerId != null">
+        writer_id = #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        next_node = #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auxStatus != null">
+        aux_status = #{auxStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="projectType != null">
+        project_type = #{projectType,jdbcType=CHAR},
+      </if>
+      <if test="stage != null">
+        stage = #{stage,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="demandListStr != null">
+        demand_list_str = #{demandListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="mergedCharacterIdStr != null">
+        merged_character_id_str = #{mergedCharacterIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="setupedTime != null">
+        setuped_time = #{setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planCompleteTime != null">
+        plan_complete_time = #{planCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devManhour != null">
+        dev_manhour = #{devManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="devManhourApproved != null">
+        dev_manhour_approved = #{devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhour != null">
+        test_manhour = #{testManhour,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourApproved != null">
+        test_manhour_approved = #{testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFee != null">
+        material_fee = #{materialFee,jdbcType=DECIMAL},
+      </if>
+      <if test="materialFeeApproved != null">
+        material_fee_approved = #{materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="testFee != null">
+        test_fee = #{testFee,jdbcType=DECIMAL},
+      </if>
+      <if test="powerFee != null">
+        power_fee = #{powerFee,jdbcType=DECIMAL},
+      </if>
+      <if test="conferenceFee != null">
+        conference_fee = #{conferenceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="businessFee != null">
+        business_fee = #{businessFee,jdbcType=DECIMAL},
+      </if>
+      <if test="cooperationFee != null">
+        cooperation_fee = #{cooperationFee,jdbcType=DECIMAL},
+      </if>
+      <if test="propertyFee != null">
+        property_fee = #{propertyFee,jdbcType=DECIMAL},
+      </if>
+      <if test="laborFee != null">
+        labor_fee = #{laborFee,jdbcType=DECIMAL},
+      </if>
+      <if test="consultingFee != null">
+        consulting_fee = #{consultingFee,jdbcType=DECIMAL},
+      </if>
+      <if test="managementFee != null">
+        management_fee = #{managementFee,jdbcType=DECIMAL},
+      </if>
+      <if test="sumOtherFee != null">
+        sum_other_fee = #{sumOtherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="budget != null">
+        budget = #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="versionUpdate != null">
+        version_update = #{versionUpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="mmStatus != null">
+        mm_status = #{mmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomStatus != null">
+        bom_status = #{bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomVersion != null">
+        bom_version = #{bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="outCharacterId != null">
+        out_character_id = #{outCharacterId,jdbcType=CHAR},
+      </if>
+      <if test="cbbProjectId != null">
+        cbb_project_id = #{cbbProjectId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCharacter3">
+    update rdms_character3
+    set character_serial = #{characterSerial,jdbcType=CHAR},
+      parent = #{parent,jdbcType=CHAR},
+      deep = #{deep,jdbcType=INTEGER},
+      character_name = #{characterName,jdbcType=VARCHAR},
+      iteration_version = #{iterationVersion,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=CHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      milestone_id = #{milestoneId,jdbcType=VARCHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      writer_id = #{writerId,jdbcType=CHAR},
+      next_node = #{nextNode,jdbcType=CHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      aux_status = #{auxStatus,jdbcType=VARCHAR},
+      jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      project_type = #{projectType,jdbcType=CHAR},
+      stage = #{stage,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      demand_list_str = #{demandListStr,jdbcType=VARCHAR},
+      merged_character_id_str = #{mergedCharacterIdStr,jdbcType=VARCHAR},
+      module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      setuped_time = #{setupedTime,jdbcType=TIMESTAMP},
+      plan_complete_time = #{planCompleteTime,jdbcType=TIMESTAMP},
+      dev_manhour = #{devManhour,jdbcType=DOUBLE},
+      dev_manhour_approved = #{devManhourApproved,jdbcType=DOUBLE},
+      test_manhour = #{testManhour,jdbcType=DOUBLE},
+      test_manhour_approved = #{testManhourApproved,jdbcType=DOUBLE},
+      material_fee = #{materialFee,jdbcType=DECIMAL},
+      material_fee_approved = #{materialFeeApproved,jdbcType=DECIMAL},
+      test_fee = #{testFee,jdbcType=DECIMAL},
+      power_fee = #{powerFee,jdbcType=DECIMAL},
+      conference_fee = #{conferenceFee,jdbcType=DECIMAL},
+      business_fee = #{businessFee,jdbcType=DECIMAL},
+      cooperation_fee = #{cooperationFee,jdbcType=DECIMAL},
+      property_fee = #{propertyFee,jdbcType=DECIMAL},
+      labor_fee = #{laborFee,jdbcType=DECIMAL},
+      consulting_fee = #{consultingFee,jdbcType=DECIMAL},
+      management_fee = #{managementFee,jdbcType=DECIMAL},
+      sum_other_fee = #{sumOtherFee,jdbcType=DECIMAL},
+      budget = #{budget,jdbcType=DECIMAL},
+      version_update = #{versionUpdate,jdbcType=VARCHAR},
+      mm_status = #{mmStatus,jdbcType=VARCHAR},
+      bom_status = #{bomStatus,jdbcType=VARCHAR},
+      bom_version = #{bomVersion,jdbcType=INTEGER},
+      out_character_id = #{outCharacterId,jdbcType=CHAR},
+      cbb_project_id = #{cbbProjectId,jdbcType=CHAR},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

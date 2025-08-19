@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsProjectSubprojectMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsProjectSubproject">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="parent" jdbcType="CHAR" property="parent" />
+    <result column="deep" jdbcType="INTEGER" property="deep" />
+    <result column="project_code" jdbcType="VARCHAR" property="projectCode" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="supervise" jdbcType="CHAR" property="supervise" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="test_manager_id" jdbcType="CHAR" property="testManagerId" />
+    <result column="key_member_list_str" jdbcType="VARCHAR" property="keyMemberListStr" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="budget" jdbcType="DECIMAL" property="budget" />
+    <result column="add_charge" jdbcType="DECIMAL" property="addCharge" />
+    <result column="charge_rate" jdbcType="DECIMAL" property="chargeRate" />
+    <result column="incentive_policy" jdbcType="VARCHAR" property="incentivePolicy" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="rd_type" jdbcType="VARCHAR" property="rdType" />
+    <result column="creator_id" jdbcType="CHAR" property="creatorId" />
+    <result column="dev_version" jdbcType="DECIMAL" property="devVersion" />
+    <result column="target_milestone_id" jdbcType="CHAR" property="targetMilestoneId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="setuped_time" jdbcType="TIMESTAMP" property="setupedTime" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="capital_source" jdbcType="VARCHAR" property="capitalSource" />
+    <result column="module_id_list_str" jdbcType="VARCHAR" property="moduleIdListStr" />
+    <result column="bom_status" jdbcType="VARCHAR" property="bomStatus" />
+    <result column="bom_version" jdbcType="INTEGER" property="bomVersion" />
+    <result column="out_source_status" jdbcType="VARCHAR" property="outSourceStatus" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent, deep, project_code, pre_project_id, project_id, customer_id, `label`, 
+    introduce, supervise, product_manager_id, project_manager_id, test_manager_id, key_member_list_str, 
+    file_list_str, budget, add_charge, charge_rate, incentive_policy, `status`, rd_type, 
+    creator_id, dev_version, target_milestone_id, create_time, setuped_time, release_time, 
+    `type`, capital_source, module_id_list_str, bom_status, bom_version, out_source_status, 
+    deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsProjectSubprojectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_project_subproject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_project_subproject
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_project_subproject
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsProjectSubprojectExample">
+    delete from rdms_project_subproject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsProjectSubproject">
+    insert into rdms_project_subproject (id, parent, deep, project_code, 
+      pre_project_id, project_id, customer_id, 
+      `label`, introduce, supervise, 
+      product_manager_id, project_manager_id, test_manager_id, 
+      key_member_list_str, file_list_str, budget, 
+      add_charge, charge_rate, incentive_policy, 
+      `status`, rd_type, creator_id, 
+      dev_version, target_milestone_id, create_time, 
+      setuped_time, release_time, `type`, 
+      capital_source, module_id_list_str, bom_status, 
+      bom_version, out_source_status, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{parent,jdbcType=CHAR}, #{deep,jdbcType=INTEGER}, #{projectCode,jdbcType=VARCHAR}, 
+      #{preProjectId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, 
+      #{label,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{supervise,jdbcType=CHAR}, 
+      #{productManagerId,jdbcType=CHAR}, #{projectManagerId,jdbcType=CHAR}, #{testManagerId,jdbcType=CHAR}, 
+      #{keyMemberListStr,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, #{budget,jdbcType=DECIMAL}, 
+      #{addCharge,jdbcType=DECIMAL}, #{chargeRate,jdbcType=DECIMAL}, #{incentivePolicy,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{rdType,jdbcType=VARCHAR}, #{creatorId,jdbcType=CHAR}, 
+      #{devVersion,jdbcType=DECIMAL}, #{targetMilestoneId,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{setupedTime,jdbcType=TIMESTAMP}, #{releaseTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
+      #{capitalSource,jdbcType=VARCHAR}, #{moduleIdListStr,jdbcType=VARCHAR}, #{bomStatus,jdbcType=VARCHAR}, 
+      #{bomVersion,jdbcType=INTEGER}, #{outSourceStatus,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsProjectSubproject">
+    insert into rdms_project_subproject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parent != null">
+        parent,
+      </if>
+      <if test="deep != null">
+        deep,
+      </if>
+      <if test="projectCode != null">
+        project_code,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="label != null">
+        `label`,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="supervise != null">
+        supervise,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id,
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id,
+      </if>
+      <if test="keyMemberListStr != null">
+        key_member_list_str,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="budget != null">
+        budget,
+      </if>
+      <if test="addCharge != null">
+        add_charge,
+      </if>
+      <if test="chargeRate != null">
+        charge_rate,
+      </if>
+      <if test="incentivePolicy != null">
+        incentive_policy,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="rdType != null">
+        rd_type,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="devVersion != null">
+        dev_version,
+      </if>
+      <if test="targetMilestoneId != null">
+        target_milestone_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="setupedTime != null">
+        setuped_time,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="capitalSource != null">
+        capital_source,
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str,
+      </if>
+      <if test="bomStatus != null">
+        bom_status,
+      </if>
+      <if test="bomVersion != null">
+        bom_version,
+      </if>
+      <if test="outSourceStatus != null">
+        out_source_status,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null">
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="supervise != null">
+        #{supervise,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="keyMemberListStr != null">
+        #{keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null">
+        #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="addCharge != null">
+        #{addCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeRate != null">
+        #{chargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="incentivePolicy != null">
+        #{incentivePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rdType != null">
+        #{rdType,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=CHAR},
+      </if>
+      <if test="devVersion != null">
+        #{devVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="targetMilestoneId != null">
+        #{targetMilestoneId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="setupedTime != null">
+        #{setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalSource != null">
+        #{capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="bomStatus != null">
+        #{bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomVersion != null">
+        #{bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="outSourceStatus != null">
+        #{outSourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsProjectSubprojectExample" resultType="java.lang.Long">
+    select count(*) from rdms_project_subproject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_project_subproject
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.parent != null">
+        parent = #{record.parent,jdbcType=CHAR},
+      </if>
+      <if test="record.deep != null">
+        deep = #{record.deep,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectCode != null">
+        project_code = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.label != null">
+        `label` = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null">
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supervise != null">
+        supervise = #{record.supervise,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectManagerId != null">
+        project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.testManagerId != null">
+        test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.keyMemberListStr != null">
+        key_member_list_str = #{record.keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.budget != null">
+        budget = #{record.budget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.addCharge != null">
+        add_charge = #{record.addCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargeRate != null">
+        charge_rate = #{record.chargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.incentivePolicy != null">
+        incentive_policy = #{record.incentivePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rdType != null">
+        rd_type = #{record.rdType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null">
+        creator_id = #{record.creatorId,jdbcType=CHAR},
+      </if>
+      <if test="record.devVersion != null">
+        dev_version = #{record.devVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.targetMilestoneId != null">
+        target_milestone_id = #{record.targetMilestoneId,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.setupedTime != null">
+        setuped_time = #{record.setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releaseTime != null">
+        release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capitalSource != null">
+        capital_source = #{record.capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIdListStr != null">
+        module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bomStatus != null">
+        bom_status = #{record.bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bomVersion != null">
+        bom_version = #{record.bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="record.outSourceStatus != null">
+        out_source_status = #{record.outSourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_project_subproject
+    set id = #{record.id,jdbcType=CHAR},
+      parent = #{record.parent,jdbcType=CHAR},
+      deep = #{record.deep,jdbcType=INTEGER},
+      project_code = #{record.projectCode,jdbcType=VARCHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      `label` = #{record.label,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      supervise = #{record.supervise,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{record.testManagerId,jdbcType=CHAR},
+      key_member_list_str = #{record.keyMemberListStr,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      budget = #{record.budget,jdbcType=DECIMAL},
+      add_charge = #{record.addCharge,jdbcType=DECIMAL},
+      charge_rate = #{record.chargeRate,jdbcType=DECIMAL},
+      incentive_policy = #{record.incentivePolicy,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      rd_type = #{record.rdType,jdbcType=VARCHAR},
+      creator_id = #{record.creatorId,jdbcType=CHAR},
+      dev_version = #{record.devVersion,jdbcType=DECIMAL},
+      target_milestone_id = #{record.targetMilestoneId,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      setuped_time = #{record.setupedTime,jdbcType=TIMESTAMP},
+      release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      capital_source = #{record.capitalSource,jdbcType=VARCHAR},
+      module_id_list_str = #{record.moduleIdListStr,jdbcType=VARCHAR},
+      bom_status = #{record.bomStatus,jdbcType=VARCHAR},
+      bom_version = #{record.bomVersion,jdbcType=INTEGER},
+      out_source_status = #{record.outSourceStatus,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsProjectSubproject">
+    update rdms_project_subproject
+    <set>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        deep = #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null">
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="label != null">
+        `label` = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="supervise != null">
+        supervise = #{supervise,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="testManagerId != null">
+        test_manager_id = #{testManagerId,jdbcType=CHAR},
+      </if>
+      <if test="keyMemberListStr != null">
+        key_member_list_str = #{keyMemberListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null">
+        budget = #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="addCharge != null">
+        add_charge = #{addCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeRate != null">
+        charge_rate = #{chargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="incentivePolicy != null">
+        incentive_policy = #{incentivePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rdType != null">
+        rd_type = #{rdType,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=CHAR},
+      </if>
+      <if test="devVersion != null">
+        dev_version = #{devVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="targetMilestoneId != null">
+        target_milestone_id = #{targetMilestoneId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="setupedTime != null">
+        setuped_time = #{setupedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalSource != null">
+        capital_source = #{capitalSource,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIdListStr != null">
+        module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="bomStatus != null">
+        bom_status = #{bomStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bomVersion != null">
+        bom_version = #{bomVersion,jdbcType=INTEGER},
+      </if>
+      <if test="outSourceStatus != null">
+        out_source_status = #{outSourceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsProjectSubproject">
+    update rdms_project_subproject
+    set parent = #{parent,jdbcType=CHAR},
+      deep = #{deep,jdbcType=INTEGER},
+      project_code = #{projectCode,jdbcType=VARCHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      `label` = #{label,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      supervise = #{supervise,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      test_manager_id = #{testManagerId,jdbcType=CHAR},
+      key_member_list_str = #{keyMemberListStr,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      budget = #{budget,jdbcType=DECIMAL},
+      add_charge = #{addCharge,jdbcType=DECIMAL},
+      charge_rate = #{chargeRate,jdbcType=DECIMAL},
+      incentive_policy = #{incentivePolicy,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      rd_type = #{rdType,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=CHAR},
+      dev_version = #{devVersion,jdbcType=DECIMAL},
+      target_milestone_id = #{targetMilestoneId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      setuped_time = #{setupedTime,jdbcType=TIMESTAMP},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      `type` = #{type,jdbcType=VARCHAR},
+      capital_source = #{capitalSource,jdbcType=VARCHAR},
+      module_id_list_str = #{moduleIdListStr,jdbcType=VARCHAR},
+      bom_status = #{bomStatus,jdbcType=VARCHAR},
+      bom_version = #{bomVersion,jdbcType=INTEGER},
+      out_source_status = #{outSourceStatus,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

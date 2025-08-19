@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsBudgetExeMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsBudgetExe">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="item_id" jdbcType="CHAR" property="itemId" />
+    <result column="parent_id" jdbcType="CHAR" property="parentId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="doc_type" jdbcType="VARCHAR" property="docType" />
+    <result column="review_desc" jdbcType="VARCHAR" property="reviewDesc" />
+    <result column="review_leader_id" jdbcType="CHAR" property="reviewLeaderId" />
+    <result column="review_coo_id_str" jdbcType="VARCHAR" property="reviewCooIdStr" />
+    <result column="dev_manhour_approved" jdbcType="DOUBLE" property="devManhourApproved" />
+    <result column="test_manhour_approved" jdbcType="DOUBLE" property="testManhourApproved" />
+    <result column="material_fee_approved" jdbcType="DECIMAL" property="materialFeeApproved" />
+    <result column="other_fee_approved" jdbcType="DECIMAL" property="otherFeeApproved" />
+    <result column="sum_budget_approved" jdbcType="DECIMAL" property="sumBudgetApproved" />
+    <result column="dev_manhour_active" jdbcType="DOUBLE" property="devManhourActive" />
+    <result column="test_manhour_active" jdbcType="DOUBLE" property="testManhourActive" />
+    <result column="material_fee_active" jdbcType="DECIMAL" property="materialFeeActive" />
+    <result column="other_fee_active" jdbcType="DECIMAL" property="otherFeeActive" />
+    <result column="sum_budget_active" jdbcType="DECIMAL" property="sumBudgetActive" />
+    <result column="budget_rate" jdbcType="DECIMAL" property="budgetRate" />
+    <result column="submit_file_id_list_str" jdbcType="VARCHAR" property="submitFileIdListStr" />
+    <result column="review_file_id_list_str" jdbcType="VARCHAR" property="reviewFileIdListStr" />
+    <result column="children_id_list_str" jdbcType="VARCHAR" property="childrenIdListStr" />
+    <result column="child_subproject_id_list_str" jdbcType="VARCHAR" property="childSubprojectIdListStr" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, item_id, parent_id, item_name, doc_type, review_desc, review_leader_id, review_coo_id_str, 
+    dev_manhour_approved, test_manhour_approved, material_fee_approved, other_fee_approved, 
+    sum_budget_approved, dev_manhour_active, test_manhour_active, material_fee_active, 
+    other_fee_active, sum_budget_active, budget_rate, submit_file_id_list_str, review_file_id_list_str, 
+    children_id_list_str, child_subproject_id_list_str, `result`, review_time, update_time, 
+    create_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsBudgetExeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_budget_exe
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_budget_exe
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_budget_exe
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsBudgetExeExample">
+    delete from rdms_budget_exe
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsBudgetExe">
+    insert into rdms_budget_exe (id, item_id, parent_id, 
+      item_name, doc_type, review_desc, 
+      review_leader_id, review_coo_id_str, dev_manhour_approved, 
+      test_manhour_approved, material_fee_approved, 
+      other_fee_approved, sum_budget_approved, dev_manhour_active, 
+      test_manhour_active, material_fee_active, other_fee_active, 
+      sum_budget_active, budget_rate, submit_file_id_list_str, 
+      review_file_id_list_str, children_id_list_str, 
+      child_subproject_id_list_str, `result`, review_time, 
+      update_time, create_time, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{itemId,jdbcType=CHAR}, #{parentId,jdbcType=CHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{docType,jdbcType=VARCHAR}, #{reviewDesc,jdbcType=VARCHAR}, 
+      #{reviewLeaderId,jdbcType=CHAR}, #{reviewCooIdStr,jdbcType=VARCHAR}, #{devManhourApproved,jdbcType=DOUBLE}, 
+      #{testManhourApproved,jdbcType=DOUBLE}, #{materialFeeApproved,jdbcType=DECIMAL}, 
+      #{otherFeeApproved,jdbcType=DECIMAL}, #{sumBudgetApproved,jdbcType=DECIMAL}, #{devManhourActive,jdbcType=DOUBLE}, 
+      #{testManhourActive,jdbcType=DOUBLE}, #{materialFeeActive,jdbcType=DECIMAL}, #{otherFeeActive,jdbcType=DECIMAL}, 
+      #{sumBudgetActive,jdbcType=DECIMAL}, #{budgetRate,jdbcType=DECIMAL}, #{submitFileIdListStr,jdbcType=VARCHAR}, 
+      #{reviewFileIdListStr,jdbcType=VARCHAR}, #{childrenIdListStr,jdbcType=VARCHAR}, 
+      #{childSubprojectIdListStr,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{reviewTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsBudgetExe">
+    insert into rdms_budget_exe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="docType != null">
+        doc_type,
+      </if>
+      <if test="reviewDesc != null">
+        review_desc,
+      </if>
+      <if test="reviewLeaderId != null">
+        review_leader_id,
+      </if>
+      <if test="reviewCooIdStr != null">
+        review_coo_id_str,
+      </if>
+      <if test="devManhourApproved != null">
+        dev_manhour_approved,
+      </if>
+      <if test="testManhourApproved != null">
+        test_manhour_approved,
+      </if>
+      <if test="materialFeeApproved != null">
+        material_fee_approved,
+      </if>
+      <if test="otherFeeApproved != null">
+        other_fee_approved,
+      </if>
+      <if test="sumBudgetApproved != null">
+        sum_budget_approved,
+      </if>
+      <if test="devManhourActive != null">
+        dev_manhour_active,
+      </if>
+      <if test="testManhourActive != null">
+        test_manhour_active,
+      </if>
+      <if test="materialFeeActive != null">
+        material_fee_active,
+      </if>
+      <if test="otherFeeActive != null">
+        other_fee_active,
+      </if>
+      <if test="sumBudgetActive != null">
+        sum_budget_active,
+      </if>
+      <if test="budgetRate != null">
+        budget_rate,
+      </if>
+      <if test="submitFileIdListStr != null">
+        submit_file_id_list_str,
+      </if>
+      <if test="reviewFileIdListStr != null">
+        review_file_id_list_str,
+      </if>
+      <if test="childrenIdListStr != null">
+        children_id_list_str,
+      </if>
+      <if test="childSubprojectIdListStr != null">
+        child_subproject_id_list_str,
+      </if>
+      <if test="result != null">
+        `result`,
+      </if>
+      <if test="reviewTime != null">
+        review_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null">
+        #{docType,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDesc != null">
+        #{reviewDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewLeaderId != null">
+        #{reviewLeaderId,jdbcType=CHAR},
+      </if>
+      <if test="reviewCooIdStr != null">
+        #{reviewCooIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="devManhourApproved != null">
+        #{devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourApproved != null">
+        #{testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFeeApproved != null">
+        #{materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApproved != null">
+        #{otherFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBudgetApproved != null">
+        #{sumBudgetApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="devManhourActive != null">
+        #{devManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourActive != null">
+        #{testManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFeeActive != null">
+        #{materialFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeActive != null">
+        #{otherFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBudgetActive != null">
+        #{sumBudgetActive,jdbcType=DECIMAL},
+      </if>
+      <if test="budgetRate != null">
+        #{budgetRate,jdbcType=DECIMAL},
+      </if>
+      <if test="submitFileIdListStr != null">
+        #{submitFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewFileIdListStr != null">
+        #{reviewFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="childrenIdListStr != null">
+        #{childrenIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="childSubprojectIdListStr != null">
+        #{childSubprojectIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsBudgetExeExample" resultType="java.lang.Long">
+    select count(*) from rdms_budget_exe
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_budget_exe
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=CHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=CHAR},
+      </if>
+      <if test="record.itemName != null">
+        item_name = #{record.itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docType != null">
+        doc_type = #{record.docType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewDesc != null">
+        review_desc = #{record.reviewDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewLeaderId != null">
+        review_leader_id = #{record.reviewLeaderId,jdbcType=CHAR},
+      </if>
+      <if test="record.reviewCooIdStr != null">
+        review_coo_id_str = #{record.reviewCooIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devManhourApproved != null">
+        dev_manhour_approved = #{record.devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testManhourApproved != null">
+        test_manhour_approved = #{record.testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialFeeApproved != null">
+        material_fee_approved = #{record.materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeApproved != null">
+        other_fee_approved = #{record.otherFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumBudgetApproved != null">
+        sum_budget_approved = #{record.sumBudgetApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="record.devManhourActive != null">
+        dev_manhour_active = #{record.devManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="record.testManhourActive != null">
+        test_manhour_active = #{record.testManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialFeeActive != null">
+        material_fee_active = #{record.materialFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otherFeeActive != null">
+        other_fee_active = #{record.otherFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumBudgetActive != null">
+        sum_budget_active = #{record.sumBudgetActive,jdbcType=DECIMAL},
+      </if>
+      <if test="record.budgetRate != null">
+        budget_rate = #{record.budgetRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.submitFileIdListStr != null">
+        submit_file_id_list_str = #{record.submitFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewFileIdListStr != null">
+        review_file_id_list_str = #{record.reviewFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childrenIdListStr != null">
+        children_id_list_str = #{record.childrenIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childSubprojectIdListStr != null">
+        child_subproject_id_list_str = #{record.childSubprojectIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null">
+        `result` = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewTime != null">
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_budget_exe
+    set id = #{record.id,jdbcType=CHAR},
+      item_id = #{record.itemId,jdbcType=CHAR},
+      parent_id = #{record.parentId,jdbcType=CHAR},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      doc_type = #{record.docType,jdbcType=VARCHAR},
+      review_desc = #{record.reviewDesc,jdbcType=VARCHAR},
+      review_leader_id = #{record.reviewLeaderId,jdbcType=CHAR},
+      review_coo_id_str = #{record.reviewCooIdStr,jdbcType=VARCHAR},
+      dev_manhour_approved = #{record.devManhourApproved,jdbcType=DOUBLE},
+      test_manhour_approved = #{record.testManhourApproved,jdbcType=DOUBLE},
+      material_fee_approved = #{record.materialFeeApproved,jdbcType=DECIMAL},
+      other_fee_approved = #{record.otherFeeApproved,jdbcType=DECIMAL},
+      sum_budget_approved = #{record.sumBudgetApproved,jdbcType=DECIMAL},
+      dev_manhour_active = #{record.devManhourActive,jdbcType=DOUBLE},
+      test_manhour_active = #{record.testManhourActive,jdbcType=DOUBLE},
+      material_fee_active = #{record.materialFeeActive,jdbcType=DECIMAL},
+      other_fee_active = #{record.otherFeeActive,jdbcType=DECIMAL},
+      sum_budget_active = #{record.sumBudgetActive,jdbcType=DECIMAL},
+      budget_rate = #{record.budgetRate,jdbcType=DECIMAL},
+      submit_file_id_list_str = #{record.submitFileIdListStr,jdbcType=VARCHAR},
+      review_file_id_list_str = #{record.reviewFileIdListStr,jdbcType=VARCHAR},
+      children_id_list_str = #{record.childrenIdListStr,jdbcType=VARCHAR},
+      child_subproject_id_list_str = #{record.childSubprojectIdListStr,jdbcType=VARCHAR},
+      `result` = #{record.result,jdbcType=VARCHAR},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsBudgetExe">
+    update rdms_budget_exe
+    <set>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null">
+        doc_type = #{docType,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDesc != null">
+        review_desc = #{reviewDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewLeaderId != null">
+        review_leader_id = #{reviewLeaderId,jdbcType=CHAR},
+      </if>
+      <if test="reviewCooIdStr != null">
+        review_coo_id_str = #{reviewCooIdStr,jdbcType=VARCHAR},
+      </if>
+      <if test="devManhourApproved != null">
+        dev_manhour_approved = #{devManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourApproved != null">
+        test_manhour_approved = #{testManhourApproved,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFeeApproved != null">
+        material_fee_approved = #{materialFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeApproved != null">
+        other_fee_approved = #{otherFeeApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBudgetApproved != null">
+        sum_budget_approved = #{sumBudgetApproved,jdbcType=DECIMAL},
+      </if>
+      <if test="devManhourActive != null">
+        dev_manhour_active = #{devManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="testManhourActive != null">
+        test_manhour_active = #{testManhourActive,jdbcType=DOUBLE},
+      </if>
+      <if test="materialFeeActive != null">
+        material_fee_active = #{materialFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFeeActive != null">
+        other_fee_active = #{otherFeeActive,jdbcType=DECIMAL},
+      </if>
+      <if test="sumBudgetActive != null">
+        sum_budget_active = #{sumBudgetActive,jdbcType=DECIMAL},
+      </if>
+      <if test="budgetRate != null">
+        budget_rate = #{budgetRate,jdbcType=DECIMAL},
+      </if>
+      <if test="submitFileIdListStr != null">
+        submit_file_id_list_str = #{submitFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewFileIdListStr != null">
+        review_file_id_list_str = #{reviewFileIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="childrenIdListStr != null">
+        children_id_list_str = #{childrenIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="childSubprojectIdListStr != null">
+        child_subproject_id_list_str = #{childSubprojectIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        `result` = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsBudgetExe">
+    update rdms_budget_exe
+    set item_id = #{itemId,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      doc_type = #{docType,jdbcType=VARCHAR},
+      review_desc = #{reviewDesc,jdbcType=VARCHAR},
+      review_leader_id = #{reviewLeaderId,jdbcType=CHAR},
+      review_coo_id_str = #{reviewCooIdStr,jdbcType=VARCHAR},
+      dev_manhour_approved = #{devManhourApproved,jdbcType=DOUBLE},
+      test_manhour_approved = #{testManhourApproved,jdbcType=DOUBLE},
+      material_fee_approved = #{materialFeeApproved,jdbcType=DECIMAL},
+      other_fee_approved = #{otherFeeApproved,jdbcType=DECIMAL},
+      sum_budget_approved = #{sumBudgetApproved,jdbcType=DECIMAL},
+      dev_manhour_active = #{devManhourActive,jdbcType=DOUBLE},
+      test_manhour_active = #{testManhourActive,jdbcType=DOUBLE},
+      material_fee_active = #{materialFeeActive,jdbcType=DECIMAL},
+      other_fee_active = #{otherFeeActive,jdbcType=DECIMAL},
+      sum_budget_active = #{sumBudgetActive,jdbcType=DECIMAL},
+      budget_rate = #{budgetRate,jdbcType=DECIMAL},
+      submit_file_id_list_str = #{submitFileIdListStr,jdbcType=VARCHAR},
+      review_file_id_list_str = #{reviewFileIdListStr,jdbcType=VARCHAR},
+      children_id_list_str = #{childrenIdListStr,jdbcType=VARCHAR},
+      child_subproject_id_list_str = #{childSubprojectIdListStr,jdbcType=VARCHAR},
+      `result` = #{result,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsJobItemProcessMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsJobItemProcess">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="job_item_id" jdbcType="CHAR" property="jobItemId" />
+    <result column="executor_id" jdbcType="CHAR" property="executorId" />
+    <result column="deep" jdbcType="INTEGER" property="deep" />
+    <result column="job_description" jdbcType="VARCHAR" property="jobDescription" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="next_node" jdbcType="CHAR" property="nextNode" />
+    <result column="actual_submission_time" jdbcType="TIMESTAMP" property="actualSubmissionTime" />
+    <result column="process_status" jdbcType="CHAR" property="processStatus" />
+    <result column="character_id_list_str" jdbcType="VARCHAR" property="characterIdListStr" />
+    <result column="approval_status" jdbcType="CHAR" property="approvalStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, job_item_id, executor_id, deep, job_description, file_list_str, next_node, actual_submission_time, 
+    process_status, character_id_list_str, approval_status, create_time, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsJobItemProcessExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_job_item_process
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_job_item_process
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_job_item_process
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsJobItemProcessExample">
+    delete from rdms_job_item_process
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsJobItemProcess">
+    insert into rdms_job_item_process (id, job_item_id, executor_id, 
+      deep, job_description, file_list_str, 
+      next_node, actual_submission_time, process_status, 
+      character_id_list_str, approval_status, create_time, 
+      deleted)
+    values (#{id,jdbcType=CHAR}, #{jobItemId,jdbcType=CHAR}, #{executorId,jdbcType=CHAR}, 
+      #{deep,jdbcType=INTEGER}, #{jobDescription,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, 
+      #{nextNode,jdbcType=CHAR}, #{actualSubmissionTime,jdbcType=TIMESTAMP}, #{processStatus,jdbcType=CHAR}, 
+      #{characterIdListStr,jdbcType=VARCHAR}, #{approvalStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsJobItemProcess">
+    insert into rdms_job_item_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobItemId != null">
+        job_item_id,
+      </if>
+      <if test="executorId != null">
+        executor_id,
+      </if>
+      <if test="deep != null">
+        deep,
+      </if>
+      <if test="jobDescription != null">
+        job_description,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="nextNode != null">
+        next_node,
+      </if>
+      <if test="actualSubmissionTime != null">
+        actual_submission_time,
+      </if>
+      <if test="processStatus != null">
+        process_status,
+      </if>
+      <if test="characterIdListStr != null">
+        character_id_list_str,
+      </if>
+      <if test="approvalStatus != null">
+        approval_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="jobItemId != null">
+        #{jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="jobDescription != null">
+        #{jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="nextNode != null">
+        #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="actualSubmissionTime != null">
+        #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processStatus != null">
+        #{processStatus,jdbcType=CHAR},
+      </if>
+      <if test="characterIdListStr != null">
+        #{characterIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStatus != null">
+        #{approvalStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsJobItemProcessExample" resultType="java.lang.Long">
+    select count(*) from rdms_job_item_process
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_job_item_process
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.jobItemId != null">
+        job_item_id = #{record.jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="record.executorId != null">
+        executor_id = #{record.executorId,jdbcType=CHAR},
+      </if>
+      <if test="record.deep != null">
+        deep = #{record.deep,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobDescription != null">
+        job_description = #{record.jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextNode != null">
+        next_node = #{record.nextNode,jdbcType=CHAR},
+      </if>
+      <if test="record.actualSubmissionTime != null">
+        actual_submission_time = #{record.actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.processStatus != null">
+        process_status = #{record.processStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.characterIdListStr != null">
+        character_id_list_str = #{record.characterIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalStatus != null">
+        approval_status = #{record.approvalStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_job_item_process
+    set id = #{record.id,jdbcType=CHAR},
+      job_item_id = #{record.jobItemId,jdbcType=CHAR},
+      executor_id = #{record.executorId,jdbcType=CHAR},
+      deep = #{record.deep,jdbcType=INTEGER},
+      job_description = #{record.jobDescription,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      next_node = #{record.nextNode,jdbcType=CHAR},
+      actual_submission_time = #{record.actualSubmissionTime,jdbcType=TIMESTAMP},
+      process_status = #{record.processStatus,jdbcType=CHAR},
+      character_id_list_str = #{record.characterIdListStr,jdbcType=VARCHAR},
+      approval_status = #{record.approvalStatus,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsJobItemProcess">
+    update rdms_job_item_process
+    <set>
+      <if test="jobItemId != null">
+        job_item_id = #{jobItemId,jdbcType=CHAR},
+      </if>
+      <if test="executorId != null">
+        executor_id = #{executorId,jdbcType=CHAR},
+      </if>
+      <if test="deep != null">
+        deep = #{deep,jdbcType=INTEGER},
+      </if>
+      <if test="jobDescription != null">
+        job_description = #{jobDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="nextNode != null">
+        next_node = #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="actualSubmissionTime != null">
+        actual_submission_time = #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processStatus != null">
+        process_status = #{processStatus,jdbcType=CHAR},
+      </if>
+      <if test="characterIdListStr != null">
+        character_id_list_str = #{characterIdListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStatus != null">
+        approval_status = #{approvalStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsJobItemProcess">
+    update rdms_job_item_process
+    set job_item_id = #{jobItemId,jdbcType=CHAR},
+      executor_id = #{executorId,jdbcType=CHAR},
+      deep = #{deep,jdbcType=INTEGER},
+      job_description = #{jobDescription,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      next_node = #{nextNode,jdbcType=CHAR},
+      actual_submission_time = #{actualSubmissionTime,jdbcType=TIMESTAMP},
+      process_status = #{processStatus,jdbcType=CHAR},
+      character_id_list_str = #{characterIdListStr,jdbcType=VARCHAR},
+      approval_status = #{approvalStatus,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

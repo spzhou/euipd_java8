@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.course.server.mapper.rdms.MyCustomerUserMapper" >
+    <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsUser">
+        <id column="id" jdbcType="CHAR" property="id" />
+        <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="true_name" jdbcType="VARCHAR" property="trueName" />
+        <result column="base_address" jdbcType="VARCHAR" property="baseAddress" />
+        <result column="subject" jdbcType="VARCHAR" property="subject" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+        <result column="education_background" jdbcType="VARCHAR" property="educationBackground" />
+        <result column="degree" jdbcType="VARCHAR" property="degree" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="profile" jdbcType="VARCHAR" property="profile" />
+        <result column="deleted" jdbcType="VARCHAR" property="deleted" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <select id="findUsers" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * from rdms_customer_user
+        WHERE rdms_customer_user.user_id in
+        <foreach collection="userIds" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+
+    <select id="findDepartments" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * from rdms_customer_user
+        WHERE rdms_customer_user.department_id in
+        <foreach collection="departmentIds" item="departmentId" open="(" close=")" separator=",">
+            #{departmentId}
+        </foreach>
+    </select>
+
+
+</mapper>

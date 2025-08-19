@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsCustomerConfig2Mapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsCustomerConfig2">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="oss_access_key" jdbcType="VARCHAR" property="ossAccessKey" />
+    <result column="oss_access_key_secret" jdbcType="VARCHAR" property="ossAccessKeySecret" />
+    <result column="oss_endpoint" jdbcType="VARCHAR" property="ossEndpoint" />
+    <result column="oss_endpoint_sts" jdbcType="VARCHAR" property="ossEndpointSts" />
+    <result column="oss_bucket" jdbcType="VARCHAR" property="ossBucket" />
+    <result column="oss_bucket_web" jdbcType="VARCHAR" property="ossBucketWeb" />
+    <result column="oss_domain" jdbcType="VARCHAR" property="ossDomain" />
+    <result column="oss_domain_web" jdbcType="VARCHAR" property="ossDomainWeb" />
+    <result column="oss_role_arn" jdbcType="VARCHAR" property="ossRoleArn" />
+    <result column="vod_access_key" jdbcType="VARCHAR" property="vodAccessKey" />
+    <result column="vod_access_key_secret" jdbcType="VARCHAR" property="vodAccessKeySecret" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, oss_access_key, oss_access_key_secret, oss_endpoint, oss_endpoint_sts, 
+    oss_bucket, oss_bucket_web, oss_domain, oss_domain_web, oss_role_arn, vod_access_key, 
+    vod_access_key_secret, `status`, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsCustomerConfig2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_customer_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_customer_config2
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_customer_config2
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsCustomerConfig2Example">
+    delete from rdms_customer_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsCustomerConfig2">
+    insert into rdms_customer_config2 (id, customer_id, oss_access_key, 
+      oss_access_key_secret, oss_endpoint, oss_endpoint_sts, 
+      oss_bucket, oss_bucket_web, oss_domain, 
+      oss_domain_web, oss_role_arn, vod_access_key, 
+      vod_access_key_secret, `status`, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{ossAccessKey,jdbcType=VARCHAR}, 
+      #{ossAccessKeySecret,jdbcType=VARCHAR}, #{ossEndpoint,jdbcType=VARCHAR}, #{ossEndpointSts,jdbcType=VARCHAR}, 
+      #{ossBucket,jdbcType=VARCHAR}, #{ossBucketWeb,jdbcType=VARCHAR}, #{ossDomain,jdbcType=VARCHAR}, 
+      #{ossDomainWeb,jdbcType=VARCHAR}, #{ossRoleArn,jdbcType=VARCHAR}, #{vodAccessKey,jdbcType=VARCHAR}, 
+      #{vodAccessKeySecret,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsCustomerConfig2">
+    insert into rdms_customer_config2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="ossAccessKey != null">
+        oss_access_key,
+      </if>
+      <if test="ossAccessKeySecret != null">
+        oss_access_key_secret,
+      </if>
+      <if test="ossEndpoint != null">
+        oss_endpoint,
+      </if>
+      <if test="ossEndpointSts != null">
+        oss_endpoint_sts,
+      </if>
+      <if test="ossBucket != null">
+        oss_bucket,
+      </if>
+      <if test="ossBucketWeb != null">
+        oss_bucket_web,
+      </if>
+      <if test="ossDomain != null">
+        oss_domain,
+      </if>
+      <if test="ossDomainWeb != null">
+        oss_domain_web,
+      </if>
+      <if test="ossRoleArn != null">
+        oss_role_arn,
+      </if>
+      <if test="vodAccessKey != null">
+        vod_access_key,
+      </if>
+      <if test="vodAccessKeySecret != null">
+        vod_access_key_secret,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="ossAccessKey != null">
+        #{ossAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ossAccessKeySecret != null">
+        #{ossAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="ossEndpoint != null">
+        #{ossEndpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="ossEndpointSts != null">
+        #{ossEndpointSts,jdbcType=VARCHAR},
+      </if>
+      <if test="ossBucket != null">
+        #{ossBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="ossBucketWeb != null">
+        #{ossBucketWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="ossDomain != null">
+        #{ossDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="ossDomainWeb != null">
+        #{ossDomainWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="ossRoleArn != null">
+        #{ossRoleArn,jdbcType=VARCHAR},
+      </if>
+      <if test="vodAccessKey != null">
+        #{vodAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="vodAccessKeySecret != null">
+        #{vodAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsCustomerConfig2Example" resultType="java.lang.Long">
+    select count(*) from rdms_customer_config2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_customer_config2
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.ossAccessKey != null">
+        oss_access_key = #{record.ossAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossAccessKeySecret != null">
+        oss_access_key_secret = #{record.ossAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossEndpoint != null">
+        oss_endpoint = #{record.ossEndpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossEndpointSts != null">
+        oss_endpoint_sts = #{record.ossEndpointSts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossBucket != null">
+        oss_bucket = #{record.ossBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossBucketWeb != null">
+        oss_bucket_web = #{record.ossBucketWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossDomain != null">
+        oss_domain = #{record.ossDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossDomainWeb != null">
+        oss_domain_web = #{record.ossDomainWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossRoleArn != null">
+        oss_role_arn = #{record.ossRoleArn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vodAccessKey != null">
+        vod_access_key = #{record.vodAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vodAccessKeySecret != null">
+        vod_access_key_secret = #{record.vodAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_customer_config2
+    set id = #{record.id,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      oss_access_key = #{record.ossAccessKey,jdbcType=VARCHAR},
+      oss_access_key_secret = #{record.ossAccessKeySecret,jdbcType=VARCHAR},
+      oss_endpoint = #{record.ossEndpoint,jdbcType=VARCHAR},
+      oss_endpoint_sts = #{record.ossEndpointSts,jdbcType=VARCHAR},
+      oss_bucket = #{record.ossBucket,jdbcType=VARCHAR},
+      oss_bucket_web = #{record.ossBucketWeb,jdbcType=VARCHAR},
+      oss_domain = #{record.ossDomain,jdbcType=VARCHAR},
+      oss_domain_web = #{record.ossDomainWeb,jdbcType=VARCHAR},
+      oss_role_arn = #{record.ossRoleArn,jdbcType=VARCHAR},
+      vod_access_key = #{record.vodAccessKey,jdbcType=VARCHAR},
+      vod_access_key_secret = #{record.vodAccessKeySecret,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsCustomerConfig2">
+    update rdms_customer_config2
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="ossAccessKey != null">
+        oss_access_key = #{ossAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ossAccessKeySecret != null">
+        oss_access_key_secret = #{ossAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="ossEndpoint != null">
+        oss_endpoint = #{ossEndpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="ossEndpointSts != null">
+        oss_endpoint_sts = #{ossEndpointSts,jdbcType=VARCHAR},
+      </if>
+      <if test="ossBucket != null">
+        oss_bucket = #{ossBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="ossBucketWeb != null">
+        oss_bucket_web = #{ossBucketWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="ossDomain != null">
+        oss_domain = #{ossDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="ossDomainWeb != null">
+        oss_domain_web = #{ossDomainWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="ossRoleArn != null">
+        oss_role_arn = #{ossRoleArn,jdbcType=VARCHAR},
+      </if>
+      <if test="vodAccessKey != null">
+        vod_access_key = #{vodAccessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="vodAccessKeySecret != null">
+        vod_access_key_secret = #{vodAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsCustomerConfig2">
+    update rdms_customer_config2
+    set customer_id = #{customerId,jdbcType=CHAR},
+      oss_access_key = #{ossAccessKey,jdbcType=VARCHAR},
+      oss_access_key_secret = #{ossAccessKeySecret,jdbcType=VARCHAR},
+      oss_endpoint = #{ossEndpoint,jdbcType=VARCHAR},
+      oss_endpoint_sts = #{ossEndpointSts,jdbcType=VARCHAR},
+      oss_bucket = #{ossBucket,jdbcType=VARCHAR},
+      oss_bucket_web = #{ossBucketWeb,jdbcType=VARCHAR},
+      oss_domain = #{ossDomain,jdbcType=VARCHAR},
+      oss_domain_web = #{ossDomainWeb,jdbcType=VARCHAR},
+      oss_role_arn = #{ossRoleArn,jdbcType=VARCHAR},
+      vod_access_key = #{vodAccessKey,jdbcType=VARCHAR},
+      vod_access_key_secret = #{vodAccessKeySecret,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

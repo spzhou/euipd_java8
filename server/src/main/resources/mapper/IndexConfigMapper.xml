@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.IndexConfigMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.IndexConfig">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="institution_id" jdbcType="CHAR" property="institutionId" />
+    <result column="main_player_warmup_img" jdbcType="VARCHAR" property="mainPlayerWarmupImg" />
+    <result column="main_live_channel_id" jdbcType="VARCHAR" property="mainLiveChannelId" />
+    <result column="cover_img_redirect_url" jdbcType="VARCHAR" property="coverImgRedirectUrl" />
+    <result column="warmup_time" jdbcType="TIMESTAMP" property="warmupTime" />
+    <result column="show_time" jdbcType="TIMESTAMP" property="showTime" />
+    <result column="up_institution_id" jdbcType="CHAR" property="upInstitutionId" />
+    <result column="up_product_id" jdbcType="CHAR" property="upProductId" />
+    <result column="up_course_id" jdbcType="CHAR" property="upCourseId" />
+    <result column="main_cover" jdbcType="VARCHAR" property="mainCover" />
+    <result column="plat_live_show" jdbcType="INTEGER" property="platLiveShow" />
+    <result column="close_plat_menu_flag" jdbcType="INTEGER" property="closePlatMenuFlag" />
+    <result column="black_Name_List_flag" jdbcType="INTEGER" property="blackNameListFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, institution_id, main_player_warmup_img, main_live_channel_id, cover_img_redirect_url, 
+    warmup_time, show_time, up_institution_id, up_product_id, up_course_id, main_cover, 
+    plat_live_show, close_plat_menu_flag, black_Name_List_flag
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.IndexConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from index_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from index_config
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from index_config
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.IndexConfigExample">
+    delete from index_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.IndexConfig">
+    insert into index_config (id, institution_id, main_player_warmup_img, 
+      main_live_channel_id, cover_img_redirect_url, 
+      warmup_time, show_time, up_institution_id, 
+      up_product_id, up_course_id, main_cover, 
+      plat_live_show, close_plat_menu_flag, black_Name_List_flag
+      )
+    values (#{id,jdbcType=CHAR}, #{institutionId,jdbcType=CHAR}, #{mainPlayerWarmupImg,jdbcType=VARCHAR}, 
+      #{mainLiveChannelId,jdbcType=VARCHAR}, #{coverImgRedirectUrl,jdbcType=VARCHAR}, 
+      #{warmupTime,jdbcType=TIMESTAMP}, #{showTime,jdbcType=TIMESTAMP}, #{upInstitutionId,jdbcType=CHAR}, 
+      #{upProductId,jdbcType=CHAR}, #{upCourseId,jdbcType=CHAR}, #{mainCover,jdbcType=VARCHAR}, 
+      #{platLiveShow,jdbcType=INTEGER}, #{closePlatMenuFlag,jdbcType=INTEGER}, #{blackNameListFlag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.IndexConfig">
+    insert into index_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="institutionId != null">
+        institution_id,
+      </if>
+      <if test="mainPlayerWarmupImg != null">
+        main_player_warmup_img,
+      </if>
+      <if test="mainLiveChannelId != null">
+        main_live_channel_id,
+      </if>
+      <if test="coverImgRedirectUrl != null">
+        cover_img_redirect_url,
+      </if>
+      <if test="warmupTime != null">
+        warmup_time,
+      </if>
+      <if test="showTime != null">
+        show_time,
+      </if>
+      <if test="upInstitutionId != null">
+        up_institution_id,
+      </if>
+      <if test="upProductId != null">
+        up_product_id,
+      </if>
+      <if test="upCourseId != null">
+        up_course_id,
+      </if>
+      <if test="mainCover != null">
+        main_cover,
+      </if>
+      <if test="platLiveShow != null">
+        plat_live_show,
+      </if>
+      <if test="closePlatMenuFlag != null">
+        close_plat_menu_flag,
+      </if>
+      <if test="blackNameListFlag != null">
+        black_Name_List_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="institutionId != null">
+        #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="mainPlayerWarmupImg != null">
+        #{mainPlayerWarmupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mainLiveChannelId != null">
+        #{mainLiveChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImgRedirectUrl != null">
+        #{coverImgRedirectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="warmupTime != null">
+        #{warmupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showTime != null">
+        #{showTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upInstitutionId != null">
+        #{upInstitutionId,jdbcType=CHAR},
+      </if>
+      <if test="upProductId != null">
+        #{upProductId,jdbcType=CHAR},
+      </if>
+      <if test="upCourseId != null">
+        #{upCourseId,jdbcType=CHAR},
+      </if>
+      <if test="mainCover != null">
+        #{mainCover,jdbcType=VARCHAR},
+      </if>
+      <if test="platLiveShow != null">
+        #{platLiveShow,jdbcType=INTEGER},
+      </if>
+      <if test="closePlatMenuFlag != null">
+        #{closePlatMenuFlag,jdbcType=INTEGER},
+      </if>
+      <if test="blackNameListFlag != null">
+        #{blackNameListFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.IndexConfigExample" resultType="java.lang.Long">
+    select count(*) from index_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update index_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.institutionId != null">
+        institution_id = #{record.institutionId,jdbcType=CHAR},
+      </if>
+      <if test="record.mainPlayerWarmupImg != null">
+        main_player_warmup_img = #{record.mainPlayerWarmupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainLiveChannelId != null">
+        main_live_channel_id = #{record.mainLiveChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverImgRedirectUrl != null">
+        cover_img_redirect_url = #{record.coverImgRedirectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warmupTime != null">
+        warmup_time = #{record.warmupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.showTime != null">
+        show_time = #{record.showTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.upInstitutionId != null">
+        up_institution_id = #{record.upInstitutionId,jdbcType=CHAR},
+      </if>
+      <if test="record.upProductId != null">
+        up_product_id = #{record.upProductId,jdbcType=CHAR},
+      </if>
+      <if test="record.upCourseId != null">
+        up_course_id = #{record.upCourseId,jdbcType=CHAR},
+      </if>
+      <if test="record.mainCover != null">
+        main_cover = #{record.mainCover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platLiveShow != null">
+        plat_live_show = #{record.platLiveShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.closePlatMenuFlag != null">
+        close_plat_menu_flag = #{record.closePlatMenuFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.blackNameListFlag != null">
+        black_Name_List_flag = #{record.blackNameListFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update index_config
+    set id = #{record.id,jdbcType=CHAR},
+      institution_id = #{record.institutionId,jdbcType=CHAR},
+      main_player_warmup_img = #{record.mainPlayerWarmupImg,jdbcType=VARCHAR},
+      main_live_channel_id = #{record.mainLiveChannelId,jdbcType=VARCHAR},
+      cover_img_redirect_url = #{record.coverImgRedirectUrl,jdbcType=VARCHAR},
+      warmup_time = #{record.warmupTime,jdbcType=TIMESTAMP},
+      show_time = #{record.showTime,jdbcType=TIMESTAMP},
+      up_institution_id = #{record.upInstitutionId,jdbcType=CHAR},
+      up_product_id = #{record.upProductId,jdbcType=CHAR},
+      up_course_id = #{record.upCourseId,jdbcType=CHAR},
+      main_cover = #{record.mainCover,jdbcType=VARCHAR},
+      plat_live_show = #{record.platLiveShow,jdbcType=INTEGER},
+      close_plat_menu_flag = #{record.closePlatMenuFlag,jdbcType=INTEGER},
+      black_Name_List_flag = #{record.blackNameListFlag,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.IndexConfig">
+    update index_config
+    <set>
+      <if test="institutionId != null">
+        institution_id = #{institutionId,jdbcType=CHAR},
+      </if>
+      <if test="mainPlayerWarmupImg != null">
+        main_player_warmup_img = #{mainPlayerWarmupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mainLiveChannelId != null">
+        main_live_channel_id = #{mainLiveChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImgRedirectUrl != null">
+        cover_img_redirect_url = #{coverImgRedirectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="warmupTime != null">
+        warmup_time = #{warmupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showTime != null">
+        show_time = #{showTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upInstitutionId != null">
+        up_institution_id = #{upInstitutionId,jdbcType=CHAR},
+      </if>
+      <if test="upProductId != null">
+        up_product_id = #{upProductId,jdbcType=CHAR},
+      </if>
+      <if test="upCourseId != null">
+        up_course_id = #{upCourseId,jdbcType=CHAR},
+      </if>
+      <if test="mainCover != null">
+        main_cover = #{mainCover,jdbcType=VARCHAR},
+      </if>
+      <if test="platLiveShow != null">
+        plat_live_show = #{platLiveShow,jdbcType=INTEGER},
+      </if>
+      <if test="closePlatMenuFlag != null">
+        close_plat_menu_flag = #{closePlatMenuFlag,jdbcType=INTEGER},
+      </if>
+      <if test="blackNameListFlag != null">
+        black_Name_List_flag = #{blackNameListFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.IndexConfig">
+    update index_config
+    set institution_id = #{institutionId,jdbcType=CHAR},
+      main_player_warmup_img = #{mainPlayerWarmupImg,jdbcType=VARCHAR},
+      main_live_channel_id = #{mainLiveChannelId,jdbcType=VARCHAR},
+      cover_img_redirect_url = #{coverImgRedirectUrl,jdbcType=VARCHAR},
+      warmup_time = #{warmupTime,jdbcType=TIMESTAMP},
+      show_time = #{showTime,jdbcType=TIMESTAMP},
+      up_institution_id = #{upInstitutionId,jdbcType=CHAR},
+      up_product_id = #{upProductId,jdbcType=CHAR},
+      up_course_id = #{upCourseId,jdbcType=CHAR},
+      main_cover = #{mainCover,jdbcType=VARCHAR},
+      plat_live_show = #{platLiveShow,jdbcType=INTEGER},
+      close_plat_menu_flag = #{closePlatMenuFlag,jdbcType=INTEGER},
+      black_Name_List_flag = #{blackNameListFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

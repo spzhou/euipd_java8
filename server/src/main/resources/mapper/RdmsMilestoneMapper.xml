@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsMilestoneMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsMilestone">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="milestone_name" jdbcType="VARCHAR" property="milestoneName" />
+    <result column="check_out" jdbcType="VARCHAR" property="checkOut" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_release" jdbcType="CHAR" property="isRelease" />
+    <result column="is_reviewed" jdbcType="INTEGER" property="isReviewed" />
+    <result column="deleted" jdbcType="CHAR" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, project_id, milestone_name, check_out, review_time, create_time, is_release, 
+    is_reviewed, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsMilestoneExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_milestone
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_milestone
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_milestone
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsMilestoneExample">
+    delete from rdms_milestone
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsMilestone">
+    insert into rdms_milestone (id, project_id, milestone_name, 
+      check_out, review_time, create_time, 
+      is_release, is_reviewed, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{milestoneName,jdbcType=VARCHAR}, 
+      #{checkOut,jdbcType=VARCHAR}, #{reviewTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isRelease,jdbcType=CHAR}, #{isReviewed,jdbcType=INTEGER}, #{deleted,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsMilestone">
+    insert into rdms_milestone
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="milestoneName != null">
+        milestone_name,
+      </if>
+      <if test="checkOut != null">
+        check_out,
+      </if>
+      <if test="reviewTime != null">
+        review_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isRelease != null">
+        is_release,
+      </if>
+      <if test="isReviewed != null">
+        is_reviewed,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="milestoneName != null">
+        #{milestoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkOut != null">
+        #{checkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRelease != null">
+        #{isRelease,jdbcType=CHAR},
+      </if>
+      <if test="isReviewed != null">
+        #{isReviewed,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsMilestoneExample" resultType="java.lang.Long">
+    select count(*) from rdms_milestone
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_milestone
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.milestoneName != null">
+        milestone_name = #{record.milestoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkOut != null">
+        check_out = #{record.checkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewTime != null">
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isRelease != null">
+        is_release = #{record.isRelease,jdbcType=CHAR},
+      </if>
+      <if test="record.isReviewed != null">
+        is_reviewed = #{record.isReviewed,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_milestone
+    set id = #{record.id,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      milestone_name = #{record.milestoneName,jdbcType=VARCHAR},
+      check_out = #{record.checkOut,jdbcType=VARCHAR},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      is_release = #{record.isRelease,jdbcType=CHAR},
+      is_reviewed = #{record.isReviewed,jdbcType=INTEGER},
+      deleted = #{record.deleted,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsMilestone">
+    update rdms_milestone
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="milestoneName != null">
+        milestone_name = #{milestoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkOut != null">
+        check_out = #{checkOut,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRelease != null">
+        is_release = #{isRelease,jdbcType=CHAR},
+      </if>
+      <if test="isReviewed != null">
+        is_reviewed = #{isReviewed,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsMilestone">
+    update rdms_milestone
+    set project_id = #{projectId,jdbcType=CHAR},
+      milestone_name = #{milestoneName,jdbcType=VARCHAR},
+      check_out = #{checkOut,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_release = #{isRelease,jdbcType=CHAR},
+      is_reviewed = #{isReviewed,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

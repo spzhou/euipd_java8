@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsOaHrmUserMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsOaHrmUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="companystartdate" jdbcType="VARCHAR" property="companystartdate" />
+    <result column="tempresidentnumber" jdbcType="VARCHAR" property="tempresidentnumber" />
+    <result column="createdate" jdbcType="VARCHAR" property="createdate" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="workstartdate" jdbcType="VARCHAR" property="workstartdate" />
+    <result column="subcompanyid1" jdbcType="VARCHAR" property="subcompanyid1" />
+    <result column="subcompanyname" jdbcType="VARCHAR" property="subcompanyname" />
+    <result column="joblevel" jdbcType="VARCHAR" property="joblevel" />
+    <result column="startdate" jdbcType="VARCHAR" property="startdate" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="belongtoid" jdbcType="VARCHAR" property="belongtoid" />
+    <result column="subcompanycode" jdbcType="VARCHAR" property="subcompanycode" />
+    <result column="jobactivitydesc" jdbcType="VARCHAR" property="jobactivitydesc" />
+    <result column="bememberdate" jdbcType="VARCHAR" property="bememberdate" />
+    <result column="modified" jdbcType="VARCHAR" property="modified" />
+    <result column="mobilecall" jdbcType="VARCHAR" property="mobilecall" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="certificatenum" jdbcType="VARCHAR" property="certificatenum" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="loginid" jdbcType="VARCHAR" property="loginid" />
+    <result column="created" jdbcType="VARCHAR" property="created" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="bepartydate" jdbcType="VARCHAR" property="bepartydate" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="classification" jdbcType="VARCHAR" property="classification" />
+    <result column="residentplace" jdbcType="VARCHAR" property="residentplace" />
+    <result column="lastname" jdbcType="VARCHAR" property="lastname" />
+    <result column="healthinfo" jdbcType="VARCHAR" property="healthinfo" />
+    <result column="enddate" jdbcType="VARCHAR" property="enddate" />
+    <result column="maritalstatus" jdbcType="VARCHAR" property="maritalstatus" />
+    <result column="departmentname" jdbcType="VARCHAR" property="departmentname" />
+    <result column="folk" jdbcType="VARCHAR" property="folk" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="isadaccount" jdbcType="VARCHAR" property="isadaccount" />
+    <result column="accounttype" jdbcType="VARCHAR" property="accounttype" />
+    <result column="textfield1" jdbcType="VARCHAR" property="textfield1" />
+    <result column="textfield2" jdbcType="VARCHAR" property="textfield2" />
+    <result column="jobcall" jdbcType="VARCHAR" property="jobcall" />
+    <result column="managerid" jdbcType="VARCHAR" property="managerid" />
+    <result column="assistantid" jdbcType="VARCHAR" property="assistantid" />
+    <result column="departmentcode" jdbcType="VARCHAR" property="departmentcode" />
+    <result column="belongto" jdbcType="VARCHAR" property="belongto" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="seclevel" jdbcType="VARCHAR" property="seclevel" />
+    <result column="policy" jdbcType="VARCHAR" property="policy" />
+    <result column="jobtitle" jdbcType="VARCHAR" property="jobtitle" />
+    <result column="workcode" jdbcType="VARCHAR" property="workcode" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="departmentid" jdbcType="VARCHAR" property="departmentid" />
+    <result column="homeaddress" jdbcType="VARCHAR" property="homeaddress" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="lastmoddate" jdbcType="VARCHAR" property="lastmoddate" />
+    <result column="educationlevel" jdbcType="VARCHAR" property="educationlevel" />
+    <result column="islabouunion" jdbcType="VARCHAR" property="islabouunion" />
+    <result column="locationid" jdbcType="VARCHAR" property="locationid" />
+    <result column="regresidentplace" jdbcType="VARCHAR" property="regresidentplace" />
+    <result column="dsporder" jdbcType="VARCHAR" property="dsporder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companystartdate, tempresidentnumber, createdate, `language`, workstartdate, 
+    subcompanyid1, subcompanyname, joblevel, startdate, `password`, belongtoid, subcompanycode, 
+    jobactivitydesc, bememberdate, modified, mobilecall, nativeplace, certificatenum, 
+    height, loginid, created, `degree`, bepartydate, weight, telephone, classification, 
+    residentplace, lastname, healthinfo, enddate, maritalstatus, departmentname, folk, 
+    `status`, birthday, isadaccount, accounttype, textfield1, textfield2, jobcall, managerid, 
+    assistantid, departmentcode, belongto, email, seclevel, policy, jobtitle, workcode, 
+    sex, departmentid, homeaddress, mobile, lastmoddate, educationlevel, islabouunion, 
+    locationid, regresidentplace, dsporder
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsOaHrmUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_oa_hrm_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_oa_hrm_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_oa_hrm_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsOaHrmUserExample">
+    delete from rdms_oa_hrm_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsOaHrmUser">
+    insert into rdms_oa_hrm_user (id, companystartdate, tempresidentnumber, 
+      createdate, `language`, workstartdate, 
+      subcompanyid1, subcompanyname, joblevel, 
+      startdate, `password`, belongtoid, 
+      subcompanycode, jobactivitydesc, bememberdate, 
+      modified, mobilecall, nativeplace, 
+      certificatenum, height, loginid, 
+      created, `degree`, bepartydate, 
+      weight, telephone, classification, 
+      residentplace, lastname, healthinfo, 
+      enddate, maritalstatus, departmentname, 
+      folk, `status`, birthday, 
+      isadaccount, accounttype, textfield1, 
+      textfield2, jobcall, managerid, 
+      assistantid, departmentcode, belongto, 
+      email, seclevel, policy, 
+      jobtitle, workcode, sex, 
+      departmentid, homeaddress, mobile, 
+      lastmoddate, educationlevel, islabouunion, 
+      locationid, regresidentplace, dsporder
+      )
+    values (#{id,jdbcType=VARCHAR}, #{companystartdate,jdbcType=VARCHAR}, #{tempresidentnumber,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{workstartdate,jdbcType=VARCHAR}, 
+      #{subcompanyid1,jdbcType=VARCHAR}, #{subcompanyname,jdbcType=VARCHAR}, #{joblevel,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{belongtoid,jdbcType=VARCHAR}, 
+      #{subcompanycode,jdbcType=VARCHAR}, #{jobactivitydesc,jdbcType=VARCHAR}, #{bememberdate,jdbcType=VARCHAR}, 
+      #{modified,jdbcType=VARCHAR}, #{mobilecall,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
+      #{certificatenum,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{loginid,jdbcType=VARCHAR}, 
+      #{created,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{bepartydate,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{classification,jdbcType=VARCHAR}, 
+      #{residentplace,jdbcType=VARCHAR}, #{lastname,jdbcType=VARCHAR}, #{healthinfo,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{maritalstatus,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
+      #{folk,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{isadaccount,jdbcType=VARCHAR}, #{accounttype,jdbcType=VARCHAR}, #{textfield1,jdbcType=VARCHAR}, 
+      #{textfield2,jdbcType=VARCHAR}, #{jobcall,jdbcType=VARCHAR}, #{managerid,jdbcType=VARCHAR}, 
+      #{assistantid,jdbcType=VARCHAR}, #{departmentcode,jdbcType=VARCHAR}, #{belongto,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{seclevel,jdbcType=VARCHAR}, #{policy,jdbcType=VARCHAR}, 
+      #{jobtitle,jdbcType=VARCHAR}, #{workcode,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{departmentid,jdbcType=VARCHAR}, #{homeaddress,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{lastmoddate,jdbcType=VARCHAR}, #{educationlevel,jdbcType=VARCHAR}, #{islabouunion,jdbcType=VARCHAR}, 
+      #{locationid,jdbcType=VARCHAR}, #{regresidentplace,jdbcType=VARCHAR}, #{dsporder,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsOaHrmUser">
+    insert into rdms_oa_hrm_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companystartdate != null">
+        companystartdate,
+      </if>
+      <if test="tempresidentnumber != null">
+        tempresidentnumber,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="language != null">
+        `language`,
+      </if>
+      <if test="workstartdate != null">
+        workstartdate,
+      </if>
+      <if test="subcompanyid1 != null">
+        subcompanyid1,
+      </if>
+      <if test="subcompanyname != null">
+        subcompanyname,
+      </if>
+      <if test="joblevel != null">
+        joblevel,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="belongtoid != null">
+        belongtoid,
+      </if>
+      <if test="subcompanycode != null">
+        subcompanycode,
+      </if>
+      <if test="jobactivitydesc != null">
+        jobactivitydesc,
+      </if>
+      <if test="bememberdate != null">
+        bememberdate,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="mobilecall != null">
+        mobilecall,
+      </if>
+      <if test="nativeplace != null">
+        nativeplace,
+      </if>
+      <if test="certificatenum != null">
+        certificatenum,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="loginid != null">
+        loginid,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="degree != null">
+        `degree`,
+      </if>
+      <if test="bepartydate != null">
+        bepartydate,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="classification != null">
+        classification,
+      </if>
+      <if test="residentplace != null">
+        residentplace,
+      </if>
+      <if test="lastname != null">
+        lastname,
+      </if>
+      <if test="healthinfo != null">
+        healthinfo,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="maritalstatus != null">
+        maritalstatus,
+      </if>
+      <if test="departmentname != null">
+        departmentname,
+      </if>
+      <if test="folk != null">
+        folk,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="isadaccount != null">
+        isadaccount,
+      </if>
+      <if test="accounttype != null">
+        accounttype,
+      </if>
+      <if test="textfield1 != null">
+        textfield1,
+      </if>
+      <if test="textfield2 != null">
+        textfield2,
+      </if>
+      <if test="jobcall != null">
+        jobcall,
+      </if>
+      <if test="managerid != null">
+        managerid,
+      </if>
+      <if test="assistantid != null">
+        assistantid,
+      </if>
+      <if test="departmentcode != null">
+        departmentcode,
+      </if>
+      <if test="belongto != null">
+        belongto,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="seclevel != null">
+        seclevel,
+      </if>
+      <if test="policy != null">
+        policy,
+      </if>
+      <if test="jobtitle != null">
+        jobtitle,
+      </if>
+      <if test="workcode != null">
+        workcode,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="departmentid != null">
+        departmentid,
+      </if>
+      <if test="homeaddress != null">
+        homeaddress,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="lastmoddate != null">
+        lastmoddate,
+      </if>
+      <if test="educationlevel != null">
+        educationlevel,
+      </if>
+      <if test="islabouunion != null">
+        islabouunion,
+      </if>
+      <if test="locationid != null">
+        locationid,
+      </if>
+      <if test="regresidentplace != null">
+        regresidentplace,
+      </if>
+      <if test="dsporder != null">
+        dsporder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="companystartdate != null">
+        #{companystartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="tempresidentnumber != null">
+        #{tempresidentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="workstartdate != null">
+        #{workstartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanyid1 != null">
+        #{subcompanyid1,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanyname != null">
+        #{subcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="joblevel != null">
+        #{joblevel,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="belongtoid != null">
+        #{belongtoid,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanycode != null">
+        #{subcompanycode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobactivitydesc != null">
+        #{jobactivitydesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bememberdate != null">
+        #{bememberdate,jdbcType=VARCHAR},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilecall != null">
+        #{mobilecall,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="certificatenum != null">
+        #{certificatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="loginid != null">
+        #{loginid,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="bepartydate != null">
+        #{bepartydate,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="residentplace != null">
+        #{residentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="lastname != null">
+        #{lastname,jdbcType=VARCHAR},
+      </if>
+      <if test="healthinfo != null">
+        #{healthinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null">
+        #{maritalstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null">
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="folk != null">
+        #{folk,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="isadaccount != null">
+        #{isadaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null">
+        #{accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="textfield1 != null">
+        #{textfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="textfield2 != null">
+        #{textfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="jobcall != null">
+        #{jobcall,jdbcType=VARCHAR},
+      </if>
+      <if test="managerid != null">
+        #{managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantid != null">
+        #{assistantid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentcode != null">
+        #{departmentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="belongto != null">
+        #{belongto,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="seclevel != null">
+        #{seclevel,jdbcType=VARCHAR},
+      </if>
+      <if test="policy != null">
+        #{policy,jdbcType=VARCHAR},
+      </if>
+      <if test="jobtitle != null">
+        #{jobtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workcode != null">
+        #{workcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null">
+        #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null">
+        #{lastmoddate,jdbcType=VARCHAR},
+      </if>
+      <if test="educationlevel != null">
+        #{educationlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="islabouunion != null">
+        #{islabouunion,jdbcType=VARCHAR},
+      </if>
+      <if test="locationid != null">
+        #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="regresidentplace != null">
+        #{regresidentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="dsporder != null">
+        #{dsporder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsOaHrmUserExample" resultType="java.lang.Long">
+    select count(*) from rdms_oa_hrm_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_oa_hrm_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companystartdate != null">
+        companystartdate = #{record.companystartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempresidentnumber != null">
+        tempresidentnumber = #{record.tempresidentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null">
+        `language` = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workstartdate != null">
+        workstartdate = #{record.workstartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcompanyid1 != null">
+        subcompanyid1 = #{record.subcompanyid1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcompanyname != null">
+        subcompanyname = #{record.subcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joblevel != null">
+        joblevel = #{record.joblevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startdate != null">
+        startdate = #{record.startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongtoid != null">
+        belongtoid = #{record.belongtoid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcompanycode != null">
+        subcompanycode = #{record.subcompanycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobactivitydesc != null">
+        jobactivitydesc = #{record.jobactivitydesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bememberdate != null">
+        bememberdate = #{record.bememberdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modified != null">
+        modified = #{record.modified,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilecall != null">
+        mobilecall = #{record.mobilecall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplace != null">
+        nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificatenum != null">
+        certificatenum = #{record.certificatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginid != null">
+        loginid = #{record.loginid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        created = #{record.created,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        `degree` = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bepartydate != null">
+        bepartydate = #{record.bepartydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classification != null">
+        classification = #{record.classification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.residentplace != null">
+        residentplace = #{record.residentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastname != null">
+        lastname = #{record.lastname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.healthinfo != null">
+        healthinfo = #{record.healthinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null">
+        enddate = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalstatus != null">
+        maritalstatus = #{record.maritalstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentname != null">
+        departmentname = #{record.departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folk != null">
+        folk = #{record.folk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isadaccount != null">
+        isadaccount = #{record.isadaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accounttype != null">
+        accounttype = #{record.accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textfield1 != null">
+        textfield1 = #{record.textfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textfield2 != null">
+        textfield2 = #{record.textfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobcall != null">
+        jobcall = #{record.jobcall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerid != null">
+        managerid = #{record.managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assistantid != null">
+        assistantid = #{record.assistantid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentcode != null">
+        departmentcode = #{record.departmentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belongto != null">
+        belongto = #{record.belongto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seclevel != null">
+        seclevel = #{record.seclevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policy != null">
+        policy = #{record.policy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobtitle != null">
+        jobtitle = #{record.jobtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workcode != null">
+        workcode = #{record.workcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentid != null">
+        departmentid = #{record.departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeaddress != null">
+        homeaddress = #{record.homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastmoddate != null">
+        lastmoddate = #{record.lastmoddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationlevel != null">
+        educationlevel = #{record.educationlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.islabouunion != null">
+        islabouunion = #{record.islabouunion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationid != null">
+        locationid = #{record.locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regresidentplace != null">
+        regresidentplace = #{record.regresidentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsporder != null">
+        dsporder = #{record.dsporder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_oa_hrm_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      companystartdate = #{record.companystartdate,jdbcType=VARCHAR},
+      tempresidentnumber = #{record.tempresidentnumber,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=VARCHAR},
+      `language` = #{record.language,jdbcType=VARCHAR},
+      workstartdate = #{record.workstartdate,jdbcType=VARCHAR},
+      subcompanyid1 = #{record.subcompanyid1,jdbcType=VARCHAR},
+      subcompanyname = #{record.subcompanyname,jdbcType=VARCHAR},
+      joblevel = #{record.joblevel,jdbcType=VARCHAR},
+      startdate = #{record.startdate,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      belongtoid = #{record.belongtoid,jdbcType=VARCHAR},
+      subcompanycode = #{record.subcompanycode,jdbcType=VARCHAR},
+      jobactivitydesc = #{record.jobactivitydesc,jdbcType=VARCHAR},
+      bememberdate = #{record.bememberdate,jdbcType=VARCHAR},
+      modified = #{record.modified,jdbcType=VARCHAR},
+      mobilecall = #{record.mobilecall,jdbcType=VARCHAR},
+      nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      certificatenum = #{record.certificatenum,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      loginid = #{record.loginid,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=VARCHAR},
+      `degree` = #{record.degree,jdbcType=VARCHAR},
+      bepartydate = #{record.bepartydate,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      classification = #{record.classification,jdbcType=VARCHAR},
+      residentplace = #{record.residentplace,jdbcType=VARCHAR},
+      lastname = #{record.lastname,jdbcType=VARCHAR},
+      healthinfo = #{record.healthinfo,jdbcType=VARCHAR},
+      enddate = #{record.enddate,jdbcType=VARCHAR},
+      maritalstatus = #{record.maritalstatus,jdbcType=VARCHAR},
+      departmentname = #{record.departmentname,jdbcType=VARCHAR},
+      folk = #{record.folk,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      isadaccount = #{record.isadaccount,jdbcType=VARCHAR},
+      accounttype = #{record.accounttype,jdbcType=VARCHAR},
+      textfield1 = #{record.textfield1,jdbcType=VARCHAR},
+      textfield2 = #{record.textfield2,jdbcType=VARCHAR},
+      jobcall = #{record.jobcall,jdbcType=VARCHAR},
+      managerid = #{record.managerid,jdbcType=VARCHAR},
+      assistantid = #{record.assistantid,jdbcType=VARCHAR},
+      departmentcode = #{record.departmentcode,jdbcType=VARCHAR},
+      belongto = #{record.belongto,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      seclevel = #{record.seclevel,jdbcType=VARCHAR},
+      policy = #{record.policy,jdbcType=VARCHAR},
+      jobtitle = #{record.jobtitle,jdbcType=VARCHAR},
+      workcode = #{record.workcode,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      departmentid = #{record.departmentid,jdbcType=VARCHAR},
+      homeaddress = #{record.homeaddress,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      lastmoddate = #{record.lastmoddate,jdbcType=VARCHAR},
+      educationlevel = #{record.educationlevel,jdbcType=VARCHAR},
+      islabouunion = #{record.islabouunion,jdbcType=VARCHAR},
+      locationid = #{record.locationid,jdbcType=VARCHAR},
+      regresidentplace = #{record.regresidentplace,jdbcType=VARCHAR},
+      dsporder = #{record.dsporder,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsOaHrmUser">
+    update rdms_oa_hrm_user
+    <set>
+      <if test="companystartdate != null">
+        companystartdate = #{companystartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="tempresidentnumber != null">
+        tempresidentnumber = #{tempresidentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        `language` = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="workstartdate != null">
+        workstartdate = #{workstartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanyid1 != null">
+        subcompanyid1 = #{subcompanyid1,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanyname != null">
+        subcompanyname = #{subcompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="joblevel != null">
+        joblevel = #{joblevel,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null">
+        startdate = #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="belongtoid != null">
+        belongtoid = #{belongtoid,jdbcType=VARCHAR},
+      </if>
+      <if test="subcompanycode != null">
+        subcompanycode = #{subcompanycode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobactivitydesc != null">
+        jobactivitydesc = #{jobactivitydesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bememberdate != null">
+        bememberdate = #{bememberdate,jdbcType=VARCHAR},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilecall != null">
+        mobilecall = #{mobilecall,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="certificatenum != null">
+        certificatenum = #{certificatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="loginid != null">
+        loginid = #{loginid,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        `degree` = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="bepartydate != null">
+        bepartydate = #{bepartydate,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="classification != null">
+        classification = #{classification,jdbcType=VARCHAR},
+      </if>
+      <if test="residentplace != null">
+        residentplace = #{residentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="lastname != null">
+        lastname = #{lastname,jdbcType=VARCHAR},
+      </if>
+      <if test="healthinfo != null">
+        healthinfo = #{healthinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null">
+        maritalstatus = #{maritalstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null">
+        departmentname = #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="folk != null">
+        folk = #{folk,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="isadaccount != null">
+        isadaccount = #{isadaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null">
+        accounttype = #{accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="textfield1 != null">
+        textfield1 = #{textfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="textfield2 != null">
+        textfield2 = #{textfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="jobcall != null">
+        jobcall = #{jobcall,jdbcType=VARCHAR},
+      </if>
+      <if test="managerid != null">
+        managerid = #{managerid,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantid != null">
+        assistantid = #{assistantid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentcode != null">
+        departmentcode = #{departmentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="belongto != null">
+        belongto = #{belongto,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="seclevel != null">
+        seclevel = #{seclevel,jdbcType=VARCHAR},
+      </if>
+      <if test="policy != null">
+        policy = #{policy,jdbcType=VARCHAR},
+      </if>
+      <if test="jobtitle != null">
+        jobtitle = #{jobtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workcode != null">
+        workcode = #{workcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        departmentid = #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="homeaddress != null">
+        homeaddress = #{homeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null">
+        lastmoddate = #{lastmoddate,jdbcType=VARCHAR},
+      </if>
+      <if test="educationlevel != null">
+        educationlevel = #{educationlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="islabouunion != null">
+        islabouunion = #{islabouunion,jdbcType=VARCHAR},
+      </if>
+      <if test="locationid != null">
+        locationid = #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="regresidentplace != null">
+        regresidentplace = #{regresidentplace,jdbcType=VARCHAR},
+      </if>
+      <if test="dsporder != null">
+        dsporder = #{dsporder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsOaHrmUser">
+    update rdms_oa_hrm_user
+    set companystartdate = #{companystartdate,jdbcType=VARCHAR},
+      tempresidentnumber = #{tempresidentnumber,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=VARCHAR},
+      `language` = #{language,jdbcType=VARCHAR},
+      workstartdate = #{workstartdate,jdbcType=VARCHAR},
+      subcompanyid1 = #{subcompanyid1,jdbcType=VARCHAR},
+      subcompanyname = #{subcompanyname,jdbcType=VARCHAR},
+      joblevel = #{joblevel,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      belongtoid = #{belongtoid,jdbcType=VARCHAR},
+      subcompanycode = #{subcompanycode,jdbcType=VARCHAR},
+      jobactivitydesc = #{jobactivitydesc,jdbcType=VARCHAR},
+      bememberdate = #{bememberdate,jdbcType=VARCHAR},
+      modified = #{modified,jdbcType=VARCHAR},
+      mobilecall = #{mobilecall,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      certificatenum = #{certificatenum,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      loginid = #{loginid,jdbcType=VARCHAR},
+      created = #{created,jdbcType=VARCHAR},
+      `degree` = #{degree,jdbcType=VARCHAR},
+      bepartydate = #{bepartydate,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      classification = #{classification,jdbcType=VARCHAR},
+      residentplace = #{residentplace,jdbcType=VARCHAR},
+      lastname = #{lastname,jdbcType=VARCHAR},
+      healthinfo = #{healthinfo,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=VARCHAR},
+      maritalstatus = #{maritalstatus,jdbcType=VARCHAR},
+      departmentname = #{departmentname,jdbcType=VARCHAR},
+      folk = #{folk,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      isadaccount = #{isadaccount,jdbcType=VARCHAR},
+      accounttype = #{accounttype,jdbcType=VARCHAR},
+      textfield1 = #{textfield1,jdbcType=VARCHAR},
+      textfield2 = #{textfield2,jdbcType=VARCHAR},
+      jobcall = #{jobcall,jdbcType=VARCHAR},
+      managerid = #{managerid,jdbcType=VARCHAR},
+      assistantid = #{assistantid,jdbcType=VARCHAR},
+      departmentcode = #{departmentcode,jdbcType=VARCHAR},
+      belongto = #{belongto,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      seclevel = #{seclevel,jdbcType=VARCHAR},
+      policy = #{policy,jdbcType=VARCHAR},
+      jobtitle = #{jobtitle,jdbcType=VARCHAR},
+      workcode = #{workcode,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      departmentid = #{departmentid,jdbcType=VARCHAR},
+      homeaddress = #{homeaddress,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      lastmoddate = #{lastmoddate,jdbcType=VARCHAR},
+      educationlevel = #{educationlevel,jdbcType=VARCHAR},
+      islabouunion = #{islabouunion,jdbcType=VARCHAR},
+      locationid = #{locationid,jdbcType=VARCHAR},
+      regresidentplace = #{regresidentplace,jdbcType=VARCHAR},
+      dsporder = #{dsporder,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

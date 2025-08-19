@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="/Users/zhoushuopeng/Documents/IdeaProjects/euipd/mysql-connector-java-8.0.22.jar" />
+<!--    <classPathEntry location="/Users/zhoushuopeng/.m2/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar" />-->
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--覆盖生成XML文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!-- 生成的实体类添加toString()方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 不生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mycourse?useUnicode=true;serverTimezone=Asia/Shanghai;characterEncoding=utf8;autoReconnect=true;useSSL=false;allowMultiQueries=true"
+                        userId="root"
+                        password="YOUR_DATABASE_PASSWORD">
+        </jdbcConnection>
+
+        <!-- domain类的位置 -->
+        <javaModelGenerator targetProject="src/main/java"
+                            targetPackage="com.course.server.domain"/>
+
+        <!-- mapper xml的位置 -->
+        <sqlMapGenerator targetProject="src/main/resources"
+                         targetPackage="mapper"/>
+
+        <!-- mapper类的位置 -->
+        <javaClientGenerator targetProject="src/main/java"
+                             targetPackage="com.course.server.mapper"
+                             type="XMLMAPPER" />
+
+<!--        <table tableName="teacher_category" domainObjectName="TeacherCategory"/>-->
+<!--        <table tableName="teacher" domainObjectName="Teacher"/>-->
+<!--        <table tableName="role_resource" domainObjectName="RoleResource"/>-->
+
+<!--        <table tableName="rdms_user" domainObjectName="RdmsUser"/>-->
+<!--        <table tableName="rdms_user_role" domainObjectName="RdmsUserRole"/>-->
+<!--        <table tableName="rdms_user_resource" domainObjectName="RdmsUserResource"/>-->
+<!--        <table tableName="rdms_user_role_resource" domainObjectName="RdmsUserRoleResource"/>-->
+<!--        <table tableName="rdms_user_role_user" domainObjectName="RdmsUserRoleUser"/>-->
+<!--        <table tableName="rdms_customer" domainObjectName="RdmsCustomer"/>-->
+        <table tableName="rdms_customer3" domainObjectName="RdmsCustomer"/>
+<!--        <table tableName="rdms_customer_role" domainObjectName="RdmsCustomerRole"/>-->
+<!--        <table tableName="rdms_customer_resource" domainObjectName="RdmsCustomerResource"/>-->
+<!--        <table tableName="rdms_customer_role_resource" domainObjectName="RdmsCustomerRoleResource"/>-->
+<!--        <table tableName="rdms_customer_role_customer" domainObjectName="RdmsCustomerRoleCustomer"/>-->
+<!--        <table tableName="rdms_customer_user" domainObjectName="RdmsCustomerUser"/>-->
+<!--        <table tableName="rdms_customer_user_job_level" domainObjectName="RdmsCustomerUserJobLevel"/>-->
+<!--        <table tableName="rdms_product" domainObjectName="RdmsProduct"/>-->
+<!--        <table tableName="rdms_department" domainObjectName="RdmsDepartment"/>-->
+<!--        <table tableName="rdms_department2" domainObjectName="RdmsDepartment2"/>-->
+<!--        <table tableName="rdms_cbb" domainObjectName="RdmsCbb"/>-->
+<!--        <table tableName="rdms_cbb2" domainObjectName="RdmsCbb2"/>-->
+<!--        <table tableName="rdms_project" domainObjectName="RdmsProject"/>-->
+<!--        <table tableName="rdms_demand" domainObjectName="RdmsDemand"/>-->
+<!--        <table tableName="rdms_pre_project" domainObjectName="RdmsPreProject"/>-->
+<!--        <table tableName="rdms_project_key_member" domainObjectName="RdmsProjectKeyMember"/>-->
+<!--        <table tableName="rdms_ipmt" domainObjectName="RdmsIpmt"/>-->
+<!--        <table tableName="rdms_product_manager" domainObjectName="RdmsProductManager"/>-->
+<!--        <table tableName="rdms_system_manager" domainObjectName="RdmsSystemManager"/>-->
+<!--        <table tableName="rdms_project_manager" domainObjectName="RdmsProjectManager"/>-->
+<!--        <table tableName="rdms_project_subproject" domainObjectName="RdmsProjectSubproject"/>-->
+<!--        <table tableName="rdms_project_sec_level" domainObjectName="RdmsProjectSecLevel"/>-->
+<!--        <table tableName="rdms_character_sec_level" domainObjectName="RdmsCharacterSecLevel"/>-->
+<!--        <table tableName="rdms_file_auth" domainObjectName="RdmsFileAuth"/>-->
+<!--        <table tableName="rdms_underline" domainObjectName="RdmsUnderline"/>-->
+<!--        <table tableName="rdms_job_item" domainObjectName="RdmsJobItem"/>-->
+<!--        <table tableName="rdms_job_item_gantt" domainObjectName="RdmsJobItemGantt"/>-->
+<!--        <table tableName="rdms_job_item2" domainObjectName="RdmsJobItem2"/>-->
+<!--        <table tableName="rdms_bom_tree" domainObjectName="RdmsBomTree"/>-->
+<!--        <table tableName="rdms_bom_tree_main" domainObjectName="RdmsBomTreeMain"/>-->
+<!--        <table tableName="rdms_function_tree" domainObjectName="RdmsFunctionTree"/>-->
+<!--        <table tableName="rdms_jobitem_associate" domainObjectName="RdmsJobitemAssociate"/>-->
+<!--        <table tableName="rdms_oa_hrm_user" domainObjectName="RdmsOaHrmUser"/>-->
+<!--        <table tableName="rdms_boss" domainObjectName="RdmsBoss"/>-->
+<!--        <table tableName="rdms_auth" domainObjectName="RdmsAuth"/>-->
+<!--        <table tableName="rdms_milestone2" domainObjectName="RdmsMilestone2"/>-->
+<!--        <table tableName="rdms_material" domainObjectName="RdmsMaterial"/>-->
+<!--        <table tableName="rdms_material2" domainObjectName="RdmsMaterial2"/>-->
+<!--        <table tableName="rdms_material_return" domainObjectName="RdmsMaterialReturn"/>-->
+<!--        <table tableName="rdms_gantt" domainObjectName="RdmsGantt"/>-->
+<!--        <table tableName="rdms_gantt_links" domainObjectName="RdmsGanttLinks"/>-->
+<!--        <table tableName="rdms_qcgm" domainObjectName="RdmsQcgm"/>-->
+<!--        <table tableName="rdms_tgm" domainObjectName="RdmsTgm"/>-->
+<!--        <table tableName="rdms_bug_feedback" domainObjectName="RdmsBugFeedback"/>-->
+<!--        <table tableName="rdms_manhour_declare" domainObjectName="RdmsManhourDeclare"/>-->
+<!--        <table tableName="rdms_manhour_declare2" domainObjectName="RdmsManhourDeclare2"/>-->
+<!--        <table tableName="rdms_course_category" domainObjectName="RdmsCourseCategory"/>-->
+<!--        <table tableName="rdms_course_content_file" domainObjectName="RdmsCourseContentFile"/>-->
+<!--        <table tableName="rdms_course_content" domainObjectName="RdmsCourseContent"/>-->
+<!--        <table tableName="rdms_course_own_category" domainObjectName="RdmsCourseOwnCategory"/>-->
+<!--        <table tableName="rdms_course" domainObjectName="RdmsCourse"/>-->
+<!--        <table tableName="rdms_course2" domainObjectName="RdmsCourse2"/>-->
+<!--        <table tableName="rdms_teacher" domainObjectName="RdmsTeacher"/>-->
+<!--        <table tableName="rdms_course_section" domainObjectName="RdmsCourseSection"/>-->
+<!--        <table tableName="rdms_vod_file" domainObjectName="RdmsVodFile"/>-->
+<!--        <table tableName="rdms_course_chapter" domainObjectName="RdmsCourseChapter"/>-->
+<!--        <table tableName="rdms_bom" domainObjectName="RdmsBom"/>-->
+<!--        <table tableName="rdms_bom_config" domainObjectName="RdmsBomConfig"/>-->
+<!--        <table tableName="rdms_material_manage" domainObjectName="RdmsMaterialManage"/>-->
+<!--        <table tableName="rdms_material_manage_return" domainObjectName="RdmsMaterialManageReturn"/>-->
+<!--        <table tableName="rdms_material_manage3" domainObjectName="RdmsMaterialManage3"/>-->
+<!--        <table tableName="rdms_material_process" domainObjectName="RdmsMaterialProcess"/>-->
+<!--        <table tableName="rdms_material_process_return" domainObjectName="RdmsMaterialProcessReturn"/>-->
+<!--        <table tableName="rdms_fee_manage" domainObjectName="RdmsFeeManage"/>-->
+<!--        <table tableName="rdms_system" domainObjectName="RdmsSystem"/>-->
+<!--        <table tableName="rdms_fee_process" domainObjectName="RdmsFeeProcess"/>-->
+<!--        <table tableName="rdms_job_item_process" domainObjectName="RdmsJobItemProcess"/>-->
+<!--        <table tableName="rdms_job_item_property" domainObjectName="RdmsJobItemProperty"/>-->
+<!--        <table tableName="rdms_file" domainObjectName="RdmsFile"/>-->
+<!--        <table tableName="rdms_file_apply" domainObjectName="RdmsFileApply"/>-->
+<!--        <table tableName="rdms_sms_info" domainObjectName="RdmsSmsInfo"/>-->
+<!--        <table tableName="rdms_sms" domainObjectName="RdmsSms"/>-->
+<!--        <table tableName="rdms_file_download" domainObjectName="RdmsFileDownload"/>-->
+<!--        <table tableName="rdms_file_reference" domainObjectName="RdmsFileReference"/>-->
+<!--        <table tableName="rdms_file_text" domainObjectName="RdmsFileText"/>-->
+<!--        <table tableName="rdms_project_task" domainObjectName="RdmsProjectTask"/>-->
+<!--        <table tableName="rdms_customer_config" domainObjectName="RdmsCustomerConfig"/>-->
+<!--        <table tableName="rdms_customer_config2" domainObjectName="RdmsCustomerConfig2"/>-->
+<!--        <table tableName="rdms_character_process" domainObjectName="RdmsCharacterProcess"/>-->
+<!--        <table tableName="rdms_performance" domainObjectName="RdmsPerformance"/>-->
+<!--        <table tableName="rdms_performance2" domainObjectName="RdmsPerformance2"/>-->
+<!--        <table tableName="rdms_quality" domainObjectName="RdmsQuality"/>-->
+<!--        <table tableName="rdms_character" domainObjectName="RdmsCharacter"/>-->
+<!--        <table tableName="rdms_character3" domainObjectName="RdmsCharacter3"/>-->
+<!--        <table tableName="rdms_character_data" domainObjectName="RdmsCharacterData"/>-->
+<!--        <table tableName="rdms_manhour_standard" domainObjectName="RdmsManhourStandard"/>-->
+<!--        <table tableName="rdms_project_budget" domainObjectName="RdmsProjectBudget"/>-->
+<!--        <table tableName="rdms_category" domainObjectName="RdmsCategory"/>-->
+<!--        <table tableName="rdms_category_file" domainObjectName="RdmsCategoryFile"/>-->
+<!--        <table tableName="rdms_category_project" domainObjectName="RdmsCategoryProject"/>-->
+<!--        <table tableName="rdms_budget_adjust" domainObjectName="RdmsBudgetAdjust"/>-->
+<!--        <table tableName="rdms_pdgm" domainObjectName="RdmsPdgm"/>-->
+<!--        <table tableName="rdms_sysgm" domainObjectName="RdmsSysgm"/>-->
+<!--        <table tableName="rdms_fggm" domainObjectName="RdmsFggm"/>-->
+<!--        <table tableName="rdms_budget" domainObjectName="RdmsBudget"/>-->
+<!--        <table tableName="rdms_budget_exe" domainObjectName="RdmsBudgetExe"/>-->
+<!--        <table tableName="rdms_budget_research" domainObjectName="RdmsBudgetResearch"/>-->
+<!--        <table tableName="rdms_budget_research_exe" domainObjectName="RdmsBudgetResearchExe"/>-->
+<!--        <table tableName="rdms_budget_research_exe2" domainObjectName="RdmsBudgetResearchExe2"/>-->
+    </context>
+</generatorConfiguration>

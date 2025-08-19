@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsDemandMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsDemand">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="demand_name" jdbcType="VARCHAR" property="demandName" />
+    <result column="demand_customer_name" jdbcType="VARCHAR" property="demandCustomerName" />
+    <result column="confirm_person_name" jdbcType="VARCHAR" property="confirmPersonName" />
+    <result column="confirm_contact_tel" jdbcType="VARCHAR" property="confirmContactTel" />
+    <result column="demand_description" jdbcType="VARCHAR" property="demandDescription" />
+    <result column="work_condition" jdbcType="VARCHAR" property="workCondition" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="writer_id" jdbcType="CHAR" property="writerId" />
+    <result column="next_node" jdbcType="CHAR" property="nextNode" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, pre_project_id, product_manager_id, demand_name, demand_customer_name, 
+    confirm_person_name, confirm_contact_tel, demand_description, work_condition, file_list_str, 
+    writer_id, next_node, `status`, create_time, submit_time, jobitem_id, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsDemandExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_demand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_demand
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_demand
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsDemandExample">
+    delete from rdms_demand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsDemand">
+    insert into rdms_demand (id, customer_id, pre_project_id, 
+      product_manager_id, demand_name, demand_customer_name, 
+      confirm_person_name, confirm_contact_tel, demand_description, 
+      work_condition, file_list_str, writer_id, 
+      next_node, `status`, create_time, 
+      submit_time, jobitem_id, deleted
+      )
+    values (#{id,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, #{preProjectId,jdbcType=CHAR}, 
+      #{productManagerId,jdbcType=CHAR}, #{demandName,jdbcType=VARCHAR}, #{demandCustomerName,jdbcType=VARCHAR}, 
+      #{confirmPersonName,jdbcType=VARCHAR}, #{confirmContactTel,jdbcType=VARCHAR}, #{demandDescription,jdbcType=VARCHAR}, 
+      #{workCondition,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, #{writerId,jdbcType=CHAR}, 
+      #{nextNode,jdbcType=CHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{jobitemId,jdbcType=CHAR}, #{deleted,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsDemand">
+    insert into rdms_demand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="demandName != null">
+        demand_name,
+      </if>
+      <if test="demandCustomerName != null">
+        demand_customer_name,
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name,
+      </if>
+      <if test="confirmContactTel != null">
+        confirm_contact_tel,
+      </if>
+      <if test="demandDescription != null">
+        demand_description,
+      </if>
+      <if test="workCondition != null">
+        work_condition,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="writerId != null">
+        writer_id,
+      </if>
+      <if test="nextNode != null">
+        next_node,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="demandName != null">
+        #{demandName,jdbcType=VARCHAR},
+      </if>
+      <if test="demandCustomerName != null">
+        #{demandCustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmContactTel != null">
+        #{confirmContactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="demandDescription != null">
+        #{demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="workCondition != null">
+        #{workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="writerId != null">
+        #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsDemandExample" resultType="java.lang.Long">
+    select count(*) from rdms_demand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_demand
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.demandName != null">
+        demand_name = #{record.demandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandCustomerName != null">
+        demand_customer_name = #{record.demandCustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmPersonName != null">
+        confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmContactTel != null">
+        confirm_contact_tel = #{record.confirmContactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandDescription != null">
+        demand_description = #{record.demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCondition != null">
+        work_condition = #{record.workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writerId != null">
+        writer_id = #{record.writerId,jdbcType=CHAR},
+      </if>
+      <if test="record.nextNode != null">
+        next_node = #{record.nextNode,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_demand
+    set id = #{record.id,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      demand_name = #{record.demandName,jdbcType=VARCHAR},
+      demand_customer_name = #{record.demandCustomerName,jdbcType=VARCHAR},
+      confirm_person_name = #{record.confirmPersonName,jdbcType=VARCHAR},
+      confirm_contact_tel = #{record.confirmContactTel,jdbcType=VARCHAR},
+      demand_description = #{record.demandDescription,jdbcType=VARCHAR},
+      work_condition = #{record.workCondition,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      writer_id = #{record.writerId,jdbcType=CHAR},
+      next_node = #{record.nextNode,jdbcType=CHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsDemand">
+    update rdms_demand
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="demandName != null">
+        demand_name = #{demandName,jdbcType=VARCHAR},
+      </if>
+      <if test="demandCustomerName != null">
+        demand_customer_name = #{demandCustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmPersonName != null">
+        confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmContactTel != null">
+        confirm_contact_tel = #{confirmContactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="demandDescription != null">
+        demand_description = #{demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="workCondition != null">
+        work_condition = #{workCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="writerId != null">
+        writer_id = #{writerId,jdbcType=CHAR},
+      </if>
+      <if test="nextNode != null">
+        next_node = #{nextNode,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsDemand">
+    update rdms_demand
+    set customer_id = #{customerId,jdbcType=CHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      demand_name = #{demandName,jdbcType=VARCHAR},
+      demand_customer_name = #{demandCustomerName,jdbcType=VARCHAR},
+      confirm_person_name = #{confirmPersonName,jdbcType=VARCHAR},
+      confirm_contact_tel = #{confirmContactTel,jdbcType=VARCHAR},
+      demand_description = #{demandDescription,jdbcType=VARCHAR},
+      work_condition = #{workCondition,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      writer_id = #{writerId,jdbcType=CHAR},
+      next_node = #{nextNode,jdbcType=CHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

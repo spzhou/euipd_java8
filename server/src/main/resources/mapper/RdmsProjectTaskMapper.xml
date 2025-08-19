@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Author：周朔鹏
+编制时间：2025-08-05
+电子邮件：391902958@qq.com
+项目官网：https://www.euipd.com
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.RdmsProjectTaskMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.RdmsProjectTask">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="task_serial_no" jdbcType="CHAR" property="taskSerialNo" />
+    <result column="customer_id" jdbcType="CHAR" property="customerId" />
+    <result column="pre_project_id" jdbcType="CHAR" property="preProjectId" />
+    <result column="project_id" jdbcType="CHAR" property="projectId" />
+    <result column="subproject_id" jdbcType="CHAR" property="subprojectId" />
+    <result column="product_manager_id" jdbcType="CHAR" property="productManagerId" />
+    <result column="project_manager_id" jdbcType="CHAR" property="projectManagerId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="task_description" jdbcType="VARCHAR" property="taskDescription" />
+    <result column="test_method" jdbcType="VARCHAR" property="testMethod" />
+    <result column="file_list_str" jdbcType="VARCHAR" property="fileListStr" />
+    <result column="manager_id" jdbcType="CHAR" property="managerId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="jobitem_type" jdbcType="VARCHAR" property="jobitemType" />
+    <result column="jobitem_id" jdbcType="CHAR" property="jobitemId" />
+    <result column="tree_deep" jdbcType="INTEGER" property="treeDeep" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="budget" jdbcType="DECIMAL" property="budget" />
+    <result column="parent_task_id" jdbcType="CHAR" property="parentTaskId" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, task_serial_no, customer_id, pre_project_id, project_id, subproject_id, product_manager_id, 
+    project_manager_id, task_name, task_description, test_method, file_list_str, manager_id, 
+    `status`, jobitem_type, jobitem_id, tree_deep, create_time, submit_time, budget, 
+    parent_task_id, deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.RdmsProjectTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rdms_project_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rdms_project_task
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rdms_project_task
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.RdmsProjectTaskExample">
+    delete from rdms_project_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.RdmsProjectTask">
+    insert into rdms_project_task (id, task_serial_no, customer_id, 
+      pre_project_id, project_id, subproject_id, 
+      product_manager_id, project_manager_id, task_name, 
+      task_description, test_method, file_list_str, 
+      manager_id, `status`, jobitem_type, 
+      jobitem_id, tree_deep, create_time, 
+      submit_time, budget, parent_task_id, 
+      deleted)
+    values (#{id,jdbcType=CHAR}, #{taskSerialNo,jdbcType=CHAR}, #{customerId,jdbcType=CHAR}, 
+      #{preProjectId,jdbcType=CHAR}, #{projectId,jdbcType=CHAR}, #{subprojectId,jdbcType=CHAR}, 
+      #{productManagerId,jdbcType=CHAR}, #{projectManagerId,jdbcType=CHAR}, #{taskName,jdbcType=VARCHAR}, 
+      #{taskDescription,jdbcType=VARCHAR}, #{testMethod,jdbcType=VARCHAR}, #{fileListStr,jdbcType=VARCHAR}, 
+      #{managerId,jdbcType=CHAR}, #{status,jdbcType=VARCHAR}, #{jobitemType,jdbcType=VARCHAR}, 
+      #{jobitemId,jdbcType=CHAR}, #{treeDeep,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{budget,jdbcType=DECIMAL}, #{parentTaskId,jdbcType=CHAR}, 
+      #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.RdmsProjectTask">
+    insert into rdms_project_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="taskSerialNo != null">
+        task_serial_no,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="subprojectId != null">
+        subproject_id,
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id,
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id,
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="taskDescription != null">
+        task_description,
+      </if>
+      <if test="testMethod != null">
+        test_method,
+      </if>
+      <if test="fileListStr != null">
+        file_list_str,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type,
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id,
+      </if>
+      <if test="treeDeep != null">
+        tree_deep,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="budget != null">
+        budget,
+      </if>
+      <if test="parentTaskId != null">
+        parent_task_id,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="taskSerialNo != null">
+        #{taskSerialNo,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescription != null">
+        #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemId != null">
+        #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="treeDeep != null">
+        #{treeDeep,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budget != null">
+        #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="parentTaskId != null">
+        #{parentTaskId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.RdmsProjectTaskExample" resultType="java.lang.Long">
+    select count(*) from rdms_project_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rdms_project_task
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.taskSerialNo != null">
+        task_serial_no = #{record.taskSerialNo,jdbcType=CHAR},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=CHAR},
+      </if>
+      <if test="record.preProjectId != null">
+        pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectId != null">
+        project_id = #{record.projectId,jdbcType=CHAR},
+      </if>
+      <if test="record.subprojectId != null">
+        subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="record.productManagerId != null">
+        product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.projectManagerId != null">
+        project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="record.taskName != null">
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskDescription != null">
+        task_description = #{record.taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testMethod != null">
+        test_method = #{record.testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileListStr != null">
+        file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerId != null">
+        manager_id = #{record.managerId,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobitemType != null">
+        jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobitemId != null">
+        jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="record.treeDeep != null">
+        tree_deep = #{record.treeDeep,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.budget != null">
+        budget = #{record.budget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parentTaskId != null">
+        parent_task_id = #{record.parentTaskId,jdbcType=CHAR},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rdms_project_task
+    set id = #{record.id,jdbcType=CHAR},
+      task_serial_no = #{record.taskSerialNo,jdbcType=CHAR},
+      customer_id = #{record.customerId,jdbcType=CHAR},
+      pre_project_id = #{record.preProjectId,jdbcType=CHAR},
+      project_id = #{record.projectId,jdbcType=CHAR},
+      subproject_id = #{record.subprojectId,jdbcType=CHAR},
+      product_manager_id = #{record.productManagerId,jdbcType=CHAR},
+      project_manager_id = #{record.projectManagerId,jdbcType=CHAR},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      task_description = #{record.taskDescription,jdbcType=VARCHAR},
+      test_method = #{record.testMethod,jdbcType=VARCHAR},
+      file_list_str = #{record.fileListStr,jdbcType=VARCHAR},
+      manager_id = #{record.managerId,jdbcType=CHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      jobitem_type = #{record.jobitemType,jdbcType=VARCHAR},
+      jobitem_id = #{record.jobitemId,jdbcType=CHAR},
+      tree_deep = #{record.treeDeep,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      budget = #{record.budget,jdbcType=DECIMAL},
+      parent_task_id = #{record.parentTaskId,jdbcType=CHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.RdmsProjectTask">
+    update rdms_project_task
+    <set>
+      <if test="taskSerialNo != null">
+        task_serial_no = #{taskSerialNo,jdbcType=CHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="preProjectId != null">
+        pre_project_id = #{preProjectId,jdbcType=CHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=CHAR},
+      </if>
+      <if test="subprojectId != null">
+        subproject_id = #{subprojectId,jdbcType=CHAR},
+      </if>
+      <if test="productManagerId != null">
+        product_manager_id = #{productManagerId,jdbcType=CHAR},
+      </if>
+      <if test="projectManagerId != null">
+        project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      </if>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescription != null">
+        task_description = #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="testMethod != null">
+        test_method = #{testMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="fileListStr != null">
+        file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemType != null">
+        jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      </if>
+      <if test="jobitemId != null">
+        jobitem_id = #{jobitemId,jdbcType=CHAR},
+      </if>
+      <if test="treeDeep != null">
+        tree_deep = #{treeDeep,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budget != null">
+        budget = #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="parentTaskId != null">
+        parent_task_id = #{parentTaskId,jdbcType=CHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.RdmsProjectTask">
+    update rdms_project_task
+    set task_serial_no = #{taskSerialNo,jdbcType=CHAR},
+      customer_id = #{customerId,jdbcType=CHAR},
+      pre_project_id = #{preProjectId,jdbcType=CHAR},
+      project_id = #{projectId,jdbcType=CHAR},
+      subproject_id = #{subprojectId,jdbcType=CHAR},
+      product_manager_id = #{productManagerId,jdbcType=CHAR},
+      project_manager_id = #{projectManagerId,jdbcType=CHAR},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_description = #{taskDescription,jdbcType=VARCHAR},
+      test_method = #{testMethod,jdbcType=VARCHAR},
+      file_list_str = #{fileListStr,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=CHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      jobitem_type = #{jobitemType,jdbcType=VARCHAR},
+      jobitem_id = #{jobitemId,jdbcType=CHAR},
+      tree_deep = #{treeDeep,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      budget = #{budget,jdbcType=DECIMAL},
+      parent_task_id = #{parentTaskId,jdbcType=CHAR},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
