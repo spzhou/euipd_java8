@@ -106,7 +106,7 @@ cd euipd
 mysql -u root -p -e "CREATE DATABASE mycourse CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 # 导入初始数据
-mysql -u root -p mycourse < doc/db/all.sql
+mysql -u root -p mycourse < doc/db/mycourse.sql
 ```
 
 ### 3. 配置文件
